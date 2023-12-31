@@ -1,6 +1,6 @@
 # Ap Tul
 
-[WebUI Version: 0.6.62](https://github.com/StoicDreams/RustWebUI)
+[WebUI Version: 0.6.67](https://github.com/StoicDreams/RustWebUI)
 
 Need to build an concept for this website.
 

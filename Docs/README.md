@@ -1,6 +1,6 @@
 # Ap Tul
 
-[WebUI Version: 0.10.5](https://github.com/StoicDreams/WebUI)
+[WebUI Version: 0.10.6](https://github.com/StoicDreams/WebUI)
 
 Need to build an concept for this website.
 

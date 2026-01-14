@@ -1,8 +1,15 @@
 use crate::prelude::*;
 
 mod prelude;
+mod image;
 
 /* Define web-worker processes here */
+
+// Enable panic hook for better debugging
+#[wasm_bindgen]
+pub fn init_panic_hook() {
+    console_error_panic_hook::set_once();
+}
 
 /// Get UUID generated from JavaScript.
 /// example

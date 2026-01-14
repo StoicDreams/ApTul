@@ -7,4 +7,12 @@ edition = "2024"
 crate-type = ["cdylib"] # Critical for wasm libraries
 
 [dependencies]
-webui = { git = "https://github.com/StoicDreams/WebUI", branch = "main", features = [] }
+webui = { git = "https://github.com/StoicDreams/WebUI", branch = "main", features = [
+] }
+console_error_panic_hook = "0.1"
+base64 = "0.22"
+
+[dependencies.image]
+version = "0.25"
+default-features = false
+features = ["png", "jpeg", "webp", "bmp", "ico"]

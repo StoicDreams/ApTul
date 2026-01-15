@@ -25,7 +25,7 @@ As a software developer, I often encounter niche tasks - like specific file conv
 <webui-page-segment elevation="10">
 I recently needed a fast way to batch-convert PNGs to WebP and resize them for a web project. The result is the [Ap Tul Image Converter](/image-converter).
 
-- **Features**: Resize images with preserved aspect ratios and convert between PNG, JPG, WebP, ICO, and BMP.
+- **Features**: Resize images with preserved aspect ratios, convert formats (PNG, WebP, JPG, ICO), and automatically strip sensitive metadata (GPS, EXIF) for enhanced privacy.
 - **Tech**: Powered by Rust and WebAssembly for native-level performance within the browser.
 </webui-page-segment>
 

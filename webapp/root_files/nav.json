@@ -8,5 +8,10 @@
         "name": "Image Converter",
         "icon": "hierarchy|has-shadow:true|theme:secondary",
         "url": "/image-converter"
+    },
+    {
+        "name": "Open API",
+        "icon": "book|has-shadow:true|shade:tri|fill",
+        "url": "/openapi"
     }
 ]

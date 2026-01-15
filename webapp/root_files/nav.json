@@ -10,6 +10,11 @@
         "url": "/image-converter"
     },
     {
+        "name": "JWT Parser",
+        "icon": "hierarchy|has-shadow:true|rotate:270",
+        "url": "/jwt-parser"
+    },
+    {
         "name": "Open API",
         "icon": "book|has-shadow:true|shade:tri|fill",
         "url": "/openapi"

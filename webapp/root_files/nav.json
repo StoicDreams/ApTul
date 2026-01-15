@@ -3,5 +3,10 @@
         "name": "Home",
         "icon": "home",
         "url": "/"
+    },
+    {
+        "name": "Image Converter",
+        "icon": "hierarchy|has-shadow:true|theme:secondary",
+        "url": "/image-converter"
     }
 ]

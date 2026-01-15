@@ -57,6 +57,7 @@
             const t = this;
             try {
                 t.sourceFile = t._fileSelect.value[0];
+                t._msgSelect.innerText = `Processing...`;
                 const dimensions = await new Promise((resolve, reject) => {
                     const img = new Image();
                     img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
@@ -65,14 +66,13 @@
                 });
                 t.width = dimensions.w;
                 t.height = dimensions.h;
-                t._msgSelect.innerText = `Dimensions: ${t.width} x ${t.height}`;
+                const size = webui.getBase64Size(t.sourceFile.content);
+                t._msgSelect.innerHTML = `Dimensions: ${t.width} x ${t.height} <webui-flex grow></webui-flex> Size: ${webui.formatBytes(size)}`;
                 t._selectedFilePreview.setFile(value);
                 t.applyTransition();
             } catch (ex) {
-                t._convertedFilePreview.setFile([{
-                    content: ex,
-                    type: 'text',
-                }]);
+                t._msgSelect.innerText = ex;
+                t._convertedFilePreview.clear();
             }
         },
         applyTransition: async function () {
@@ -91,22 +91,23 @@
                         width = parseInt(height * (t.width / t.height));
                         break;
                 }
-                t._msgConvert.innerText = `Dimensions: ${width} x ${height}`;
+                t._msgConvert.innerText = `Processing...`;
+                t._convertedFilePreview.clear();
                 let converted = await webui.worker.process_image(t.sourceFile.content, width, height, t._format.value);
-                let cf = {
-                    content: converted,
-                };
                 if (converted.startsWith('data')) {
-                    cf.type = converted.split(';')[0].split(':')[1];
+                    const size = webui.getBase64Size(converted);
+                    t._msgConvert.innerHTML = `Dimensions: ${width} x ${height} <webui-flex grow></webui-flex> Size: ${webui.formatBytes(size)}`;
+                    t._convertedFilePreview.setFile([{
+                        content: converted,
+                        type: converted.split(';')[0].split(':')[1],
+                    }]);
                 } else {
-                    cf.type = 'text';
+                    t._msgConvert.innerText = converted;
+                    t._convertedFilePreview.clear();
                 }
-                t._convertedFilePreview.setFile([cf]);
             } catch (ex) {
-                t._convertedFilePreview.setFile([{
-                    content: ex,
-                    type: 'text',
-                }]);
+                t._msgConvert.innerText = ex;
+                t._convertedFilePreview.clear();
             }
         },
         connected: (t) => {
@@ -119,21 +120,21 @@ position:relative;
 box-sizing:border-box;
 }
 </style>
-<webui-flex column>
+<webui-flex column class="mx-a">
 <webui-flex elevation="10" align="center" justify="center">
 <webui-dropdown label="Resize To" options="No Resize:Auto,Width,Height"></webui-dropdown>
-<webui-input-text></webui-input-text>
+<webui-input-text max="5000" min="1" type="number"></webui-input-text>
 <webui-dropdown label="Convert To" options="webp,jpg,ico,png,bmp"></webui-dropdown>
 </webui-flex>
 <webui-side-by-side>
 <webui-page-segment elevation="10" class="content">
 <h3>Starting File - <webui-file-select label="Select Image to Convert" accept=".png,.jpg,.jpeg,.webp,.ico,.bmp" style="font-size: var(--typography-size);"></webui-file-select></h3>
-<webui-page-segment class="msgSelected"></webui-page-segment>
+<webui-flex class="msgSelected"></webui-flex>
 <webui-file-preview name="selectedFilePreview" maxHeight="500"></webui-file-preview>
 </webui-page-segment>
 <webui-page-segment elevation="10" class="content">
 <h3>Updated File</h3>
-<webui-page-segment class="msgConverted"></webui-page-segment>
+<webui-flex class="msgConverted"></webui-flex>
 <webui-file-preview name="convertedFilePreview" maxHeight="500"></webui-file-preview>
 </webui-page-segment>
 </webui-side-by-side>

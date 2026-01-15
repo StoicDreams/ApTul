@@ -1,9 +1,36 @@
-<webui-data data-page-title="{APP_NAME}" data-page-subtitle=""></webui-data>
+<webui-data data-page-title="Ap Tul" data-page-subtitle="A Developer’s Personal Toolkit & Utility Library"></webui-data>
+
+> Simple, privacy-focused web tools built to solve real-world development problems
+
+## Introduction
 
 <webui-page-segment elevation="10">
-Welcome to the Ap Tul - my personal tool library for online tools that help me to simplify tasks in my day-to-day work as a software developer.
+Welcome to Ap Tul, a growing collection of online utilities designed to streamline the day-to-day tasks of software development.
 
-This site is relatively early in development, but the concept for development is simple. Whenever I need a simple tool to perform some niche task, instead of scouring the web for such a tool, I will simply build it and add it to this site. For example, I needed to convert PNG images to WEBP format and resize them to specific dimensions for a website project I'm working on, so I created a quick image converter that I can use for such a task.
+This site is built on a simple philosophy: **Necessity breeds creation**.
+
+As a software developer, I often encounter niche tasks - like specific file conversions or data formatting - that require simple, immediate solutions. Instead of scouring the web for ad-heavy third-party tools, I build the solutions I need myself and add them here. The result is a library of lightweight, purpose-built tools that prioritize function, speed, and privacy.
 </webui-page-segment>
 
-<app-image-converter></app-image-converter>
+### Why Use Ap Tul?
+
+<webui-page-segment elevation="10">
+- **Built for Real Workflows**: Every tool on this site exists because it was needed for a real project.
+- **Privacy First**: Many online tools require uploading files to a server. My tools, like the Image Converter, utilize technologies like Rust and WebAssembly to process data directly in your browser.
+- **No Clutter**: No paywalls, no aggressive ads, just the utility you need.
+</webui-page-segment>
+
+#### Newest Addition: Image Converter & Resizer
+
+<webui-page-segment elevation="10">
+I recently needed a fast way to batch-convert PNGs to WebP and resize them for a web project. The result is the [Ap Tul Image Converter](/image-converter).
+
+- **Features**: Resize images with preserved aspect ratios and convert between PNG, JPG, WebP, ICO, and BMP.
+- **Tech**: Powered by Rust and WebAssembly for native-level performance within the browser.
+</webui-page-segment>
+
+##### What's Next?
+
+<webui-page-segment elevation="10">
+Ap Tul is in active development. As I tackle new challenges in my software engineering career, this library will grow. Bookmark this page to keep these utilities handy for your own workflow.
+</webui-page-segment>

@@ -1,7 +1,7 @@
 use crate::prelude::*;
 
-mod prelude;
 mod image;
+mod prelude;
 
 /* Define web-worker processes here */
 

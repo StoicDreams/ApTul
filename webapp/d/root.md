@@ -20,7 +20,7 @@ As a software developer, I often encounter niche tasks - like specific file conv
 - **No Clutter**: No paywalls, no aggressive ads, just the utility you need.
 </webui-page-segment>
 
-#### Newest Addition: Image Converter & Resizer
+#### Tool Spotlight: Image Converter & Resizer
 
 <webui-page-segment elevation="10">
 I recently needed a fast way to batch-convert PNGs to WebP and resize them for a web project. The result is the [Ap Tul Image Converter](/image-converter).

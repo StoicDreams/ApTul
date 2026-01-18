@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
     webui.worker = workerProxy;
     setTimeout(() => {
         webui.worker.init_panic_hook();
-    }, 1000);
+    }, 5000);
     myWorker.onerror = (error) => {
         console.error('Main thread: Worker error:', error);
     };

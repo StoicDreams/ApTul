@@ -2,18 +2,22 @@
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://www.aptul.com/</loc>
-		<lastmod>2026-01-15</lastmod>
+		<lastmod>2026-01-17</lastmod>
 	</url>
 	<url>
 		<loc>https://www.aptul.com/image-converter</loc>
-		<lastmod>2026-01-15</lastmod>
+		<lastmod>2026-01-17</lastmod>
 	</url>
 	<url>
 		<loc>https://www.aptul.com/jwt-parser</loc>
-		<lastmod>2026-01-15</lastmod>
+		<lastmod>2026-01-17</lastmod>
 	</url>
 	<url>
 		<loc>https://www.aptul.com/openapi</loc>
-		<lastmod>2026-01-15</lastmod>
+		<lastmod>2026-01-17</lastmod>
+	</url>
+	<url>
+		<loc>https://www.aptul.com/svg-path-rotator</loc>
+		<lastmod>2026-01-17</lastmod>
 	</url>
 </urlset>

@@ -11,12 +11,17 @@
     },
     {
         "name": "JWT Parser",
-        "icon": "hierarchy|has-shadow:true|rotate:270",
+        "icon": "jwt|has-shadow:true|fill|sharp|theme:tertiary|stroke:thin|shade:tri",
         "url": "/jwt-parser"
     },
     {
         "name": "Open API",
         "icon": "book|has-shadow:true|shade:tri|fill",
         "url": "/openapi"
+    },
+    {
+        "name": "SVG Path Rotate",
+        "icon": "diamong|has-shadow:true|rotate:70",
+        "url": "/svg-path-rotator"
     }
 ]

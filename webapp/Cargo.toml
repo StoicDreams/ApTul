@@ -1,6 +1,6 @@
 [package]
 name = "webapp"
-version = "0.1.10"
+version = "0.1.11"
 edition = "2024"
 
 [lib]
@@ -11,6 +11,7 @@ webui = { git = "https://github.com/StoicDreams/WebUI", branch = "main", feature
 ] }
 console_error_panic_hook = "0.1"
 base64 = "0.22"
+kurbo = "0.13"
 
 [dependencies.image]
 version = "0.25"

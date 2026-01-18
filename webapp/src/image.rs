@@ -2,7 +2,107 @@ use crate::prelude::*;
 use base64::prelude::*;
 use image::imageops::FilterType;
 use image::{ImageFormat, load_from_memory};
+use kurbo::{Affine, BezPath, PathEl};
+use std::f64::consts::PI;
 use std::io::Cursor;
+
+/// Helper to format a float with specific precision
+fn fmt_f64(val: f64, precision: usize) -> String {
+    format!("{:.1$}", val, precision)
+}
+
+/// Rotates an SVG path around a specific point for multiple angles.
+///
+/// Arguments:
+/// * `path_data`: The SVG path string (e.g., "M0 -70 Q...").
+/// * `cx`: The X coordinate of the rotation origin.
+/// * `cy`: The Y coordinate of the rotation origin.
+/// * `angles_str`: Space-delimited string of angles in degrees (e.g., "0 90 180").
+///
+/// Returns:
+/// * `String`: A newline-separated list of the rotated path strings.
+#[wasm_bindgen]
+pub fn rotate_svg_path(
+    path_data: &str,
+    cx: f64,
+    cy: f64,
+    angles_str: &str,
+    precision: usize,
+) -> Result<String, String> {
+    // 1. Parse the SVG path
+    let path =
+        BezPath::from_svg(path_data).map_err(|e| format!("Failed to parse SVG path: {}", e))?;
+
+    // 2. Parse the angles
+    let angles: Vec<f64> = angles_str
+        .split_whitespace()
+        .filter_map(|s| s.parse::<f64>().ok())
+        .collect();
+
+    if angles.is_empty() {
+        return Err("No valid angles provided".to_string());
+    }
+
+    let mut results = Vec::new();
+
+    // 3. Process each angle
+    for angle_deg in angles {
+        let angle_rad = angle_deg * (PI / 180.0);
+        let transform = Affine::rotate_about(angle_rad, (cx, cy));
+        let rotated_path = transform * &path;
+
+        // Manual serialization to enforce precision
+        let mut path_str = String::new();
+        for el in rotated_path.elements() {
+            if !path_str.is_empty() {
+                path_str.push(' ');
+            }
+            match el {
+                PathEl::MoveTo(p) => {
+                    path_str.push_str(&format!(
+                        "M{} {}",
+                        fmt_f64(p.x, precision),
+                        fmt_f64(p.y, precision)
+                    ));
+                }
+                PathEl::LineTo(p) => {
+                    path_str.push_str(&format!(
+                        "L{} {}",
+                        fmt_f64(p.x, precision),
+                        fmt_f64(p.y, precision)
+                    ));
+                }
+                PathEl::QuadTo(p1, p2) => {
+                    path_str.push_str(&format!(
+                        "Q{} {} {} {}",
+                        fmt_f64(p1.x, precision),
+                        fmt_f64(p1.y, precision),
+                        fmt_f64(p2.x, precision),
+                        fmt_f64(p2.y, precision)
+                    ));
+                }
+                PathEl::CurveTo(p1, p2, p3) => {
+                    path_str.push_str(&format!(
+                        "C{} {} {} {} {} {}",
+                        fmt_f64(p1.x, precision),
+                        fmt_f64(p1.y, precision),
+                        fmt_f64(p2.x, precision),
+                        fmt_f64(p2.y, precision),
+                        fmt_f64(p3.x, precision),
+                        fmt_f64(p3.y, precision)
+                    ));
+                }
+                PathEl::ClosePath => {
+                    path_str.push('z');
+                }
+            }
+        }
+        results.push(path_str);
+    }
+
+    // 4. Join with newlines for the output block
+    Ok(results.join("\n"))
+}
 
 /// Resizes an image and converts it to the specified format.
 ///

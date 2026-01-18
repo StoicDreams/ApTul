@@ -36,19 +36,27 @@
             });
             pathInput.addEventListener('input', e => t.path = e.target.value);
             formGrid.appendChild(pathInput);
-            const configGrid = webui.create('webui-grid', { columns: '1fr 1fr 1fr 2fr', gap: 'var(--padding)' });
+            const configGrid = webui.create('webui-flex', { wrap: true, align: 'end', gap: 'var(--padding)' });
             formGrid.appendChild(configGrid);
             const cxInput = webui.create('webui-input-text', {
                 label: 'Center X',
                 value: t.cx,
-                type: 'number'
+                type: 'number',
+                compact: true,
+                style: 'width:10ch;',
+                min: -100,
+                max: 100
             });
             cxInput.addEventListener('input', e => t.cx = parseFloat(e.target.value) || 0);
             configGrid.appendChild(cxInput);
             const cyInput = webui.create('webui-input-text', {
                 label: 'Center Y',
                 value: t.cy,
-                type: 'number'
+                type: 'number',
+                compact: true,
+                style: 'width:10ch;',
+                min: -100,
+                max: 100
             });
             cyInput.addEventListener('input', e => t.cy = parseFloat(e.target.value) || 0);
             configGrid.appendChild(cyInput);
@@ -56,6 +64,8 @@
                 label: 'Precision',
                 value: t.precision,
                 type: 'number',
+                compact: true,
+                style: 'width:10ch;',
                 min: 0,
                 max: 10
             });
@@ -64,6 +74,8 @@
             const anglesInput = webui.create('webui-input-text', {
                 label: 'Angles (Space delimited degrees)',
                 value: t.angles,
+                compact: true,
+                style: 'flex:1 1 30ch',
                 placeholder: '0 90 180'
             });
             anglesInput.addEventListener('input', e => t.angles = e.target.value);

@@ -8,7 +8,12 @@ use std::io::Cursor;
 
 /// Helper to format a float with specific precision
 fn fmt_f64(val: f64, precision: usize) -> String {
-    format!("{:.1$}", val, precision)
+    let s = format!("{:.1$}", val, precision);
+    if s.contains('.') {
+        s.trim_end_matches('0').trim_end_matches('.').to_string()
+    } else {
+        s
+    }
 }
 
 /// Rotates an SVG path around a specific point for multiple angles.
@@ -29,29 +34,21 @@ pub fn rotate_svg_path(
     angles_str: &str,
     precision: usize,
 ) -> Result<String, String> {
-    // 1. Parse the SVG path
     let path =
         BezPath::from_svg(path_data).map_err(|e| format!("Failed to parse SVG path: {}", e))?;
 
-    // 2. Parse the angles
     let angles: Vec<f64> = angles_str
         .split_whitespace()
         .filter_map(|s| s.parse::<f64>().ok())
         .collect();
-
     if angles.is_empty() {
         return Err("No valid angles provided".to_string());
     }
-
     let mut results = Vec::new();
-
-    // 3. Process each angle
     for angle_deg in angles {
         let angle_rad = angle_deg * (PI / 180.0);
         let transform = Affine::rotate_about(angle_rad, (cx, cy));
         let rotated_path = transform * &path;
-
-        // Manual serialization to enforce precision
         let mut path_str = String::new();
         for el in rotated_path.elements() {
             if !path_str.is_empty() {
@@ -99,8 +96,6 @@ pub fn rotate_svg_path(
         }
         results.push(path_str);
     }
-
-    // 4. Join with newlines for the output block
     Ok(results.join("\n"))
 }
 

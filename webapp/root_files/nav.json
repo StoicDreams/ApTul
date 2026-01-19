@@ -21,7 +21,7 @@
     },
     {
         "name": "SVG Path Rotate",
-        "icon": "diamong|has-shadow:true|rotate:70",
+        "icon": "diamond|has-shadow:true|rotate:70",
         "url": "/svg-path-rotator"
     }
 ]

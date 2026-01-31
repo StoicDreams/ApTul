@@ -14,7 +14,8 @@
         height: 100,
         sourceFile: null,
         resize: 'Auto',
-        constructor: (t) => {
+        constructor() {
+            const t = this;
             t._msgSelect = t.template.querySelector('.msgSelected');
             t._msgConvert = t.template.querySelector('.msgConverted');
             t._resize = t.template.querySelector('webui-dropdown[label="Resize To"]');
@@ -53,7 +54,7 @@
                 t.applyTransition();
             });
         },
-        setValue: async function (value) {
+        async setValue(value) {
             const t = this;
             try {
                 t.sourceFile = t._fileSelect.value[0];
@@ -75,7 +76,7 @@
                 t._convertedFilePreview.clear();
             }
         },
-        applyTransition: async function () {
+        async applyTransition() {
             const t = this;
             if (!t.sourceFile || !t.sourceFile.content || !t.sourceFile.content.startsWith('data')) return;
             try {
@@ -109,8 +110,6 @@
                 t._msgConvert.innerText = ex;
                 t._convertedFilePreview.clear();
             }
-        },
-        connected: (t) => {
         },
         shadowTemplate: `
 <style type="text/css">

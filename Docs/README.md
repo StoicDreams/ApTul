@@ -1,6 +1,6 @@
 # Ap Tul
 
-[Version: 0.1.12](https://github.com/StoicDreams/ApTul)
+[Version: 0.1.13](https://github.com/StoicDreams/ApTul)
 
 [WebUI](https://github.com/StoicDreams/WebUI)
 

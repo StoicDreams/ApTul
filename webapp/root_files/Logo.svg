@@ -16,7 +16,7 @@ svg, text {overflow:visible;}
 .secondary{fill:#2e54ff;stroke:#2e54ff;stroke-miterlimit:10;}
 .tertiary{fill:#7d0b77;stroke:#7d0b77;stroke-miterlimit:10;}
 .success{fill:#1c970e;stroke:#1c970e;stroke-miterlimit:10;}
-.text{fill:#FFFFFF;font-family:'Nunito', Arial, sans-serif;font-weight:700;letter-spacing:-1px;font-size: clamp(10px, 20cqw, 45px);}
+.text{fill:#FFFFFF;font-family:'Nunito', Arial, sans-serif;font-weight:700;letter-spacing:-1px;font-size: clamp(10px, 20cqw, 45px);text-shadow:0 0 10px black;}
 .flex-container {
 height: 100%;
 display: flex;

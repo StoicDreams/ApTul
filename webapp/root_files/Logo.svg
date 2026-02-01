@@ -11,11 +11,11 @@
 <style type="text/css">
 svg, text {overflow:visible;}
 .background{fill:#000000;stroke:#000000;stroke-miterlimit:10;}
-.success{fill:#1c970e;stroke:#1c970e;stroke-miterlimit:10;}
-.tertiary{fill:#7d0b77;stroke:#7d0b77;stroke-miterlimit:10;}
+.title{fill:#d14d06;stroke:#d14d06;stroke-miterlimit:10;}
 .primary{fill:#d9620c;stroke:#d9620c;stroke-miterlimit:10;}
 .secondary{fill:#2e54ff;stroke:#2e54ff;stroke-miterlimit:10;}
-.primary{fill:#d14d06;stroke:#d14d06;stroke-miterlimit:10;}
+.tertiary{fill:#7d0b77;stroke:#7d0b77;stroke-miterlimit:10;}
+.success{fill:#1c970e;stroke:#1c970e;stroke-miterlimit:10;}
 .text{fill:#FFFFFF;font-family:'Nunito', Arial, sans-serif;font-weight:700;letter-spacing:-1px;font-size: clamp(10px, 20cqw, 45px);}
 .flex-container {
 height: 100%;
@@ -49,7 +49,7 @@ text:empty { display: none; }
 <g class="success">
 <path d="M 939.194242 1258.491498 L 549.516466 1258.491498 C 372.912414 1258.491498 229.705497 1115.320695 229.705497 938.676156 L 229.705497 549.090255 C 229.705497 372.512932 372.912414 229.274913 549.516466 229.274913 L 939.194242 229.274913 C 1115.798294 229.274913 1259.005211 372.512932 1259.005211 549.090255 L 1259.005211 938.810589 C 1259.005211 1115.387912 1115.798294 1258.491498 939.194242 1258.491498 Z M 939.194242 1258.491498 " transform="matrix(0.0584818,0,0,0.0581146,0,0.00000113284)"></path>
 </g>
-<g class="primary">
+<g class="title">
 <path d="M 58.703125 141.28125 L 7.859375 90.757812 C -1.179688 81.773438 -1.179688 67.199219 7.859375 58.214844 L 58.703125 7.6875 C 67.746094 -1.296875 82.414062 -1.296875 91.453125 7.6875 L 142.296875 58.214844 C 151.339844 67.199219 151.339844 81.773438 142.296875 90.757812 L 91.453125 141.28125 C 82.414062 150.265625 67.75 150.265625 58.703125 141.28125 Z M 58.703125 141.28125 "></path>
 </g>
 <svg x="0%" y="5%" width="100%" height="90%" viewBox="0 0 150 150" preserveAspectRatio="xMidYMid meet" class="text">

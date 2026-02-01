@@ -20,13 +20,13 @@
     }
     webui.define('app-jwt-parser', {
         preload: 'flex input-message code grid alert card',
-        constructor: t => {
-            t.token = '';
+        constructor() {
+            this.token = '';
         },
-        connected: t => {
-            t.render();
+        connected() {
+            this.render();
         },
-        render: function () {
+        render() {
             const t = this;
             t.innerHTML = '';
             const wrap = webui.create('webui-flex', { column: true, gap: 'var(--padding)' });

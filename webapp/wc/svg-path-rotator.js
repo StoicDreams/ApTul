@@ -9,17 +9,18 @@
 {
     webui.define('app-svg-path-rotator', {
         preload: 'flex input-text input-message code button grid alert paper card',
-        constructor: t => {
+        constructor() {
+            const t = this;
             t.path = "M0 -70Q-7 -70 -7 -70Q-7 -60 -7 -60Q-7 -45 -7 -45Q-7 -35 -7 -35Q-7 -30 -7 -30Q0 -22 0 -22Q7 -30 7 -30Q7 -35 7 -35Q7 -45 7 -45Q7 -60 7 -60Q7 -70 7 -70z";
             t.cx = 0;
             t.cy = 0;
             t.angles = "0 45 90 135 180 225 270 315";
             t.precision = 0;
         },
-        connected: t => {
-            t.render();
+        connected() {
+            this.render();
         },
-        render: function () {
+        render() {
             const t = this;
             t.innerHTML = '';
             const wrap = webui.create('webui-flex', { column: true, gap: 'var(--padding)' });

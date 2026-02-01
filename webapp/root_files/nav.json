@@ -6,7 +6,7 @@
     },
     {
         "name": "Image Converter",
-        "icon": "hierarchy|theme:secondary",
+        "icon": "emoji-framed_picture",
         "url": "/image-converter"
     },
     {
@@ -16,12 +16,12 @@
     },
     {
         "name": "Open API",
-        "icon": "book|shade:tri|fill",
+        "icon": "emoji-book",
         "url": "/openapi"
     },
     {
         "name": "SVG Path Rotate",
-        "icon": "diamond|rotate:70",
+        "icon": "emoji-arrows_counterclockwise",
         "url": "/svg-path-rotator"
     }
 ]

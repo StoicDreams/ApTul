@@ -40,3 +40,23 @@ Since this tool fetches via JavaScript in the browser, CORS (Cross-Origin Resour
 
 If the document fails to load, ensure the hosting server allows CORS requests, or that you are on the same network as the server.
 </webui-page-segment>
+
+## Frequently Asked Questions
+
+<webui-page-segment elevation="10">
+
+### Why won't my specification load?
+
+The most common cause is CORS. Your browser fetches the file directly, so the server hosting it must allow requests from other sites. Allowing CORS on that server, or opening the file from a server that already allows it, usually fixes this.
+
+### Can I view an API running on my own computer?
+
+Yes. The request is made by your browser, so addresses like http://localhost:8080/v3/api-docs work as long as that server allows CORS.
+
+### Which formats are supported?
+
+OpenAPI 3.0 and later, in JSON format.
+
+</webui-page-segment>
+
+<app-related-tools></app-related-tools>

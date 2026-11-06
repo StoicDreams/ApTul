@@ -30,6 +30,12 @@
             t._fileSelect.addEventListener('change', ev => {
                 t.setValue(t._fileSelect.value);
             });
+            // Dropping an image anywhere on the tool works the same as choosing it with the button.
+            t._fileDrop = t.template.querySelector('app-file-drop');
+            t._fileDrop.addEventListener('change', ev => {
+                t._fileSelect.setValue(t._fileDrop.value);
+                t.setValue(t._fileDrop.value);
+            });
             t._resize.addEventListener('change', _ => {
                 t.resize = t._resize.value;
                 switch (t.resize) {
@@ -57,7 +63,13 @@
         async setValue(value) {
             const t = this;
             try {
-                t.sourceFile = t._fileSelect.value[0];
+                t.sourceFile = (value || [])[0];
+                if (!t.sourceFile) {
+                    t._msgSelect.innerText = '';
+                    t._selectedFilePreview.clear();
+                    t._convertedFilePreview.clear();
+                    return;
+                }
                 t._msgSelect.innerText = `Processing...`;
                 const dimensions = await new Promise((resolve, reject) => {
                     const img = new Image();
@@ -119,6 +131,7 @@ position:relative;
 box-sizing:border-box;
 }
 </style>
+<app-file-drop class="mx-a" accept=".png,.jpg,.jpeg,.webp,.ico,.bmp" read="dataurl" label="Drop an image to convert">
 <webui-flex column class="mx-a">
 <webui-flex elevation="10" align="center" justify="center">
 <webui-dropdown label="Resize To" options="No Resize:Auto,Width,Height"></webui-dropdown>
@@ -127,7 +140,7 @@ box-sizing:border-box;
 </webui-flex>
 <webui-side-by-side>
 <webui-page-segment elevation="10" class="content">
-<h3>Starting File - <webui-file-select label="Select Image to Convert" accept=".png,.jpg,.jpeg,.webp,.ico,.bmp" style="font-size: var(--typography-size);"></webui-file-select></h3>
+<h3>Starting File - <webui-file-select label="Select or Drop an Image" accept=".png,.jpg,.jpeg,.webp,.ico,.bmp" style="font-size: var(--typography-size);"></webui-file-select></h3>
 <webui-flex class="msgSelected"></webui-flex>
 <webui-file-preview name="selectedFilePreview" maxHeight="500"></webui-file-preview>
 </webui-page-segment>
@@ -138,6 +151,7 @@ box-sizing:border-box;
 </webui-page-segment>
 </webui-side-by-side>
 </webui-flex>
+</app-file-drop>
 `
     });
 }

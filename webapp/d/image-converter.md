@@ -47,3 +47,27 @@ Whether you are a web developer looking to optimize assets for faster page loads
 
 Beyond local processing, this tool acts as a "scrubber" for your photos. It removes hidden metadata that could reveal your location, making it the safest way to prepare images for social media or public blogs.
 </webui-page-segment>
+
+## Frequently Asked Questions
+
+<webui-page-segment elevation="10">
+
+### Are my images uploaded to a server?
+
+No. The conversion runs in your browser using WebAssembly, so your images never leave your device.
+
+### Does converting remove EXIF and GPS data?
+
+Yes. The image is decoded and saved as a new file that holds only the picture itself, so camera details, location, and dates from the original are not carried over.
+
+### Which format is best for websites?
+
+WebP is usually the best choice. It makes smaller files than JPG or PNG at similar quality, and every current browser supports it. Use PNG when you need sharp edges with transparency, and JPG when a file must open everywhere.
+
+### Can I make a favicon?
+
+Yes. Choose ICO as the format and resize the image to 256 pixels or smaller, such as 32 or 48 pixels wide.
+
+</webui-page-segment>
+
+<app-related-tools></app-related-tools>

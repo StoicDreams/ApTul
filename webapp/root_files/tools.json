@@ -1,0 +1,38 @@
+{
+    "categories": [
+        { "id": "image", "name": "Image Tools", "icon": "emoji-framed_picture" },
+        { "id": "developer", "name": "Developer Tools", "icon": "emoji-hammer_and_wrench" },
+        { "id": "text", "name": "Text Tools", "icon": "emoji-memo" },
+        { "id": "generators", "name": "Generators", "icon": "emoji-game_die" }
+    ],
+    "tools": [
+        {
+            "url": "/image-converter",
+            "name": "Image Converter & Resizer",
+            "description": "Resize images and convert between WebP, PNG, JPG, ICO, and BMP, with photo metadata removed.",
+            "category": "image",
+            "icon": "emoji-framed_picture"
+        },
+        {
+            "url": "/svg-path-rotator",
+            "name": "SVG Path Rotator",
+            "description": "Rotate SVG path data by any angle and copy the updated path.",
+            "category": "image",
+            "icon": "emoji-arrows_counterclockwise"
+        },
+        {
+            "url": "/jwt-parser",
+            "name": "JWT Decoder",
+            "description": "Decode JSON Web Tokens to read the header, payload, and expiry, without sending them anywhere.",
+            "category": "developer",
+            "icon": "jwt|fill|sharp|theme:tertiary|stroke:thin|shade:tri"
+        },
+        {
+            "url": "/openapi",
+            "name": "OpenAPI Viewer",
+            "description": "View an OpenAPI specification from any URL as readable API documentation.",
+            "category": "developer",
+            "icon": "emoji-book"
+        }
+    ]
+}

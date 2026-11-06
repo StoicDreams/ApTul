@@ -36,3 +36,23 @@ Note: This tool decodes and visualizes the token structure. It does not verify t
 <webui-page-segment elevation="10">
 Debugging authentication issues often requires checking the claims inside a JWT. However, pasting a valid session token into a random website is a major security risk. Ap Tul solves this by moving the logic to the client-side. You get the convenience of a web UI with the security of a local script.
 </webui-page-segment>
+
+## Frequently Asked Questions
+
+<webui-page-segment elevation="10">
+
+### Is it safe to paste my token here?
+
+The token is decoded by JavaScript in your browser and is never sent to a server. Even so, treat tokens from live systems as passwords, and prefer test tokens when you can.
+
+### Does this check the token's signature?
+
+No. It decodes the header and payload so you can read them. Checking the signature needs the secret or public key that signed the token, which should stay on your server.
+
+### What do exp and iat mean?
+
+They are standard claims stored as Unix timestamps. iat is when the token was issued, and exp is when it expires. The decoder shows both as dates in your local time, and says whether the token has expired.
+
+</webui-page-segment>
+
+<app-related-tools></app-related-tools>

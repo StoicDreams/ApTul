@@ -31,3 +31,23 @@ Rotate your SVG path data by specifying the desired angle in degrees. The tool p
 <webui-page-segment elevation="10">
 Rotating SVG paths manually can be tedious and error-prone. This tool automates the process, saving you time and ensuring accuracy in your vector graphic designs.
 </webui-page-segment>
+
+## Frequently Asked Questions
+
+<webui-page-segment elevation="10">
+
+### What do Center X and Center Y do?
+
+They set the point the path rotates around, in the path's own coordinates. For a 24 by 24 icon, a center of 12, 12 rotates it in place.
+
+### Can I create several rotations at once?
+
+Yes. Enter each angle in degrees, separated by spaces. You get one rotated path for each angle, one per line.
+
+### What does Precision change?
+
+It sets how many decimal places each number in the result keeps. Fewer decimal places make shorter paths, while more keep curves accurate.
+
+</webui-page-segment>
+
+<app-related-tools></app-related-tools>

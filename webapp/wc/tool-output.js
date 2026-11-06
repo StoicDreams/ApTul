@@ -11,7 +11,8 @@
      * <app-tool-output label="Formatted JSON" lang="json" filename="formatted.json" mime="application/json"></app-tool-output>
      *
      * Set the result with setValue(text), or with data-subscribe="key". An empty value hides the output.
-     * The Copy button comes from webui-code. Download only shows when a filename is set.
+     * Copy copies the exact text. webui-code's own copy button copies its rendered text instead, which turns
+     * tabs into spaces and trims whitespace, so it is turned off here. Download only shows when a filename is set.
      */
     webui.define('app-tool-output', {
         preload: 'code button flex',
@@ -20,7 +21,9 @@
             const t = this;
             t.value = '';
             t._code = t.template.querySelector('webui-code');
-            t._download = t.template.querySelector('webui-button');
+            t._copy = t.template.querySelector('webui-button.copy');
+            t._download = t.template.querySelector('webui-button.download');
+            t._copy.addEventListener('click', _ => t.copy());
             t._download.addEventListener('click', _ => t.download());
         },
         attrChanged(property, value) {
@@ -61,6 +64,15 @@
             if (value !== t.value) return;
             t._code.setValue(value);
         },
+        /** Copy the exact result, then confirm on the button for a moment. */
+        async copy() {
+            const t = this;
+            if (!t.value) return;
+            await webui.copyToClipboard(t.value);
+            t._copy.innerText = 'Copied';
+            clearTimeout(t._copyTimer);
+            t._copyTimer = setTimeout(() => t._copy.innerText = 'Copy', 1500);
+        },
         /** Save the current result as a file, named by the filename attribute. */
         download() {
             const t = this;
@@ -75,9 +87,10 @@
         },
         shadowTemplate: `
 <webui-flex column gap="var(--padding)">
-<webui-code lang="text"></webui-code>
-<webui-flex justify="end">
-<webui-button theme="primary">Download</webui-button>
+<webui-code lang="text" nocopy></webui-code>
+<webui-flex justify="end" gap="var(--padding)">
+<webui-button class="copy" theme="secondary">Copy</webui-button>
+<webui-button class="download" theme="primary">Download</webui-button>
 </webui-flex>
 </webui-flex>
 <style type="text/css">

@@ -1,7 +1,7 @@
 use crate::prelude::*;
 use base64::prelude::*;
 use image::imageops::FilterType;
-use image::{ImageFormat, load_from_memory};
+use image::{DynamicImage, ImageDecoder, ImageFormat, ImageReader};
 use kurbo::{Affine, BezPath, PathEl};
 use std::f64::consts::PI;
 use std::io::Cursor;
@@ -109,6 +109,19 @@ pub fn rotate_svg_path(
 ///
 /// Returns:
 /// * `Vec<u8>`: The processed image bytes.
+/// Load an image and turn it the way its EXIF orientation says, as browsers do when they show it.
+/// Phone photos are often stored sideways with an orientation tag. Without this, a photo the browser shows
+/// as portrait is loaded as landscape, and resizing it to the size the browser reports squashes it.
+fn load_upright(bytes: &[u8]) -> image::ImageResult<DynamicImage> {
+    let mut decoder = ImageReader::new(Cursor::new(bytes))
+        .with_guessed_format()?
+        .into_decoder()?;
+    let orientation = decoder.orientation()?;
+    let mut img = DynamicImage::from_decoder(decoder)?;
+    img.apply_orientation(orientation);
+    Ok(img)
+}
+
 #[wasm_bindgen]
 pub fn process_image(
     base64_input: &str,
@@ -131,7 +144,7 @@ pub fn process_image(
 
     // Load the image from memory
     // image v0.25 still uses load_from_memory for guessing formats
-    let img = load_from_memory(&bytes).map_err(|e| format!("Failed to load image: {}", e))?;
+    let img = load_upright(&bytes).map_err(|e| format!("Failed to load image: {}", e))?;
 
     // Resize the image
     // FilterType::Lanczos3 is high quality, slow. Use Triangle for speed.

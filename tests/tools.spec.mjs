@@ -78,7 +78,7 @@ test.describe('app-related-tools', () => {
         const related = page.locator('app-related-tools');
         await expect(related.locator('h2')).toHaveText('Related Tools');
         const links = related.locator('webui-card');
-        await expect(links).toHaveCount(registry.tools.length - 1);
+        await expect(links).toHaveCount(Math.min(6, registry.tools.length - 1));
         const urls = await links.evaluateAll(cards => cards.map(card => card.getAttribute('link')));
         expect(urls).not.toContain('/jwt-parser');
         const sameCategory = registry.tools.filter(tool => tool.category === 'developer' && tool.url !== '/jwt-parser').map(tool => tool.url);
@@ -123,6 +123,18 @@ test.describe('app-tool-output', () => {
         const chunks = [];
         for await (const chunk of stream) chunks.push(chunk);
         expect(Buffer.concat(chunks).toString()).toBe('hello world');
+    });
+
+    test('copies the exact result, including tabs and surrounding spaces', async ({ page, context }) => {
+        await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+        await openPage(page, '/');
+        const root = await mount(page, '<app-tool-output label="Result"></app-tool-output>');
+        const output = root.locator('app-tool-output');
+        const exact = '{\n\t"a": "x & y <b>"\n}\n';
+        await output.evaluate((el, text) => el.setValue(text), exact);
+        await output.locator('webui-button', { hasText: 'Copy' }).click();
+        await expect(output.locator('webui-button.copy')).toHaveText('Copied');
+        expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(exact);
     });
 
     test('has no Download button without a filename', async ({ page }) => {
@@ -182,5 +194,46 @@ test.describe('image converter', () => {
         const converter = page.locator('app-image-converter');
         await dropFiles(converter.locator('app-file-drop'), [PNG]);
         await expect(converter.locator('webui-flex.msgSelected')).toContainText('Dimensions: 1 x 1');
+    });
+});
+
+test.describe('app-tool-directory', () => {
+    test('the home page lists every tool as a plain link, for the static page search engines read', () => {
+        const home = readText(routeToFile('/'));
+        const block = home.match(/<app-tool-directory>([\s\S]*?)<\/app-tool-directory>/)?.[1];
+        expect(block, 'root.md should have an app-tool-directory with a list of tool links inside').toBeTruthy();
+        const listed = [...block.matchAll(/\]\((\/[^)\s]*)\)/g)].map(match => match[1]);
+        expect(listed.filter(url => !toolUrls.includes(url)), 'Listed on the home page but not in tools.json').toEqual([]);
+        expect(toolUrls.filter(url => !listed.includes(url)), 'In tools.json but not listed on the home page').toEqual([]);
+    });
+
+    test('groups tools by category, skipping empty categories', async ({ page }) => {
+        await openPage(page, '/');
+        const directory = page.locator('app-tool-directory');
+        await expect(directory.locator('webui-card')).toHaveCount(registry.tools.length);
+        const used = registry.categories.filter(category => registry.tools.some(tool => tool.category === category.id));
+        await expect(directory.locator('section > h2')).toHaveText(used.map(category => category.name));
+        // The plain list is replaced once the directory loads.
+        await expect(directory.locator('ul')).toHaveCount(0);
+    });
+
+    test('search filters tools and categories, and clearing it shows everything again', async ({ page }) => {
+        await openPage(page, '/');
+        const directory = page.locator('app-tool-directory');
+        const search = directory.locator('webui-input-text input');
+        const visibleCards = directory.locator('webui-card:visible');
+        await search.fill('jwt');
+        await expect(visibleCards).toHaveCount(1);
+        await expect(visibleCards).toHaveAttribute('link', '/jwt-parser');
+        await expect(directory.locator('section[data-category="image"]')).toBeHidden();
+        await search.fill('favicon ico');
+        await expect(visibleCards).toHaveCount(1);
+        await expect(visibleCards).toHaveAttribute('link', '/favicon-generator');
+        await search.fill('nothing matches this');
+        await expect(visibleCards).toHaveCount(0);
+        await expect(directory.locator('.no-results')).toBeVisible();
+        await search.fill('');
+        await expect(visibleCards).toHaveCount(registry.tools.length);
+        await expect(directory.locator('.no-results')).toBeHidden();
     });
 });

@@ -1,9 +1,30 @@
 {
     "categories": [
-        { "id": "image", "name": "Image Tools", "icon": "emoji-framed_picture" },
-        { "id": "developer", "name": "Developer Tools", "icon": "emoji-hammer_and_wrench" },
-        { "id": "text", "name": "Text Tools", "icon": "emoji-memo" },
-        { "id": "generators", "name": "Generators", "icon": "emoji-game_die" }
+        {
+            "id": "image",
+            "name": "Image Tools",
+            "icon": "emoji-framed_picture"
+        },
+        {
+            "id": "developer",
+            "name": "Developer Tools",
+            "icon": "emoji-hammer_and_wrench"
+        },
+        {
+            "id": "design",
+            "name": "Color & Design Tools",
+            "icon": "emoji-art"
+        },
+        {
+            "id": "text",
+            "name": "Text Tools",
+            "icon": "emoji-memo"
+        },
+        {
+            "id": "generators",
+            "name": "Generators",
+            "icon": "emoji-game_die"
+        }
     ],
     "tools": [
         {
@@ -33,6 +54,160 @@
             "description": "View an OpenAPI specification from any URL as readable API documentation.",
             "category": "developer",
             "icon": "emoji-book"
+        },
+        {
+            "url": "/json-formatter",
+            "name": "JSON Formatter & Validator",
+            "description": "Format, validate, and minify JSON, with the line and column of any error.",
+            "category": "developer",
+            "icon": "emoji-clipboard"
+        },
+        {
+            "url": "/base64",
+            "name": "Base64 Encoder & Decoder",
+            "description": "Encode text or files to Base64 and decode it back, with UTF-8 and URL-safe support.",
+            "category": "developer",
+            "icon": "emoji-input_symbols"
+        },
+        {
+            "url": "/url-encoder",
+            "name": "URL Encoder & Decoder",
+            "description": "Percent-encode text for URLs and query strings, or decode it back to readable text.",
+            "category": "developer",
+            "icon": "emoji-link"
+        },
+        {
+            "url": "/uuid-generator",
+            "name": "UUID Generator",
+            "description": "Generate random version 4 or time-ordered version 7 UUIDs, up to 1,000 at once.",
+            "category": "generators",
+            "icon": "emoji-id"
+        },
+        {
+            "url": "/hash-generator",
+            "name": "Hash Generator",
+            "description": "Get MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes of text or files, and check a file against its hash.",
+            "category": "developer",
+            "icon": "emoji-hash"
+        },
+        {
+            "url": "/timestamp-converter",
+            "name": "Unix Timestamp Converter",
+            "description": "Convert Unix timestamps to readable dates in UTC and your time zone, and dates back to timestamps.",
+            "category": "developer",
+            "icon": "emoji-alarm_clock"
+        },
+        {
+            "url": "/password-generator",
+            "name": "Password Generator",
+            "description": "Generate strong random passwords with your choice of letters, numbers, and symbols.",
+            "category": "generators",
+            "icon": "emoji-key"
+        },
+        {
+            "url": "/word-counter",
+            "name": "Word Counter",
+            "description": "Count words, characters, sentences, and paragraphs, with reading and speaking time.",
+            "category": "text",
+            "icon": "emoji-1234"
+        },
+        {
+            "url": "/case-converter",
+            "name": "Case Converter",
+            "description": "Convert text to upper, lower, title, or sentence case, or to camelCase, snake_case, and other code cases.",
+            "category": "text",
+            "icon": "emoji-capital_abcd"
+        },
+        {
+            "url": "/diff-checker",
+            "name": "Diff Checker",
+            "description": "Compare two texts line by line and see what was added, removed, or changed.",
+            "category": "text",
+            "icon": "emoji-left_right_arrow"
+        },
+        {
+            "url": "/color-converter",
+            "name": "Color Converter",
+            "description": "Convert colors between HEX, RGB, HSL, and CMYK, with a color picker and preview.",
+            "category": "design",
+            "icon": "emoji-art"
+        },
+        {
+            "url": "/contrast-checker",
+            "name": "Color Contrast Checker",
+            "description": "Check text and background colors against the WCAG AA and AAA contrast levels.",
+            "category": "design",
+            "icon": "emoji-eyeglasses"
+        },
+        {
+            "url": "/png-to-webp",
+            "name": "PNG to WebP Converter",
+            "description": "Convert PNG images to smaller WebP files for the web, keeping transparency.",
+            "category": "image",
+            "icon": "emoji-framed_picture"
+        },
+        {
+            "url": "/jpg-to-webp",
+            "name": "JPG to WebP Converter",
+            "description": "Convert JPG photos to WebP for faster loading pages, at the quality you choose.",
+            "category": "image",
+            "icon": "emoji-framed_picture"
+        },
+        {
+            "url": "/webp-to-png",
+            "name": "WebP to PNG Converter",
+            "description": "Convert WebP images to PNG to open and edit them in any app.",
+            "category": "image",
+            "icon": "emoji-framed_picture"
+        },
+        {
+            "url": "/webp-to-jpg",
+            "name": "WebP to JPG Converter",
+            "description": "Convert WebP images to JPG for apps and sites that do not accept WebP.",
+            "category": "image",
+            "icon": "emoji-framed_picture"
+        },
+        {
+            "url": "/png-to-jpg",
+            "name": "PNG to JPG Converter",
+            "description": "Convert PNG photos and screenshots to much smaller JPG files.",
+            "category": "image",
+            "icon": "emoji-framed_picture"
+        },
+        {
+            "url": "/jpg-to-png",
+            "name": "JPG to PNG Converter",
+            "description": "Convert JPG photos to PNG to edit them without further quality loss.",
+            "category": "image",
+            "icon": "emoji-framed_picture"
+        },
+        {
+            "url": "/favicon-generator",
+            "name": "Favicon Generator",
+            "description": "Make a favicon.ico for your website from a PNG, JPG, or WebP image.",
+            "category": "image",
+            "icon": "emoji-star"
+        },
+        {
+            "url": "/resize-image",
+            "name": "Image Resizer",
+            "description": "Resize images to an exact width or height, keeping their proportions and format.",
+            "category": "image",
+            "icon": "emoji-straight_ruler"
+        },
+        {
+            "url": "/remove-exif",
+            "name": "EXIF Remover",
+            "description": "Remove GPS location, camera details, and other hidden data from photos before sharing.",
+            "category": "image",
+            "icon": "emoji-shield"
+        },
+        {
+            "url": "/image-to-base64",
+            "name": "Image to Base64",
+            "description": "Turn an image into a Base64 data URL, with ready-to-paste HTML and CSS.",
+            "category": "image",
+            "icon": "emoji-input_symbols"
         }
     ]
 }

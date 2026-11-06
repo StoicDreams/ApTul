@@ -7,6 +7,30 @@
  */
 "use strict"
 {
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+    function svgElement(name, attributes) {
+        const el = document.createElementNS(SVG_NS, name);
+        Object.entries(attributes).forEach(([key, value]) => el.setAttribute(key, `${value}`));
+        return el;
+    }
+    /**
+     * A titled preview of SVG paths with axes and the rotation center marked.
+     * Paths come from visitor input, so they are only ever set as attribute values, never parsed as HTML.
+     */
+    function buildPreview(title, paths, stroke, opacity, cx, cy) {
+        const column = webui.create('div');
+        column.appendChild(webui.create('h4', { text: title, style: 'text-align:center;' }));
+        const svg = svgElement('svg', {
+            viewBox: '-200 -200 400 400',
+            style: 'width:100%; height:300px; background:#f4f4f4; border:1px solid #ddd; border-radius:4px;',
+        });
+        svg.appendChild(svgElement('line', { x1: -200, y1: 0, x2: 200, y2: 0, stroke: '#ddd' }));
+        svg.appendChild(svgElement('line', { x1: 0, y1: -200, x2: 0, y2: 200, stroke: '#ddd' }));
+        paths.forEach(d => svg.appendChild(svgElement('path', { d, fill: 'none', stroke, 'stroke-width': 2, opacity })));
+        svg.appendChild(svgElement('circle', { cx, cy, r: 3, fill: 'red' }));
+        column.appendChild(svg);
+        return column;
+    }
     webui.define('app-svg-path-rotator', {
         preload: 'flex input-text input-message code button grid alert paper card',
         constructor() {
@@ -87,14 +111,6 @@
             formGrid.appendChild(btnRow);
             const outputWrapper = webui.create('div');
             wrap.appendChild(outputWrapper);
-            const buildSvg = (content) => `
-                <svg viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:300px; background:#f4f4f4; border:1px solid #ddd; border-radius:4px;">
-                    <line x1="-200" y1="0" x2="200" y2="0" stroke="#ddd" />
-                    <line x1="0" y1="-200" x2="0" y2="200" stroke="#ddd" />
-                    ${content}
-                    <circle cx="${t.cx}" cy="${t.cy}" r="3" fill="red" />
-                </svg>
-            `;
             btn.addEventListener('click', async () => {
                 outputWrapper.innerHTML = '';
                 if (!t.path) {
@@ -105,15 +121,8 @@
                     const result = await webui.worker.rotate_svg_path(t.path, t.cx, t.cy, t.angles, t.precision);
                     const previewGrid = webui.create('webui-grid', { columns: '1fr 1fr', gap: 'var(--padding)', style: 'margin-bottom: 20px;' });
                     outputWrapper.appendChild(previewGrid);
-                    const leftCol = webui.create('div');
-                    leftCol.innerHTML = `<h4 style="text-align:center;">Original</h4>` + buildSvg(`<path d="${t.path}" fill="none" stroke="black" stroke-width="2" />`);
-                    previewGrid.appendChild(leftCol);
-                    const resultPaths = result.split('\n').map((d, i) =>
-                        `<path d="${d}" fill="none" stroke="blue" stroke-width="2" opacity="0.7" />`
-                    ).join('');
-                    const rightCol = webui.create('div');
-                    rightCol.innerHTML = `<h4 style="text-align:center;">Result</h4>` + buildSvg(resultPaths);
-                    previewGrid.appendChild(rightCol);
+                    previewGrid.appendChild(buildPreview('Original', [t.path], 'black', 1, t.cx, t.cy));
+                    previewGrid.appendChild(buildPreview('Result', result.split('\n'), 'blue', 0.7, t.cx, t.cy));
                     const codeBlock = webui.create('webui-code', {
                         lang: 'text',
                         label: 'Rotated Paths (One per line)'

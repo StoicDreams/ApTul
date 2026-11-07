@@ -71,6 +71,27 @@
         ]
     },
     {
+        "name": "PDF Tools",
+        "icon": "emoji-page_facing_up",
+        "children": [
+            {
+                "name": "Image to PDF",
+                "icon": "emoji-page_with_curl",
+                "url": "/image-to-pdf"
+            },
+            {
+                "name": "Merge PDF",
+                "icon": "emoji-paperclip",
+                "url": "/merge-pdf"
+            },
+            {
+                "name": "Split PDF",
+                "icon": "emoji-scissors",
+                "url": "/split-pdf"
+            }
+        ]
+    },
+    {
         "name": "Developer Tools",
         "icon": "emoji-hammer_and_wrench",
         "children": [
@@ -95,9 +116,19 @@
                 "url": "/jwt-parser"
             },
             {
+                "name": "Markdown to HTML",
+                "icon": "emoji-pencil",
+                "url": "/markdown-to-html"
+            },
+            {
                 "name": "Open API",
                 "icon": "emoji-book",
                 "url": "/openapi"
+            },
+            {
+                "name": "Regex Tester",
+                "icon": "emoji-mag",
+                "url": "/regex-tester"
             },
             {
                 "name": "Timestamp Converter",
@@ -153,9 +184,19 @@
         "icon": "emoji-game_die",
         "children": [
             {
+                "name": "Lorem Ipsum Generator",
+                "icon": "emoji-abc",
+                "url": "/lorem-ipsum-generator"
+            },
+            {
                 "name": "Password Generator",
                 "icon": "emoji-key",
                 "url": "/password-generator"
+            },
+            {
+                "name": "QR Code Generator",
+                "icon": "emoji-iphone",
+                "url": "/qr-code-generator"
             },
             {
                 "name": "UUID Generator",

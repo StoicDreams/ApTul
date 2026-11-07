@@ -82,7 +82,9 @@ test.describe('app-related-tools', () => {
         const urls = await links.evaluateAll(cards => cards.map(card => card.getAttribute('link')));
         expect(urls).not.toContain('/jwt-parser');
         const sameCategory = registry.tools.filter(tool => tool.category === 'developer' && tool.url !== '/jwt-parser').map(tool => tool.url);
-        expect(urls.slice(0, sameCategory.length).sort()).toEqual(sameCategory.sort());
+        // Tools in the same category come first, filling the list when there are more of them than fit.
+        const first = urls.slice(0, Math.min(sameCategory.length, urls.length));
+        expect(first.every(url => sameCategory.includes(url)), `${first} are all developer tools`).toBe(true);
     });
 
     test('limit and category change what is listed', async ({ page }) => {

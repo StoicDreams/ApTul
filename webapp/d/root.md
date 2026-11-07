@@ -19,6 +19,12 @@
 - [EXIF Remover](/remove-exif): Remove GPS location, camera details, and other hidden data from photos before sharing.
 - [Image to Base64](/image-to-base64): Turn an image into a Base64 data URL, with ready-to-paste HTML and CSS.
 
+### PDF Tools
+
+- [Merge PDF](/merge-pdf): Join PDF files into one, in the order you choose, without uploading them.
+- [Split PDF](/split-pdf): Take pages out of a PDF, or split it into several files, without uploading it.
+- [Image to PDF](/image-to-pdf): Turn JPG, PNG, and WebP images into a PDF, one image per page, on A4, Letter, or image-sized pages.
+
 ### Developer Tools
 
 - [JWT Decoder](/jwt-parser): Decode JSON Web Tokens to read the header, payload, and expiry, without sending them anywhere.
@@ -28,6 +34,8 @@
 - [URL Encoder & Decoder](/url-encoder): Percent-encode text for URLs and query strings, or decode it back to readable text.
 - [Hash Generator](/hash-generator): Get MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes of text or files, and check a file against its hash.
 - [Unix Timestamp Converter](/timestamp-converter): Convert Unix timestamps to readable dates in UTC and your time zone, and dates back to timestamps.
+- [Markdown to HTML Converter](/markdown-to-html): Convert Markdown to clean HTML, with GitHub tables, task lists, and a live preview.
+- [Regex Tester](/regex-tester): Test JavaScript regular expressions, with highlighted matches, groups, and find and replace.
 
 ### Color & Design Tools
 
@@ -44,6 +52,8 @@
 
 - [UUID Generator](/uuid-generator): Generate random version 4 or time-ordered version 7 UUIDs, up to 1,000 at once.
 - [Password Generator](/password-generator): Generate strong random passwords with your choice of letters, numbers, and symbols.
+- [QR Code Generator](/qr-code-generator): Make QR codes for links, text, Wi-Fi, email, and phone numbers, and download them as PNG or SVG.
+- [Lorem Ipsum Generator](/lorem-ipsum-generator): Generate placeholder text as paragraphs, sentences, words, or list items, in plain text or HTML.
 
 </app-tool-directory>
 

@@ -6,6 +6,11 @@
             "icon": "emoji-framed_picture"
         },
         {
+            "id": "pdf",
+            "name": "PDF Tools",
+            "icon": "emoji-page_facing_up"
+        },
+        {
             "id": "developer",
             "name": "Developer Tools",
             "icon": "emoji-hammer_and_wrench"
@@ -208,6 +213,55 @@
             "description": "Turn an image into a Base64 data URL, with ready-to-paste HTML and CSS.",
             "category": "image",
             "icon": "emoji-input_symbols"
+        },
+        {
+            "url": "/qr-code-generator",
+            "name": "QR Code Generator",
+            "description": "Make QR codes for links, text, Wi-Fi, email, and phone numbers, and download them as PNG or SVG.",
+            "category": "generators",
+            "icon": "emoji-iphone"
+        },
+        {
+            "url": "/merge-pdf",
+            "name": "Merge PDF",
+            "description": "Join PDF files into one, in the order you choose, without uploading them.",
+            "category": "pdf",
+            "icon": "emoji-paperclip"
+        },
+        {
+            "url": "/split-pdf",
+            "name": "Split PDF",
+            "description": "Take pages out of a PDF, or split it into several files, without uploading it.",
+            "category": "pdf",
+            "icon": "emoji-scissors"
+        },
+        {
+            "url": "/image-to-pdf",
+            "name": "Image to PDF",
+            "description": "Turn JPG, PNG, and WebP images into a PDF, one image per page, on A4, Letter, or image-sized pages.",
+            "category": "pdf",
+            "icon": "emoji-page_with_curl"
+        },
+        {
+            "url": "/markdown-to-html",
+            "name": "Markdown to HTML Converter",
+            "description": "Convert Markdown to clean HTML, with GitHub tables, task lists, and a live preview.",
+            "category": "developer",
+            "icon": "emoji-pencil"
+        },
+        {
+            "url": "/regex-tester",
+            "name": "Regex Tester",
+            "description": "Test JavaScript regular expressions, with highlighted matches, groups, and find and replace.",
+            "category": "developer",
+            "icon": "emoji-mag"
+        },
+        {
+            "url": "/lorem-ipsum-generator",
+            "name": "Lorem Ipsum Generator",
+            "description": "Generate placeholder text as paragraphs, sentences, words, or list items, in plain text or HTML.",
+            "category": "generators",
+            "icon": "emoji-abc"
         }
     ]
 }

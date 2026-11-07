@@ -71,6 +71,8 @@ Every tool on Ap Tul follows the same layout, so pages are quick to build, look 
 | `app-tool-output` | A text result with Copy (copies the exact text) and Download. `<app-tool-output label="Result" lang="json" filename="result.json" mime="application/json">`, then call `setValue(text)` or bind it with `data-subscribe`. Empty results hide the box. |
 | `app-image-converter` | The image converter. Set `to` (webp, jpg, png, ico, bmp, or same) to choose the starting format, so one tool can serve pages such as PNG to WebP. |
 | `app-file-drop` | Wrap a tool so files can be dropped on it. Set `accept` the same as a file input, `read` to `auto`, `text`, `dataurl`, or `buffer`, and `multiple` for more than one file. Listen for `change` and read `value`, which has the same shape as `webui-file-select`. |
+| `app-file-list` | Several files in an order the visitor chooses, with move and remove buttons, as used by Merge PDF and Image to PDF. Set `accept`, `label`, and `button`, or `single` for one file. Its `value` is `[{ name, type, size, bytes }]` with bytes as a `Uint8Array`. Listen for `change`, and for `rejected`, whose `detail` lists the names of skipped files. |
+| `webui.worker` | Runs the Rust functions in `webapp/src` in a worker, such as `await webui.worker.qr_code(...)`. The worker and its WebAssembly (about 500 KB compressed) only load with the first call, so only tools that need Rust should call it. `Uint8Array` arguments and results are passed as binary. Errors reject with the Rust error message. |
 | `app-ad-slot` | One ad. Keep the two in the template where they are, away from the tool, since ads next to buttons can be clicked by mistake and break ad network rules. See [Ads](#ads). |
 | `app-tool-directory` | The home page directory, grouped by category with search. Put a plain list of tool links inside it (see step 4). |
 | `app-related-tools` | Put at the end of every tool page. Lists other tools from `tools.json`, starting with the same category. Optional `category`, `limit`, and `heading` attributes. |
@@ -89,6 +91,9 @@ Tool input comes from visitors, so never put it into `innerHTML` or attribute st
 - **Inputs:** use `webui-input-message` for text people paste into a tool. `webui-input-text` cleans what is typed, which can change values such as JSON or URLs.
 - **Copying results:** show results with `app-tool-output`, which adds a Copy button, and a Download button when `filename` is set. Older versions of `webui-code` copied the displayed text, which lost tabs and whitespace. It now copies the exact value.
 - **Components inside results:** a site component only loads once one is on the page. Create result components such as `app-tool-output` when the tool renders, not later, or waiting for them never finishes.
+- **Attributes that are on when present:** `webui.create('input', { multiple: false })` still adds `multiple`, which turns it on. Leave the key out instead.
+- **Events from inner components bubble:** `change` from an inner `app-file-drop` or `webui-file-select` reaches listeners on the tool around it, before the outer component has handled it. Stop it with `stopPropagation()` when the outer component sends its own event.
+- **Code copied into a worker:** the minifier renames functions and constants, so a function whose source is copied into a worker (as in the Regex Tester) must not use anything outside itself.
 - **Image claims:** check what the converter really produces before writing about it. For example, the Rust image crate only writes lossless WebP, so lossy JPG and WebP are saved by the browser instead.
 
 ## Ads

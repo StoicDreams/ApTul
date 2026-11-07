@@ -1,7 +1,10 @@
 use crate::prelude::*;
 
 mod image;
+mod markdown;
+mod pdf;
 mod prelude;
+mod qr;
 
 /* Define web-worker processes here */
 

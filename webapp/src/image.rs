@@ -112,7 +112,7 @@ pub fn rotate_svg_path(
 /// Load an image and turn it the way its EXIF orientation says, as browsers do when they show it.
 /// Phone photos are often stored sideways with an orientation tag. Without this, a photo the browser shows
 /// as portrait is loaded as landscape, and resizing it to the size the browser reports squashes it.
-fn load_upright(bytes: &[u8]) -> image::ImageResult<DynamicImage> {
+pub(crate) fn load_upright(bytes: &[u8]) -> image::ImageResult<DynamicImage> {
     let mut decoder = ImageReader::new(Cursor::new(bytes))
         .with_guessed_format()?
         .into_decoder()?;

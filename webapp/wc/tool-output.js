@@ -8,7 +8,7 @@
 "use strict"
 {
     /*
-     * <app-tool-output label="Formatted JSON" lang="json" filename="formatted.json" mime="application/json"></app-tool-output>
+     * <app-tool-output label="Formatted JSON" language="json" filename="formatted.json" mime="application/json"></app-tool-output>
      *
      * Set the result with setValue(text), or with data-subscribe="key". An empty value hides the output.
      * Copy copies the exact text. webui-code's own copy button copies its rendered text instead, which turns
@@ -16,7 +16,9 @@
      */
     webui.define('app-tool-output', {
         preload: 'code button flex',
-        attr: ['label', 'lang', 'filename', 'mime'],
+        // language, not lang: lang is the HTML attribute for a human language, which screen readers act on.
+        // lang still works, for older markup.
+        attr: ['label', 'language', 'lang', 'filename', 'mime'],
         constructor() {
             const t = this;
             t.value = '';
@@ -32,8 +34,9 @@
                 case 'label':
                     t._code.setAttribute('label', value || '');
                     break;
+                case 'language':
                 case 'lang':
-                    t._code.setAttribute('lang', value || 'text');
+                    t._code.setAttribute('language', value || 'text');
                     break;
                 case 'filename':
                     t._download.style.display = value ? '' : 'none';
@@ -87,7 +90,7 @@
         },
         shadowTemplate: `
 <webui-flex column gap="var(--padding)">
-<webui-code lang="text" nocopy></webui-code>
+<webui-code language="text" nocopy></webui-code>
 <webui-flex justify="end" gap="var(--padding)">
 <webui-button class="copy" theme="secondary">Copy</webui-button>
 <webui-button class="download" theme="primary">Download</webui-button>

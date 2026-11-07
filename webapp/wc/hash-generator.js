@@ -75,7 +75,7 @@
             const results = webui.create('div', { class: 'hash-results', style: 'display:flex; flex-direction:column; gap:var(--padding);' });
             const codes = {};
             ALGORITHMS.forEach(name => {
-                codes[name] = webui.create('app-tool-output', { lang: 'text', label: name, 'data-algorithm': name });
+                codes[name] = webui.create('app-tool-output', { language: 'text', label: name, 'data-algorithm': name });
                 results.appendChild(codes[name]);
             });
             results.style.display = 'none';

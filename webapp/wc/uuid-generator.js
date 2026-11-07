@@ -88,7 +88,7 @@
             const braces = webui.create('webui-dropdown', { label: 'Braces', options: 'None|no,{Braces}|yes', value: 'no', style: 'flex:1 1 14rem; max-width:22rem;' });
             const button = webui.create('webui-button', { theme: 'primary', text: 'Generate' });
             options.append(version, count, casing, hyphens, braces, button);
-            const output = webui.create('app-tool-output', { label: 'UUIDs', lang: 'text', filename: 'uuids.txt' });
+            const output = webui.create('app-tool-output', { label: 'UUIDs', language: 'text', filename: 'uuids.txt' });
             wrap.append(options, output);
             t.replaceChildren(wrap);
 

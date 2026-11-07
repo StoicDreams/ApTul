@@ -68,7 +68,7 @@
                     resultContainer.appendChild(payloadSection);
                     resultContainer.appendChild(headerSigGroup);
                     // --- Header Section ---
-                    const headerCode = webui.create('webui-code', { label: 'Header', lang: 'json' });
+                    const headerCode = webui.create('webui-code', { label: 'Header', language: 'json' });
                     headerCode.setValue(JSON.stringify(header, null, 2));
                     headerSection.appendChild(headerCode);
                     headerSigGroup.appendChild(headerSection);
@@ -89,11 +89,11 @@
                         }
                         payloadSection.appendChild(hints);
                     }
-                    const payloadCode = webui.create('webui-code', { label: 'Primary', lang: 'json' });
+                    const payloadCode = webui.create('webui-code', { label: 'Primary', language: 'json' });
                     payloadCode.setValue(JSON.stringify(payload, null, 2));
                     payloadSection.appendChild(payloadCode);
                     // --- Signature Section ---
-                    const sigCode = webui.create('webui-code', { label: 'Signature', lang: 'text' });
+                    const sigCode = webui.create('webui-code', { label: 'Signature', language: 'text' });
                     sigCode.setValue(rawSignature);
                     sigSection.appendChild(sigCode);
                     headerSigGroup.appendChild(sigSection);

@@ -101,7 +101,7 @@ test.describe('app-related-tools', () => {
 test.describe('app-tool-output', () => {
     test('shows the result and hides when empty', async ({ page }) => {
         await openPage(page, '/');
-        const root = await mount(page, '<app-tool-output label="Result" lang="json" filename="result.json" mime="application/json"></app-tool-output>');
+        const root = await mount(page, '<app-tool-output label="Result" language="json" filename="result.json" mime="application/json"></app-tool-output>');
         const output = root.locator('app-tool-output');
         await expect(output).toBeHidden();
         await output.evaluate(el => el.setValue('{"a":1}'));

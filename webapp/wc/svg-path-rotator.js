@@ -124,7 +124,7 @@
                     previewGrid.appendChild(buildPreview('Original', [t.path], 'black', 1, t.cx, t.cy));
                     previewGrid.appendChild(buildPreview('Result', result.split('\n'), 'blue', 0.7, t.cx, t.cy));
                     const codeBlock = webui.create('webui-code', {
-                        lang: 'text',
+                        language: 'text',
                         label: 'Rotated Paths (One per line)'
                     });
                     codeBlock.setValue(result);

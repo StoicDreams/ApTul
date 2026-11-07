@@ -68,7 +68,7 @@ Every tool on Ap Tul follows the same layout, so pages are quick to build, look 
 
 | Component | Use it for |
 |---|---|
-| `app-tool-output` | A text result with Copy (copies the exact text) and Download. `<app-tool-output label="Result" lang="json" filename="result.json" mime="application/json">`, then call `setValue(text)` or bind it with `data-subscribe`. Empty results hide the box. |
+| `app-tool-output` | A text result with Copy (copies the exact text) and Download. `<app-tool-output label="Result" language="json" filename="result.json" mime="application/json">`, then call `setValue(text)` or bind it with `data-subscribe`. Empty results hide the box. |
 | `app-image-converter` | The image converter. Set `to` (webp, jpg, png, ico, bmp, or same) to choose the starting format, so one tool can serve pages such as PNG to WebP. |
 | `app-file-drop` | Wrap a tool so files can be dropped on it. Set `accept` the same as a file input, `read` to `auto`, `text`, `dataurl`, or `buffer`, and `multiple` for more than one file. Listen for `change` and read `value`, which has the same shape as `webui-file-select`. |
 | `app-file-list` | Several files in an order the visitor chooses, with move and remove buttons, as used by Merge PDF and Image to PDF. Set `accept`, `label`, and `button`, or `single` for one file. Its `value` is `[{ name, type, size, bytes }]` with bytes as a `Uint8Array`. Listen for `change`, and for `rejected`, whose `detail` lists the names of skipped files. |

@@ -46,7 +46,7 @@
             const status = webui.create('webui-alert', { show: false });
             const results = webui.create('div', { class: 'base64-results', style: 'display:none; flex-direction:column; gap:var(--padding);' });
             const codes = snippets({ content: 'data:,', name: '' }).map(([label, lang]) => {
-                const code = webui.create('app-tool-output', { lang: 'text', label, 'data-snippet': label });
+                const code = webui.create('app-tool-output', { language: 'text', label, 'data-snippet': label });
                 results.appendChild(code);
                 return code;
             });

@@ -42,7 +42,7 @@
             const input = webui.create('webui-input-message', { label: 'Text', placeholder: 'Type or paste text, such as a sentence or a list of names', rows: 6 });
             const results = webui.create('div', { class: 'case-results', style: 'display:flex; flex-direction:column; gap:var(--padding);' });
             const codes = CASES.map(([name]) => {
-                const code = webui.create('app-tool-output', { lang: 'text', label: name, 'data-case': name });
+                const code = webui.create('app-tool-output', { language: 'text', label: name, 'data-case': name });
                 results.appendChild(code);
                 return code;
             });

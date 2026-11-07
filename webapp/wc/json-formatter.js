@@ -90,7 +90,7 @@
             const status = webui.create('webui-alert', { show: false });
             const output = webui.create('app-tool-output', {
                 label: 'Result',
-                lang: 'json',
+                language: 'json',
                 filename: 'formatted.json',
                 mime: 'application/json',
             });

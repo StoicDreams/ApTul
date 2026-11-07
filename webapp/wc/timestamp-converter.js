@@ -74,7 +74,7 @@
             // One output per format, created up front so their component loads with the page. Empty outputs hide themselves.
             const results = webui.create('div', { class: 'time-results', style: 'display:flex; flex-direction:column; gap:var(--padding);' });
             const outputs = describe(Date.now()).map(([label]) => {
-                const output = webui.create('app-tool-output', { lang: 'text', label });
+                const output = webui.create('app-tool-output', { language: 'text', label });
                 results.appendChild(output);
                 return output;
             });

@@ -77,7 +77,7 @@
                 boxes[key] = box;
             });
             const status = webui.create('webui-alert', { show: false });
-            const output = webui.create('app-tool-output', { label: 'Password', lang: 'text' });
+            const output = webui.create('app-tool-output', { label: 'Password', language: 'text' });
             wrap.append(row, checks, status, output);
             t.replaceChildren(wrap);
 

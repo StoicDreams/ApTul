@@ -99,7 +99,7 @@
             };
             const opening = box('opening', 'Start with "Lorem ipsum dolor sit amet"', true);
             const html = box('html', 'HTML tags', false);
-            const output = webui.create('app-tool-output', { label: 'Placeholder text', lang: 'text' });
+            const output = webui.create('app-tool-output', { label: 'Placeholder text', language: 'text' });
             const stats = webui.create('p', { class: 'lorem-stats', style: 'margin:0; opacity:0.8;' });
             wrap.append(row, options, output, stats);
             t.replaceChildren(wrap);
@@ -110,7 +110,7 @@
                 const n = Math.min(limit, Math.max(1, parseInt(count.value) || 1));
                 const items = generate(current, n, opening.checked);
                 const text = format(items, current, html.checked);
-                output.setAttribute('lang', html.checked ? 'html' : 'text');
+                output.setAttribute('language', html.checked ? 'html' : 'text');
                 output.setValue(text);
                 const plain = items.join(' ');
                 const wordCount = plain.split(/\s+/).filter(Boolean).length;

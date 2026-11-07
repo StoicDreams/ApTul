@@ -62,7 +62,7 @@
             const input = webui.create('webui-input-message', { label: 'Text', placeholder: 'Type or paste text to encode', rows: 8 });
             drop.appendChild(input);
             const status = webui.create('webui-alert', { show: false });
-            const output = webui.create('app-tool-output', { label: 'Base64', lang: 'text', filename: 'base64.txt' });
+            const output = webui.create('app-tool-output', { label: 'Base64', language: 'text', filename: 'base64.txt' });
             wrap.append(options, drop, status, output);
             t.replaceChildren(wrap);
 

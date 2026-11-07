@@ -52,7 +52,7 @@
             options.append(mode, plus);
             const input = webui.create('webui-input-message', { label: 'Text', placeholder: 'Type or paste text to encode', rows: 6 });
             const status = webui.create('webui-alert', { show: false });
-            const output = webui.create('app-tool-output', { label: 'Result', lang: 'text' });
+            const output = webui.create('app-tool-output', { label: 'Result', language: 'text' });
             wrap.append(options, input, status, output);
             t.replaceChildren(wrap);
 

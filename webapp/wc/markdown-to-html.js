@@ -54,7 +54,7 @@ img { max-width: 100%; } blockquote { border-left: 4px solid #ccc; margin-left: 
             const github = webui.create('input', { type: 'checkbox', name: 'github' });
             github.checked = true;
             optionRow.append(github, document.createTextNode('GitHub style (tables, task lists, strikethrough, and footnotes)'));
-            const output = webui.create('app-tool-output', { label: 'HTML', lang: 'html', filename: 'document.html', mime: 'text/html' });
+            const output = webui.create('app-tool-output', { label: 'HTML', language: 'html', filename: 'document.html', mime: 'text/html' });
             const previewLabel = webui.create('h3', { text: 'Preview', class: 'preview-label', style: 'display:none; margin:0;' });
             const preview = webui.create('iframe', {
                 class: 'markdown-preview', title: 'Preview of the converted HTML', sandbox: '',

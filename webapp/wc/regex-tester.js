@@ -117,7 +117,7 @@ self.onmessage = e => { try { postMessage({ ok: true, result: run(e.data) }); } 
             });
             const table = webui.create('table', { class: 'regex-matches', style: 'display:none; width:100%; border-collapse:collapse;' });
             const replace = webui.create('webui-input-message', { label: 'Replace with (optional)', placeholder: 'Use $1 or $<name> for groups, and $& for the whole match', rows: 1 });
-            const output = webui.create('app-tool-output', { label: 'Result after replacing', lang: 'text' });
+            const output = webui.create('app-tool-output', { label: 'Result after replacing', language: 'text' });
             wrap.append(pattern, flagRow, text, status, highlight, table, replace, output);
             t.replaceChildren(wrap);
 

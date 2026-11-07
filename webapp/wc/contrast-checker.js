@@ -64,7 +64,7 @@
             const colorField = (label, value) => {
                 const box = webui.create('webui-flex', { gap: '0.5rem', align: 'end', style: 'flex:1 1 18rem;' });
                 const input = webui.create('webui-input-message', { label, rows: 1, style: 'flex:1;' });
-                const picker = webui.create('input', { type: 'color', value, title: `Pick the ${label.toLowerCase()}`, style: 'width:3.5rem; height:3rem; cursor:pointer;' });
+                const picker = webui.create('input', { type: 'color', value, title: `Pick the ${label.toLowerCase()}`, 'aria-label': `Pick the ${label.toLowerCase()}`, style: 'width:3.5rem; height:3rem; cursor:pointer;' });
                 box.append(input, picker);
                 row.appendChild(box);
                 return { input, picker, value };
@@ -106,7 +106,8 @@
                     rows.append(
                         webui.create('span', { text: name }),
                         webui.create('span', { text: `${needed} : 1` }),
-                        webui.create('strong', { text: pass ? 'Pass' : 'Fail', 'data-level': name, style: `color:${pass ? '#2e9e2e' : '#d33'};` }),
+                        // Badges in the theme's own colors, which are chosen to be readable, whatever the page background.
+                        webui.create('strong', { text: pass ? 'Pass' : 'Fail', 'data-level': name, style: `padding:0 0.4em; border-radius:4px; background-color:var(--color-${pass ? 'success' : 'danger'}); color:var(--color-${pass ? 'success' : 'danger'}-offset);` }),
                     );
                 });
                 table.replaceChildren(rows);

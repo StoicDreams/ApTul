@@ -80,7 +80,7 @@
                 rows: 1,
                 style: 'flex:1 1 24rem;',
             });
-            const picker = webui.create('input', { type: 'color', value: '#ff8800', title: 'Pick a color', style: 'width:4rem; height:3rem; cursor:pointer;' });
+            const picker = webui.create('input', { type: 'color', value: '#ff8800', title: 'Pick a color', 'aria-label': 'Pick a color', style: 'width:4rem; height:3rem; cursor:pointer;' });
             row.append(input, picker);
             const swatch = webui.create('div', {
                 class: 'color-swatch',
@@ -91,7 +91,7 @@
             const status = webui.create('webui-alert', { show: false });
             const results = webui.create('div', { class: 'color-results', style: 'display:flex; flex-direction:column; gap:var(--padding);' });
             const codes = formats({ r: 0, g: 0, b: 0, a: 1 }).map(([label]) => {
-                const code = webui.create('app-tool-output', { lang: 'text', label, 'data-format': label.split(' ')[0] });
+                const code = webui.create('app-tool-output', { language: 'text', label, 'data-format': label.split(' ')[0] });
                 results.appendChild(code);
                 return code;
             });

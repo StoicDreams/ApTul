@@ -78,10 +78,10 @@ Tool input comes from visitors, so never put it into `innerHTML` or attribute st
 
 ## Things that have caught us out
 
-- **Hiding parts of a tool:** `webui-flex` sets `display: flex !important` on itself, so `style.display = 'none'` does nothing to it. Put anything you need to hide in a plain `div` instead, and show it again with the display it needs (such as `'flex'`), not `''`.
+- **Hiding parts of a tool:** older versions of `webui-flex` set `display: flex !important`, so `style.display = 'none'` did nothing. The framework no longer does this, but the existing tools use plain `div`s for parts they hide, which also works.
 - **Components load on demand:** wait with `customElements.whenDefined(tag)` before calling a component's methods, such as `setValue` on `app-tool-output`. Run the tool once after waiting, so anything typed while it loaded is handled.
 - **Alerts:** pass an object, as in `alert.setValue({ text: message }, 'danger')`. A plain string is first tried as JSON.
 - **Inputs:** use `webui-input-message` for text people paste into a tool. `webui-input-text` cleans what is typed, which can change values such as JSON or URLs.
-- **Copying results:** `webui-code`'s copy button copies its displayed text, which turns tabs into spaces and trims whitespace. Show results with `app-tool-output`, whose Copy button copies the exact value.
+- **Copying results:** show results with `app-tool-output`, which adds a Copy button, and a Download button when `filename` is set. Older versions of `webui-code` copied the displayed text, which lost tabs and whitespace. It now copies the exact value.
 - **Components inside results:** a site component only loads once one is on the page. Create result components such as `app-tool-output` when the tool renders, not later, or waiting for them never finishes.
 - **Image claims:** check what the converter really produces before writing about it. For example, the Rust image crate only writes lossless WebP, so lossy JPG and WebP are saved by the browser instead.

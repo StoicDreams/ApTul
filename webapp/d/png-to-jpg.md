@@ -22,6 +22,8 @@ Convert PNG images to JPG to make photos and large screenshots much smaller for 
 - **Private**: Your image is converted on your device.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ JPG has no transparency, so they are filled with white. The converter tells you 
 JPG compression softens sharp edges. Choose Best (95), or keep text-heavy images as PNG.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

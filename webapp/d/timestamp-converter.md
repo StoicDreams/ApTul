@@ -22,6 +22,8 @@ Turn a Unix timestamp into a readable date in UTC and your own time zone, or tur
 - **Your Time Zone**: Shows the local time with your time zone name, alongside UTC.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -43,5 +45,7 @@ A date and time without a time zone, such as 2026-01-31 14:30, is read as your l
 Older systems store timestamps as a signed 32-bit number of seconds, which runs out on 19 January 2038. Most current systems use 64-bit numbers, which last for billions of years.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

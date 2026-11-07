@@ -23,6 +23,8 @@ Convert PNG images to WebP for faster websites. WebP keeps transparency and is u
 - **Private**: Images are converted by your browser, with no upload.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -44,5 +46,7 @@ Yes. Every current version of Chrome, Edge, Firefox, and Safari shows WebP image
 Small, simple graphics with few colors are sometimes smaller as PNG. The converter tells you when the new file is larger, so you can keep the original.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

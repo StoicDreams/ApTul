@@ -24,6 +24,8 @@ Paste JSON to format it, check it for errors, or minify it. Everything runs in y
 - **Sort Keys**: Sorting keys makes two JSON files much easier to compare.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -45,5 +47,7 @@ Formatting adds line breaks and indentation so people can read the JSON. Minifyi
 Not always. Numbers larger than 9,007,199,254,740,991 lose precision when JSON is read in a browser, so very large IDs can change slightly. Store large IDs as strings to keep them exact.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

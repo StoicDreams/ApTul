@@ -23,6 +23,8 @@ Count words, characters, sentences, and paragraphs as you type, and see how long
 - **Private**: Nothing you type is uploaded or saved.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -40,5 +42,7 @@ Tools disagree on things like hyphenated words, numbers, and emoji. Character co
 Search engines show about 150 to 160 characters of a meta description. On X, posts are limited to 280 characters for most accounts.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

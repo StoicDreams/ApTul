@@ -22,6 +22,8 @@ Make text safe to use in a URL, or turn an encoded URL back into readable text. 
 - **Clear Errors**: If decoding fails, the tool explains why instead of showing a broken result.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ Both mean a space. %20 works everywhere in a URL. The + sign only means a space 
 A % sign must be followed by two hexadecimal digits, such as %20. Text with a lone % or an incomplete code cannot be decoded. Encode a literal % sign as %25.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

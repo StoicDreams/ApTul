@@ -23,6 +23,8 @@ Resize photos and images to an exact width or height, with the proportions kept 
 - **Private**: Resizing happens on your device.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -40,5 +42,7 @@ Make them no wider than they are shown. Around 1,600 to 2,000 pixels wide suits 
 Making an image smaller keeps it sharp. JPG and WebP images are saved again at the quality you choose, so pick High (90) or Best (95) to keep the most detail.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

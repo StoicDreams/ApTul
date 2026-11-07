@@ -23,6 +23,8 @@ Convert JPG photos to WebP to make pages load faster. Choose the quality that su
 - **Removes Photo Data**: Camera details and GPS location are not copied into the new file.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -40,5 +42,7 @@ Good (80) works for most photos on websites. Use High (90) for photography portf
 Each lossy conversion removes a little more detail, so convert from your original photo rather than from an already converted copy.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

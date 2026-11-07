@@ -22,6 +22,8 @@ Convert JPG images to PNG to edit them without losing more quality each time you
 - **Private**: Your photo stays on your device.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ PNG is lossless, which takes much more space for photos. That is expected. Use J
 Converting does not remove backgrounds. The PNG can hold transparency, but you need an image editor to erase the background.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

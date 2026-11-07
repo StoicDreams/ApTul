@@ -23,6 +23,8 @@ Get the MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes of any text or file at 
 - **UTF-8 Text**: Text is hashed as UTF-8, the same as most programming languages and command line tools.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -44,5 +46,7 @@ Usually the input is not exactly the same. A trailing line break, a different li
 No. A hash is a one-way fingerprint. Short or common text can sometimes be found by guessing, which is another reason not to rely on fast hashes for secrets.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

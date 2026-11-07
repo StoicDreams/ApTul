@@ -23,6 +23,8 @@ Generate version 4 or version 7 UUIDs, also called GUIDs, one at a time or up to
 - **Formats for Any System**: Braces and uppercase suit Microsoft tools, and no hyphens suits compact storage.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -44,5 +46,7 @@ In practice, no. A version 4 UUID has 122 random bits, so you would need to gene
 No. They are created in your browser and are not sent to or stored on any server.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

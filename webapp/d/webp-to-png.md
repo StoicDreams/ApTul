@@ -22,6 +22,8 @@ Convert WebP images to PNG so you can open and edit them in any app. PNG keeps e
 - **No Upload**: Your image is converted on your device.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ PNG stores every pixel without losing detail, while WebP usually uses lossy comp
 Only the first frame is converted, because PNG images here are still images.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

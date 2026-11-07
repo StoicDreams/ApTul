@@ -23,6 +23,8 @@ Create strong random passwords with your browser's secure random number generato
 - **Private**: Nothing is sent, saved, or logged.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -44,5 +46,7 @@ They are based on bits of randomness, which measure how many guesses an attacker
 Some sites only allow certain symbols. Turn off symbols and make the password longer to keep it just as strong.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

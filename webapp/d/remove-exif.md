@@ -22,6 +22,8 @@ Remove hidden photo data, including GPS location, camera model, and the date and
 - **Same Format**: Keeps your photo as a JPG, PNG, or WebP unless you choose otherwise.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ A photo's GPS location can reveal where you live or work. Some sites remove this
 The picture is saved again, so JPG and WebP photos go through compression once more. Choose Best (95) to keep nearly all detail. One side effect: phones sometimes record rotation in EXIF, and the cleaned copy is saved the way your browser shows the photo, so it keeps the right way up.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

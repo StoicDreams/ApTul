@@ -48,6 +48,8 @@ Whether you are a web developer looking to optimize assets for faster page loads
 Beyond local processing, this tool acts as a "scrubber" for your photos. It removes hidden metadata that could reveal your location, making it the safest way to prepare images for social media or public blogs.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -69,5 +71,7 @@ WebP is usually the best choice. It makes smaller files than JPG or PNG at simil
 Yes. Choose ICO as the format and resize the image to 256 pixels or smaller, such as 32 or 48 pixels wide.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

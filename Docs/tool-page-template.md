@@ -40,6 +40,8 @@ Every tool on Ap Tul follows the same layout, so pages are quick to build, look 
 - **{Feature}**: {Why it matters.}
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -49,6 +51,8 @@ Every tool on Ap Tul follows the same layout, so pages are quick to build, look 
 {A direct answer in the first sentence, then any detail.}
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>
 ```
@@ -67,6 +71,7 @@ Every tool on Ap Tul follows the same layout, so pages are quick to build, look 
 | `app-tool-output` | A text result with Copy (copies the exact text) and Download. `<app-tool-output label="Result" lang="json" filename="result.json" mime="application/json">`, then call `setValue(text)` or bind it with `data-subscribe`. Empty results hide the box. |
 | `app-image-converter` | The image converter. Set `to` (webp, jpg, png, ico, bmp, or same) to choose the starting format, so one tool can serve pages such as PNG to WebP. |
 | `app-file-drop` | Wrap a tool so files can be dropped on it. Set `accept` the same as a file input, `read` to `auto`, `text`, `dataurl`, or `buffer`, and `multiple` for more than one file. Listen for `change` and read `value`, which has the same shape as `webui-file-select`. |
+| `app-ad-slot` | One ad. Keep the two in the template where they are, away from the tool, since ads next to buttons can be clicked by mistake and break ad network rules. See [Ads](#ads). |
 | `app-tool-directory` | The home page directory, grouped by category with search. Put a plain list of tool links inside it (see step 4). |
 | `app-related-tools` | Put at the end of every tool page. Lists other tools from `tools.json`, starting with the same category. Optional `category`, `limit`, and `heading` attributes. |
 
@@ -85,3 +90,22 @@ Tool input comes from visitors, so never put it into `innerHTML` or attribute st
 - **Copying results:** show results with `app-tool-output`, which adds a Copy button, and a Download button when `filename` is set. Older versions of `webui-code` copied the displayed text, which lost tabs and whitespace. It now copies the exact value.
 - **Components inside results:** a site component only loads once one is on the page. Create result components such as `app-tool-output` when the tool renders, not later, or waiting for them never finishes.
 - **Image claims:** check what the converter really produces before writing about it. For example, the Rust image crate only writes lossless WebP, so lossy JPG and WebP are saved by the browser instead.
+
+## Ads
+
+Ad slots show nothing until ads are set up, so pages can carry them before an ad network approves the site. Once approved:
+
+1. Add the network's settings to `webapp/root_files/appConfig.json`. Each name in `slots` matches a slot's `name`, and its value is the ad unit ID from the network:
+
+    ```json
+    "ads": {
+        "network": "adsense",
+        "client": "ca-pub-0000000000000000",
+        "slots": { "content": "1234567890", "footer": "2345678901" }
+    }
+    ```
+
+2. Add `webapp/root_files/ads.txt` with the line the network gives you.
+
+A slot reserves its space as soon as the page loads, so the page does not jump, and loads its ad the first time it scrolls into view. The ad script loads once, with the first ad. To turn ads off, remove `ads` from `appConfig.json`.
+

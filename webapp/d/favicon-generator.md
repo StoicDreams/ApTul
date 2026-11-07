@@ -23,6 +23,8 @@ Turn a logo or image into a favicon.ico file for your website, the small icon sh
 - **Size Limit Handled**: Images larger than 256 pixels, the most an ICO can hold, are scaled down for you.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -44,5 +46,7 @@ No. It holds one image at the size you choose. Modern browsers handle a single 4
 Yes. All current browsers accept a PNG favicon through a link tag. An ICO is still useful because some tools request /favicon.ico directly.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

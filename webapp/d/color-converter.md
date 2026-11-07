@@ -22,6 +22,8 @@ Convert any color between HEX, RGB, HSL, and CMYK. Type a value in any CSS forma
 - **Color Picker**: Choose a color visually, and the text box follows.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ HSL describes a color by hue, saturation, and lightness, which makes it easy to 
 No. CMYK depends on the printer, ink, and paper, so a screen color has no single correct CMYK value. The value shown is a standard conversion that makes a good starting point. Ask your printer for their color profile for exact results.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

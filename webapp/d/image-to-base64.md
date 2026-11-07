@@ -22,6 +22,8 @@ Turn an image into a Base64 data URL, with ready-to-paste HTML and CSS. Useful f
 - **Size Warning**: Large data URLs slow pages down, so the tool tells you when a normal image file would be better.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ For large images. Base64 makes an image about a third larger, and browsers canno
 The data URL starts with data:image/png;base64, which tells the browser the image type, followed by the Base64 text. Use the data URL in HTML and CSS. Use the Base64 text alone when an API or tool asks for just the encoded data.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

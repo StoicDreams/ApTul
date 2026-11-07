@@ -22,6 +22,8 @@ Check whether your text and background colors have enough contrast to be readabl
 - **Exact Results**: Ratios are never rounded up, so a color that only nearly passes is shown as failing, as WCAG requires.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ Text at least 24 pixels (18 points) in size, or at least 19 pixels (14 points) w
 People's eyesight, screens, and lighting vary widely. The WCAG levels are set so text stays readable for people with low vision or color blindness, and on a phone in bright sunlight.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

@@ -37,6 +37,8 @@ Note: This tool decodes and visualizes the token structure. It does not verify t
 Debugging authentication issues often requires checking the claims inside a JWT. However, pasting a valid session token into a random website is a major security risk. Ap Tul solves this by moving the logic to the client-side. You get the convenience of a web UI with the security of a local script.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -54,5 +56,7 @@ No. It decodes the header and payload so you can read them. Checking the signatu
 They are standard claims stored as Unix timestamps. iat is when the token was issued, and exp is when it expires. The decoder shows both as dates in your local time, and says whether the token has expired.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

@@ -22,6 +22,8 @@ Convert WebP images to JPG for apps, forms, and sites that do not accept WebP. C
 - **Private**: The conversion runs in your browser, with no upload.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ Some older software, printing services, and upload forms only accept JPG or PNG.
 Yes. They are two names for the same format. The .jpg extension comes from older systems that only allowed three letters.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

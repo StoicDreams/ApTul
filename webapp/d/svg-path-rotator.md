@@ -32,6 +32,8 @@ Rotate your SVG path data by specifying the desired angle in degrees. The tool p
 Rotating SVG paths manually can be tedious and error-prone. This tool automates the process, saving you time and ensuring accuracy in your vector graphic designs.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -49,5 +51,7 @@ Yes. Enter each angle in degrees, separated by spaces. You get one rotated path 
 It sets how many decimal places each number in the result keeps. Fewer decimal places make shorter paths, while more keep curves accurate.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

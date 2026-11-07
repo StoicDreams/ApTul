@@ -24,6 +24,8 @@ Encode text or files to Base64, or decode Base64 back to readable text. Supports
 - **Forgiving Decoder**: Accepts both alphabets, with or without padding and line breaks.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -45,5 +47,7 @@ Standard Base64 uses + and /, which have special meanings in URLs. URL-safe Base
 Base64 writes every 3 bytes as 4 characters, so encoded data is about a third larger than the original.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

@@ -22,6 +22,8 @@ Convert text to every common case at once: upper, lower, title, and sentence cas
 - **Line by Line**: Convert a whole list of names at once, keeping one per line.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ Follow your language's convention. JavaScript and Java use camelCase for variabl
 It capitalizes the first letter of every word. Style guides such as AP and Chicago leave short words like "and" and "of" in lowercase, so adjust those by hand if you follow one.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

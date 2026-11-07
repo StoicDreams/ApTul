@@ -41,6 +41,8 @@ Since this tool fetches via JavaScript in the browser, CORS (Cross-Origin Resour
 If the document fails to load, ensure the hosting server allows CORS requests, or that you are on the same network as the server.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -58,5 +60,7 @@ Yes. The request is made by your browser, so addresses like http://localhost:808
 OpenAPI 3.0 and later, in JSON format.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

@@ -22,6 +22,8 @@ Paste two versions of a text to see exactly what changed, line by line. Useful f
 - **Private**: Compare contracts, code, or configuration without uploading them anywhere.
 </webui-page-segment>
 
+<app-ad-slot name="content"></app-ad-slot>
+
 ## Frequently Asked Questions
 
 <webui-page-segment elevation="10">
@@ -39,5 +41,7 @@ The comparison works line by line, which is how code tools such as Git show chan
 No. Windows and Unix line endings are treated the same, so a file saved on a different system does not show every line as changed.
 
 </webui-page-segment>
+
+<app-ad-slot name="footer"></app-ad-slot>
 
 <app-related-tools></app-related-tools>

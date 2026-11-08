@@ -1,3 +1,4 @@
+// app-file-list, which these tools share, is tested here through the merge and split tools.
 import { test, expect, openPage } from './support/site.mjs';
 import { makePdf, makePng, dropFiles, pageCount, download } from './support/pdf.mjs';
 import { choose } from './support/tools.mjs';

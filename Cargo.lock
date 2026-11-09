@@ -1749,7 +1749,7 @@ dependencies = [
 
 [[package]]
 name = "webapp"
-version = "0.1.21"
+version = "0.1.22"
 dependencies = [
  "base64",
  "console_error_panic_hook",

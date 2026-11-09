@@ -7,9 +7,12 @@ export async function typeInto(tool, label, text) {
     await tool.locator(`webui-input-message[label="${label}"] textarea`).fill(text);
 }
 
-/** Choose a dropdown option by its value. */
+/**
+ * Choose a dropdown option by its value.
+ * The dropdown keeps a hidden select under its options list, so this sets the select directly. Its change event updates the dropdown.
+ */
 export async function choose(tool, label, value) {
-    await tool.locator(`webui-dropdown[label="${label}"] select`).selectOption(value);
+    await tool.locator(`webui-dropdown[label="${label}"] select`).selectOption(value, { force: true });
 }
 
 /** The text currently shown in the tool's app-tool-output. */

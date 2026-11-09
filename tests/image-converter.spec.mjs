@@ -4,7 +4,7 @@ import { join } from 'node:path';
 // Uses the Rust worker, so webapp/pkg must exist (run PowerShell/RunLocal.ps1 -PreBuildOnly or a Trunk build first).
 
 const tool = page => page.locator('app-image-converter');
-const choose = (page, label, value) => tool(page).locator(`webui-dropdown[label="${label}"] select`).selectOption(value);
+const choose = (page, label, value) => tool(page).locator(`webui-dropdown[label="${label}"] select`).selectOption(value, { force: true });
 
 /** Make an image in the page with a canvas, returned as Base64. */
 async function makeImage(page, { type, width, height, draw, quality }) {

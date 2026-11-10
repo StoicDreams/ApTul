@@ -7,27 +7,6 @@
  */
 "use strict"
 {
-    let context = null;
-    /**
-     * Any color the browser understands (hex, rgb, hsl, hwb, named colors, oklch, and more) as
-     * { r, g, b, a } with r, g, b from 0 to 255 and a from 0 to 1, or null when it is not a color.
-     * The browser draws the color on a 1x1 canvas, so the result matches how it really shows on screen.
-     */
-    function parseColor(text) {
-        const value = (text || '').trim();
-        if (!value || !CSS.supports('color', value)) return null;
-        if (!context) {
-            const canvas = document.createElement('canvas');
-            canvas.width = canvas.height = 1;
-            context = canvas.getContext('2d', { willReadFrequently: true });
-        }
-        context.clearRect(0, 0, 1, 1);
-        context.fillStyle = value;
-        context.fillRect(0, 0, 1, 1);
-        const [r, g, b, alpha] = context.getImageData(0, 0, 1, 1).data;
-        return { r, g, b, a: Math.round((alpha / 255) * 100) / 100 };
-    }
-
     const hex2 = n => n.toString(16).padStart(2, '0');
 
     function toHsl({ r, g, b }) {
@@ -51,9 +30,10 @@
         return { c: part(r), m: part(g), y: part(b), k: Math.round(k * 100) };
     }
 
-    /** Each format shown for a color, in display order. */
+    /** Each format shown for a color, in display order. a is rounded to two places. */
     function formats(color) {
-        const { r, g, b, a } = color;
+        const { r, g, b } = color;
+        const a = Math.round(color.a * 100) / 100;
         const { h, s, l } = toHsl(color);
         const { c, m, y, k } = toCmyk(color);
         const opaque = a >= 1;
@@ -61,70 +41,119 @@
             ['HEX', opaque ? `#${hex2(r)}${hex2(g)}${hex2(b)}` : `#${hex2(r)}${hex2(g)}${hex2(b)}${hex2(Math.round(a * 255))}`],
             ['RGB', opaque ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${a})`],
             ['HSL', opaque ? `hsl(${h}, ${s}%, ${l}%)` : `hsla(${h}, ${s}%, ${l}%, ${a})`],
-            ['CMYK (approximate, for print)', `cmyk(${c}%, ${m}%, ${y}%, ${k}%)`],
+            ['CMYK', `cmyk(${c}%, ${m}%, ${y}%, ${k}%)`],
         ];
     }
 
-    webui.define('app-color-converter', {
-        preload: 'flex input-message alert',
-        connected() {
-            this.render();
-        },
-        async render() {
-            const t = this;
-            const wrap = webui.create('webui-flex', { column: true, gap: 'var(--padding)' });
-            const row = webui.create('webui-flex', { wrap: true, gap: 'var(--padding)', align: 'end' });
-            const input = webui.create('webui-input-message', {
-                label: 'Color',
-                placeholder: 'For example #ff8800, rgb(255, 136, 0), hsl(32, 100%, 50%), or orange',
-                rows: 1,
-                style: 'flex:1 1 24rem;',
-            });
-            const picker = webui.create('input', { type: 'color', value: '#ff8800', title: 'Pick a color', 'aria-label': 'Pick a color', style: 'width:4rem; height:3rem; cursor:pointer;' });
-            row.append(input, picker);
-            const swatch = webui.create('div', {
-                class: 'color-swatch',
-                style: 'height:5rem; border-radius:var(--border-radius, 4px); border:1px solid #888; background-image:repeating-conic-gradient(#ccc 0 25%, #fff 0 50%); background-size:16px 16px;',
-            });
-            const fill = webui.create('div', { style: 'height:100%; border-radius:inherit;' });
-            swatch.appendChild(fill);
-            const status = webui.create('webui-alert', { show: false });
-            const results = webui.create('div', { class: 'color-results', style: 'display:flex; flex-direction:column; gap:var(--padding);' });
-            const codes = formats({ r: 0, g: 0, b: 0, a: 1 }).map(([label]) => {
-                const code = webui.create('app-tool-output', { language: 'text', label, 'data-format': label.split(' ')[0] });
-                results.appendChild(code);
-                return code;
-            });
-            wrap.append(row, swatch, status, results);
-            t.replaceChildren(wrap);
+    /** Black or white, whichever reads better on the color (blended over white when see-through). */
+    function readableOn({ r, g, b, a }) {
+        const mix = v => v * a + 255 * (1 - a);
+        const brightness = (mix(r) * 299 + mix(g) * 587 + mix(b) * 114) / 1000;
+        return brightness > 150 ? '#000000' : '#ffffff';
+    }
 
-            const update = () => {
-                status.removeAttribute('show');
-                const text = input.value || '';
-                const color = parseColor(text);
-                if (!color) {
-                    results.style.display = 'none';
-                    swatch.style.display = 'none';
-                    if (text.trim()) status.setValue({ text: 'That is not a color the browser recognizes. Try a HEX value such as #ff8800.' }, 'danger');
-                    return;
-                }
-                results.style.display = 'flex';
-                swatch.style.display = '';
-                const list = formats(color);
-                list.forEach(([, value], i) => codes[i].setValue(value));
-                // The value has been normalized to a plain rgba() string, so it is safe to set as a style.
-                fill.style.backgroundColor = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
-                const hex = list[0][1].slice(0, 7);
-                if (picker.value !== hex) picker.value = hex;
-            };
-            await Promise.all(['webui-input-message', 'webui-alert', 'app-tool-output'].map(tag => customElements.whenDefined(tag)));
-            input.addEventListener('input', update);
-            picker.addEventListener('input', () => {
-                input.setValue(picker.value);
-                update();
-            });
-            if (!input.value) input.setValue(picker.value);
-            update();
+    webui.define('app-color-converter', {
+        preload: 'alert',
+        constructor() {
+            const t = this;
+            t._field = t.template.querySelector('app-color-field');
+            t._status = t.template.querySelector('webui-alert');
+            t._card = t.template.querySelector('.card');
+            t._fill = t.template.querySelector('.fill');
+            t._name = t.template.querySelector('.name');
+            t._outputs = [...t.template.querySelectorAll('app-tool-output')];
         },
+        async connected() {
+            const t = this;
+            await Promise.all(['app-color-field', 'app-tool-output', 'webui-alert'].map(tag => customElements.whenDefined(tag)));
+            t._field.addEventListener('input', () => t.update());
+            t.update();
+        },
+        update() {
+            const t = this;
+            const color = t._field.color;
+            t._status.removeAttribute('show');
+            t._card.hidden = !color;
+            if (!color) {
+                if ((t._field.value || '').trim()) t._status.setValue({ text: 'That is not a color the browser recognizes. Try a HEX value such as #ff8800.' }, 'danger');
+                return;
+            }
+            const list = formats(color);
+            list.forEach(([, value], i) => t._outputs[i].setValue(value));
+            // The color is normalized to a plain rgba() string, so it is safe to set as a style.
+            t._fill.style.backgroundColor = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+            t._fill.style.color = readableOn(color);
+            t._name.textContent = list[0][1];
+        },
+        shadowTemplate: `
+<app-color-field label="Color" value="#ff8800" placeholder="For example #ff8800, rgb(255, 136, 0), hsl(32, 100%, 50%), or orange"></app-color-field>
+<webui-alert></webui-alert>
+<div class="card">
+<div class="preview" aria-hidden="true"><div class="fill"><span class="name"></span></div></div>
+<div class="color-results">
+<app-tool-output inline label="HEX" data-format="HEX"></app-tool-output>
+<app-tool-output inline label="RGB" data-format="RGB"></app-tool-output>
+<app-tool-output inline label="HSL" data-format="HSL"></app-tool-output>
+<app-tool-output inline label="CMYK" data-format="CMYK"></app-tool-output>
+<p class="note">CMYK is an approximation for print. Printers convert colors with their own profiles.</p>
+</div>
+</div>
+<style type="text/css">
+:host {
+display:flex;
+flex-direction:column;
+gap:var(--padding, 0.5rem);
+max-width:60rem;
+margin-inline:auto;
+box-sizing:border-box;
+}
+.card {
+display:grid;
+grid-template-columns:minmax(10rem, 16rem) minmax(0, 1fr);
+gap:calc(var(--padding, 0.5rem) * 2);
+padding:calc(var(--padding, 0.5rem) * 2);
+border-radius:var(--border-radius, 6px);
+background-color:rgba(0, 0, 0, 0.2);
+--tool-output-label-width:4rem;
+}
+.card[hidden] { display:none; }
+.preview {
+position:relative;
+aspect-ratio:1;
+border-radius:var(--border-radius, 6px);
+border:2px solid rgba(128, 128, 128, 0.6);
+background-image:repeating-conic-gradient(#ccc 0 25%, #fff 0 50%);
+background-size:20px 20px;
+overflow:hidden;
+}
+.fill {
+position:absolute;
+inset:0;
+display:flex;
+align-items:flex-end;
+justify-content:center;
+padding:0.75rem;
+font-family:ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+font-size:1.2rem;
+font-weight:bold;
+}
+.color-results {
+display:flex;
+flex-direction:column;
+justify-content:center;
+gap:var(--padding, 0.5rem);
+min-width:0;
+}
+.note {
+margin:0;
+font-size:0.875em;
+opacity:0.85;
+}
+@media (max-width: 640px) {
+.card { grid-template-columns:minmax(0, 1fr); }
+.preview { aspect-ratio:auto; height:8rem; }
+}
+</style>
+`
     });
 }

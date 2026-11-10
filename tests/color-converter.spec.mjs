@@ -12,7 +12,7 @@ test('converts HEX to every format', async ({ page }) => {
     await expectCode(tool(page), 'HEX', '#ff8800');
     await expectCode(tool(page), 'RGB', 'rgb(255, 136, 0)');
     await expectCode(tool(page), 'HSL', 'hsl(32, 100%, 50%)');
-    await expectCode(tool(page), 'CMYK (approximate, for print)', 'cmyk(0%, 47%, 100%, 0%)');
+    await expectCode(tool(page), 'CMYK', 'cmyk(0%, 47%, 100%, 0%)');
 });
 
 test('reads named colors, rgb, and hsl', async ({ page }) => {

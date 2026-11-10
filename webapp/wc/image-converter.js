@@ -75,6 +75,23 @@
         return canvas.toDataURL(FORMATS[format].mime, quality);
     }
 
+    /**
+     * Whether a WebP data URL is lossless: its image is a VP8L chunk rather than VP8. The image chunk can come after
+     * others, such as the color profile Chrome adds, so walk the RIFF chunks to find it.
+     */
+    function isLosslessWebp(dataUrl) {
+        const bytes = atob(dataUrl.slice(dataUrl.indexOf(',') + 1));
+        for (let at = 12; at + 8 <= bytes.length;) {
+            const id = bytes.slice(at, at + 4);
+            if (id === 'VP8L') return true;
+            if (id === 'VP8 ') return false;
+            const size = (bytes.charCodeAt(at + 4) | bytes.charCodeAt(at + 5) << 8 | bytes.charCodeAt(at + 6) << 16 | bytes.charCodeAt(at + 7) << 24) >>> 0;
+            // Chunks are padded to an even length.
+            at += 8 + size + (size & 1);
+        }
+        return false;
+    }
+
     function dataUrlToBlob(dataUrl) {
         const [head, base64] = dataUrl.split(',');
         const mime = head.split(':')[1].split(';')[0];
@@ -112,6 +129,9 @@
             // Dropping an image anywhere on the tool works the same as choosing it with the button.
             t._fileDrop = t.template.querySelector('app-file-drop');
             t._fileDrop.addEventListener('change', ev => {
+                // The file select's own change bubbles through the drop zone too. Only handle real drops here,
+                // or choosing a file is followed at once by the drop zone's empty value.
+                if (ev.target !== t._fileDrop) return;
                 t._fileSelect.setValue(t._fileDrop.value);
                 t.setValue(t._fileDrop.value);
             });
@@ -175,8 +195,8 @@
         async setValue(value) {
             const t = this;
             try {
-                t.sourceFile = (value || [])[0];
-                if (!t.sourceFile) {
+                const file = t.sourceFile = (value || [])[0];
+                if (!file) {
                     t._msgSelect.innerText = '';
                     t._msgConvert.innerText = '';
                     t._note.innerText = '';
@@ -186,15 +206,18 @@
                     return;
                 }
                 t._msgSelect.innerText = `Processing...`;
-                const img = await loadImage(t.sourceFile.content);
+                const img = await loadImage(file.content);
+                // Another file may have been chosen while this one loaded.
+                if (file !== t.sourceFile) return;
                 t.width = img.naturalWidth;
                 t.height = img.naturalHeight;
-                const size = webui.getBase64Size(t.sourceFile.content);
+                const size = webui.getBase64Size(file.content);
                 t._msgSelect.innerHTML = `Dimensions: ${t.width} x ${t.height} <webui-flex grow></webui-flex> Size: ${webui.formatBytes(size)}`;
                 t._selectedFilePreview.setFile(value);
                 t.showQuality();
                 t.applyTransition();
             } catch (ex) {
+                if ((value || [])[0] !== t.sourceFile) return;
                 t._msgSelect.innerText = ex;
                 t._convertedFilePreview.clear();
             }
@@ -231,9 +254,25 @@
                 t._convertedFilePreview.clear();
                 const quality = parseFloat(t._quality.value) || 0.8;
                 const lossy = format === 'jpg' || (format === 'webp' && canEncodeWebp());
-                let converted = await webui.worker.process_image(t.sourceFile.content, width, height, lossy ? 'png' : format);
-                if (converted.startsWith('data') && lossy) {
-                    converted = await encodeWithCanvas(converted, format, quality, width, height);
+                const base = await webui.worker.process_image(t.sourceFile.content, width, height, lossy ? 'png' : format);
+                let converted = base;
+                if (base.startsWith('data') && lossy) {
+                    converted = await encodeWithCanvas(base, format, quality, width, height);
+                }
+                // Lossy WebP suits photos. Screenshots, logos, and other graphics with sharp edges and flat colors are often
+                // far smaller as lossless WebP, so for anything that did not start as a JPG photo, try lossless too and
+                // keep the smallest. The browser's own encoder (quality 1 is lossless in Chrome) usually beats Rust's.
+                if (format === 'webp' && lossy && converted.startsWith('data') && t.sourceFile.type !== 'image/jpeg') {
+                    const lossyResult = converted;
+                    const candidates = [lossyResult, await encodeWithCanvas(base, 'webp', 1, width, height)];
+                    const rust = await webui.worker.process_image(t.sourceFile.content, width, height, 'webp');
+                    if (rust.startsWith('data')) candidates.push(rust);
+                    converted = candidates.reduce((best, next) => webui.getBase64Size(next) < webui.getBase64Size(best) ? next : best);
+                    if (converted !== lossyResult) {
+                        notes.push(isLosslessWebp(converted)
+                            ? 'Lossless WebP was smaller for this image, so it was used. It keeps every pixel exactly, so Quality has no effect.'
+                            : 'A higher quality WebP was smaller for this image, so it was used.');
+                    }
                 }
                 if (run !== t._run) return;
                 if (format === 'webp' && !lossy) {

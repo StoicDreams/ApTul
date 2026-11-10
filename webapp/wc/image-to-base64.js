@@ -80,8 +80,10 @@
                 }
             };
             await Promise.all(['app-file-drop', 'webui-file-select', 'webui-alert', 'app-tool-output'].map(tag => customElements.whenDefined(tag)));
-            drop.addEventListener('change', () => show(drop.value[0]));
-            fileSelect.addEventListener('change', () => show(fileSelect.value[0]));
+            // The file select sits inside the drop zone, and its change bubbles through it, so only handle real drops here.
+            drop.addEventListener('change', ev => { if (ev.target === drop) show(drop.value[0]); });
+            // The framework can send change before the file is read, while value is still undefined.
+            fileSelect.addEventListener('change', () => { if (fileSelect.value && fileSelect.value[0]) show(fileSelect.value[0]); });
         },
     });
 }

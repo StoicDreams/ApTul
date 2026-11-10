@@ -51,3 +51,9 @@ test('encodes a dropped file', async ({ page }) => {
     await expectOutput(tool(page), Buffer.from([0, 1, 2, 250, 251, 252]).toString('base64'));
     await expect(tool(page).locator('webui-alert')).toContainText('Encoded bytes.bin');
 });
+
+test('encodes a file chosen with the select button', async ({ page }) => {
+    await tool(page).locator('webui-file-select input[type=file]').setInputFiles({ name: 'chosen.bin', mimeType: 'application/octet-stream', buffer: Buffer.from([0, 1, 2, 250, 251, 252]) });
+    await expectOutput(tool(page), Buffer.from([0, 1, 2, 250, 251, 252]).toString('base64'));
+    await expect(tool(page).locator('webui-alert')).toContainText('Encoded chosen.bin');
+});

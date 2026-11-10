@@ -66,6 +66,23 @@ test('downloads a PNG at the chosen size, and an SVG', async ({ page }) => {
     expect(svg.bytes.toString()).toMatch(/^<svg xmlns="http:\/\/www.w3.org\/2000\/svg" viewBox="0 0 \d+ \d+"/);
 });
 
+test('copies the code to the clipboard as a PNG at the chosen size', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await field(page, 'Link or text').fill('https://aptul.com');
+    await expect(tool(page).locator('.qr-result')).toBeVisible();
+    await choose(tool(page), 'PNG Size', '256');
+    const button = tool(page).locator('webui-button.copy-image');
+    await button.click();
+    await expect(button).toHaveText('Copied');
+    const size = await page.evaluate(async () => {
+        const [item] = await navigator.clipboard.read();
+        const bitmap = await createImageBitmap(await item.getType('image/png'));
+        return [item.types, bitmap.width, bitmap.height];
+    });
+    expect(size).toEqual([['image/png'], 256, 256]);
+    await expect(button).toHaveText('Copy Image');
+});
+
 test('warns about colors that are hard to scan, and text too long to fit', async ({ page }) => {
     const status = tool(page).locator('webui-alert');
     await field(page, 'Link or text').fill('hello');

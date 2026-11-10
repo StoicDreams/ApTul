@@ -147,7 +147,7 @@
             compare.addEventListener('input', show);
             casing.addEventListener('change', show);
             drop.addEventListener('change', () => hashFile(drop.value[0]));
-            fileSelect.addEventListener('change', () => hashFile(fileSelect.value[0]));
+            fileSelect.addEventListener('change', () => hashFile((fileSelect.value || [])[0]));
             hashText();
         },
     });

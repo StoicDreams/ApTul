@@ -147,7 +147,8 @@
             const size = webui.create('webui-dropdown', { label: 'PNG Size', value: '1024', options: '256 px|256,512 px|512,1024 px|1024,2048 px|2048', style: 'flex:0 1 10rem;' });
             const png = webui.create('webui-button', { theme: 'primary', text: 'Download PNG', class: 'download-png' });
             const svgButton = webui.create('webui-button', { theme: 'secondary', text: 'Download SVG', class: 'download-svg' });
-            actions.append(size, png, svgButton);
+            const copyButton = webui.create('webui-button', { theme: 'tertiary', text: 'Copy Image', class: 'copy-image' });
+            actions.append(size, png, svgButton, copyButton);
             result.append(preview, actions);
             wrap.append(row, fieldBox, colors, status, result);
             t.replaceChildren(wrap);
@@ -212,8 +213,8 @@
             svgButton.addEventListener('click', () => {
                 if (svg) save(new Blob([svg], { type: 'image/svg+xml' }), 'qr-code.svg');
             });
-            png.addEventListener('click', async () => {
-                if (!svg) return;
+            /** The code as a PNG at the chosen size. */
+            const pngBlob = async () => {
                 const pixels = parseInt(size.value) || 1024;
                 const img = await svgImage(svg);
                 const canvas = document.createElement('canvas');
@@ -222,7 +223,28 @@
                 // Keep the squares sharp instead of blurring their edges.
                 context.imageSmoothingEnabled = false;
                 context.drawImage(img, 0, 0, pixels, pixels);
-                canvas.toBlob(blob => save(blob, 'qr-code.png'), 'image/png');
+                return new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject('The QR code could not be drawn.'), 'image/png'));
+            };
+            png.addEventListener('click', async () => {
+                if (!svg) return;
+                save(await pngBlob(), 'qr-code.png');
+            });
+            let copyTimer = null;
+            copyButton.addEventListener('click', async () => {
+                if (!svg) return;
+                if (!navigator.clipboard || !navigator.clipboard.write || !window.ClipboardItem) {
+                    status.setValue({ text: 'This browser cannot copy images. Use Download PNG instead.' }, 'warning');
+                    return;
+                }
+                try {
+                    // Safari only allows the copy while the click is being handled, so the PNG is passed as a promise.
+                    await navigator.clipboard.write([new ClipboardItem({ 'image/png': pngBlob() })]);
+                    copyButton.innerText = 'Copied';
+                    clearTimeout(copyTimer);
+                    copyTimer = setTimeout(() => copyButton.innerText = 'Copy Image', 1500);
+                } catch (error) {
+                    status.setValue({ text: 'The image could not be copied. Your browser may need permission, or use Download PNG instead.' }, 'warning');
+                }
             });
             update();
         },

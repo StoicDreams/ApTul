@@ -9,8 +9,8 @@ Convert any color between HEX, RGB, HSL, and CMYK. Type a value in any CSS forma
 ## How It Works
 
 <webui-page-segment elevation="10">
-1. **Enter a Color**: Type a value such as #ff8800, rgb(255, 136, 0), hsl(32, 100%, 50%), or orange, or use the color picker.
-1. **See the Preview**: The swatch shows the color, with a checkered pattern behind see-through colors.
+1. **Enter a Color**: Type a value such as #ff8800, rgb(255, 136, 0), hsl(32, 100%, 50%), or orange, or click the swatch to pick one.
+1. **See the Preview**: The large preview shows the color, with a checkered pattern behind see-through colors.
 1. **Copy a Format**: Each format has its own copy button.
 </webui-page-segment>
 
@@ -19,7 +19,7 @@ Convert any color between HEX, RGB, HSL, and CMYK. Type a value in any CSS forma
 <webui-page-segment elevation="10">
 - **Any CSS Color**: Reads every format your browser supports, including named colors and newer formats such as oklch.
 - **Transparency**: Keeps the alpha value, writing HEX with eight digits and using rgba and hsla.
-- **Color Picker**: Choose a color visually, and the text box follows.
+- **Color Picker**: Click the swatch to choose a color visually, and the text box follows.
 </webui-page-segment>
 
 <app-ad-slot name="content"></app-ad-slot>

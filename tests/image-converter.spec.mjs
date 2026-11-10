@@ -145,3 +145,38 @@ test.describe('format pages start with their format chosen', () => {
         });
     }
 });
+
+test('converts an image chosen with the select button, not only dropped ones', async ({ page }) => {
+    // The file select sits inside the drop zone. Its change used to reach the drop zone too, which cleared the file
+    // while it loaded and failed with "t.sourceFile is undefined".
+    const png = await makeImage(page, { type: 'image/png', width: 120, height: 80, draw: `ctx.fillStyle = '#c33'; ctx.fillRect(0, 0, w, h);` });
+    await tool(page).locator('webui-file-select input[type=file]').setInputFiles({ name: 'chosen.png', mimeType: 'image/png', buffer: Buffer.from(png, 'base64') });
+    await choose(page, 'Convert To', 'jpg');
+    const result = await converted(page, 'jpg');
+    expect(result.size).toContain('120 x 80');
+    const selected = await tool(page).evaluate(el => el._msgSelect.innerText);
+    expect(selected).toContain('120 x 80');
+    expect(selected).not.toContain('Error');
+});
+
+test('screenshots become a smaller, lossless WebP when that beats lossy', async ({ page }) => {
+    // Text on a flat background, like a screenshot. Lossy WebP adds noise around sharp edges and can end up larger than the PNG.
+    const screenshot = `ctx.fillStyle = '#3a3a3a'; ctx.fillRect(0, 0, w, h); ctx.fillStyle = '#fff'; ctx.font = '18px monospace';
+        for (let i = 0; i < 15; i++) ctx.fillText('Tilemap ray_dir.y failed: y:1.00', 6, 40 + i * 20);`;
+    const png = await makeImage(page, { type: 'image/png', width: 458, height: 340, draw: screenshot });
+    await dropImage(page, png, 'screenshot.png', 'image/png');
+    const result = await converted(page, 'webp');
+    expect(result.content).toMatch(/^data:image\/webp;/);
+    expect(result.bytes).toBeLessThan(atob(png).length);
+    expect(result.note).toContain('Lossless WebP was smaller');
+    expect(result.note).not.toContain('larger than the original');
+    // Lossless keeps the background exactly.
+    expect(await pixel(page, 450, 2)).toEqual([58, 58, 58, 255]);
+});
+
+test('JPG photos stay lossy WebP, without trying lossless', async ({ page }) => {
+    const jpg = await makeImage(page, { type: 'image/jpeg', width: 200, height: 150, draw: NOISY_PHOTO, quality: 0.85 });
+    await dropImage(page, jpg, 'photo.jpg', 'image/jpeg');
+    const result = await converted(page, 'webp');
+    expect(result.note).not.toContain('Lossless');
+});

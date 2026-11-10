@@ -53,3 +53,12 @@ test('warns about large data URLs', async ({ page }) => {
     await drop(page, 'noise.png', 'image/png', big);
     await expect(tool(page).locator('webui-alert')).toContainText('A normal image file is usually better');
 });
+
+test('keeps the result for an image chosen with the select button', async ({ page }) => {
+    // The file select sits inside the drop zone, whose own change used to follow and hide the result.
+    await tool(page).locator('webui-file-select input[type=file]').setInputFiles({ name: 'chosen.png', mimeType: 'image/png', buffer: Buffer.from(PNG, 'base64') });
+    await expect.poll(() => codeText(tool(page), 'Base64 only')).toBe(PNG);
+    await page.waitForTimeout(300);
+    await expect(tool(page).locator('img.image-preview')).toBeVisible();
+    expect(await codeText(tool(page), 'Base64 only')).toBe(PNG);
+});

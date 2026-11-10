@@ -103,7 +103,7 @@
             mode.addEventListener('change', update);
             variant.addEventListener('change', update);
             drop.addEventListener('change', () => encodeFile(drop.value[0]));
-            fileSelect.addEventListener('change', () => encodeFile(fileSelect.value[0]));
+            fileSelect.addEventListener('change', () => encodeFile((fileSelect.value || [])[0]));
             update();
         },
     });

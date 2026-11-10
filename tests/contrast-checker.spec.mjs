@@ -30,3 +30,23 @@ test('explains an unreadable color', async ({ page }) => {
     await expect(tool(page).locator('webui-alert')).toContainText('background color is not a color');
     await expect(tool(page).locator('[data-level]')).toHaveCount(0);
 });
+
+test('swaps the text and background colors', async ({ page }) => {
+    await typeInto(tool(page), 'Text color', '#000000');
+    await typeInto(tool(page), 'Background color', '#777777');
+    await tool(page).getByRole('button', { name: 'Swap the text and background colors' }).click();
+    await expect(tool(page).locator('webui-input-message[label="Text color"] textarea')).toHaveValue('#777777');
+    await expect(tool(page).locator('webui-input-message[label="Background color"] textarea')).toHaveValue('#000000');
+    await expect(tool(page).locator('.contrast-preview')).toHaveCSS('color', 'rgb(119, 119, 119)');
+});
+
+test('sums up the result in words', async ({ page }) => {
+    const verdict = tool(page).locator('.verdict');
+    await typeInto(tool(page), 'Text color', '#000');
+    await typeInto(tool(page), 'Background color', '#fff');
+    await expect(verdict).toHaveText('Passes AAA for all text');
+    await typeInto(tool(page), 'Text color', '#777777');
+    await expect(verdict).toHaveText('Passes AA for large text and graphics only');
+    await typeInto(tool(page), 'Text color', '#eeeeee');
+    await expect(verdict).toHaveText('Fails every level');
+});

@@ -9,7 +9,7 @@ Check whether your text and background colors have enough contrast to be readabl
 ## How It Works
 
 <webui-page-segment elevation="10">
-1. **Enter Two Colors**: Type or pick a text color and a background color, in any CSS format.
+1. **Enter Two Colors**: Type a text color and a background color in any CSS format, or click a swatch to pick one.
 1. **Read the Ratio**: The contrast ratio ranges from 1:1 (no contrast) to 21:1 (black on white).
 1. **Check Each Level**: See whether the colors pass WCAG AA and AAA for normal text, large text, and graphics.
 </webui-page-segment>
@@ -18,7 +18,8 @@ Check whether your text and background colors have enough contrast to be readabl
 
 <webui-page-segment elevation="10">
 - **Every WCAG 2 Level**: AA and AAA for normal and large text, plus the level for buttons, icons, and other graphics.
-- **Live Preview**: See normal and large text in your colors as you change them.
+- **Live Preview**: See normal text, large text, and a button outline in your colors as you change them.
+- **Swap**: Switch the text and background colors with one click, to check a dark theme.
 - **Exact Results**: Ratios are never rounded up, so a color that only nearly passes is shown as failing, as WCAG requires.
 </webui-page-segment>
 

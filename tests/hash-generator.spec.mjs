@@ -50,3 +50,9 @@ test('hides the hashes when the text is cleared', async ({ page }) => {
     await typeInto(tool(page), 'Text', '');
     await expect(tool(page).locator('.hash-results')).toBeHidden();
 });
+
+test('hashes a file chosen with the select button', async ({ page }) => {
+    await tool(page).locator('webui-file-select input[type=file]').setInputFiles({ name: 'chosen.bin', mimeType: 'application/octet-stream', buffer: Buffer.from([0, 1, 2, 250]) });
+    await expect.poll(() => codeText(tool(page), 'SHA-512')).toMatch(/^cc0458bb4e916bb5/);
+    await expect(tool(page).locator('webui-alert')).toContainText('Hashed chosen.bin');
+});

@@ -12,7 +12,7 @@ Make a QR code for a link, Wi-Fi network, email, phone number, or text message, 
 1. **Choose a Type**: Pick Link or Text, Wi-Fi, Email, Phone Call, or Text Message.
 1. **Fill In the Details**: The code updates as you type.
 1. **Pick Colors**: Dark codes on light backgrounds scan most reliably. You will be warned about colors that are hard to scan.
-1. **Download**: Save a PNG at up to 2048 pixels for documents and screens, or an SVG that stays sharp at any size for print.
+1. **Download or Copy**: Save a PNG at up to 2048 pixels for documents and screens, or an SVG that stays sharp at any size for print. Or copy the PNG and paste it straight into a document, slide, or message.
 </webui-page-segment>
 
 ### Key Features

@@ -3,32 +3,32 @@
         {
             "id": "image",
             "name": "Image Tools",
-            "icon": "emoji-framed_picture"
+            "icon": "images"
         },
         {
             "id": "pdf",
             "name": "PDF Tools",
-            "icon": "emoji-page_facing_up"
+            "icon": "pdf"
         },
         {
             "id": "developer",
             "name": "Developer Tools",
-            "icon": "emoji-hammer_and_wrench"
+            "icon": "code"
         },
         {
             "id": "design",
             "name": "Color & Design Tools",
-            "icon": "emoji-art"
+            "icon": "palette"
         },
         {
             "id": "text",
             "name": "Text Tools",
-            "icon": "emoji-memo"
+            "icon": "font"
         },
         {
             "id": "generators",
             "name": "Generators",
-            "icon": "emoji-game_die"
+            "icon": "sparkles"
         }
     ],
     "tools": [
@@ -37,14 +37,14 @@
             "name": "Image Converter & Resizer",
             "description": "Resize images and convert between WebP, PNG, JPG, ICO, and BMP, with photo metadata removed.",
             "category": "image",
-            "icon": "emoji-framed_picture"
+            "icon": "image"
         },
         {
             "url": "/svg-path-rotator",
             "name": "SVG Path Rotator",
             "description": "Rotate SVG path data by any angle and copy the updated path.",
             "category": "image",
-            "icon": "emoji-arrows_counterclockwise"
+            "icon": "undo|flip"
         },
         {
             "url": "/jwt-parser",
@@ -58,210 +58,210 @@
             "name": "OpenAPI Viewer",
             "description": "View an OpenAPI specification from any URL as readable API documentation.",
             "category": "developer",
-            "icon": "emoji-book"
+            "icon": "book_brackets-curly|bordered"
         },
         {
             "url": "/json-formatter",
             "name": "JSON Formatter & Validator",
             "description": "Format, validate, and minify JSON, with the line and column of any error.",
             "category": "developer",
-            "icon": "emoji-clipboard"
+            "icon": "brackets-curly"
         },
         {
             "url": "/base64",
             "name": "Base64 Encoder & Decoder",
             "description": "Encode text or files to Base64 and decode it back, with UTF-8 and URL-safe support.",
             "category": "developer",
-            "icon": "emoji-input_symbols"
+            "icon": "binary"
         },
         {
             "url": "/url-encoder",
             "name": "URL Encoder & Decoder",
             "description": "Percent-encode text for URLs and query strings, or decode it back to readable text.",
             "category": "developer",
-            "icon": "emoji-link"
+            "icon": "link"
         },
         {
             "url": "/uuid-generator",
             "name": "UUID Generator",
             "description": "Generate random version 4 or time-ordered version 7 UUIDs, up to 1,000 at once.",
             "category": "generators",
-            "icon": "emoji-id"
+            "icon": "id-card"
         },
         {
             "url": "/hash-generator",
             "name": "Hash Generator",
             "description": "Get MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes of text or files, and check a file against its hash.",
             "category": "developer",
-            "icon": "emoji-hash"
+            "icon": "fingerprint"
         },
         {
             "url": "/timestamp-converter",
             "name": "Unix Timestamp Converter",
             "description": "Convert Unix timestamps to readable dates in UTC and your time zone, and dates back to timestamps.",
             "category": "developer",
-            "icon": "emoji-alarm_clock"
+            "icon": "clock"
         },
         {
             "url": "/password-generator",
             "name": "Password Generator",
             "description": "Generate strong random passwords with your choice of letters, numbers, and symbols.",
             "category": "generators",
-            "icon": "emoji-key"
+            "icon": "key"
         },
         {
             "url": "/word-counter",
             "name": "Word Counter",
             "description": "Count words, characters, sentences, and paragraphs, with reading and speaking time.",
             "category": "text",
-            "icon": "emoji-1234"
+            "icon": "hashtag"
         },
         {
             "url": "/case-converter",
             "name": "Case Converter",
             "description": "Convert text to upper, lower, title, or sentence case, or to camelCase, snake_case, and other code cases.",
             "category": "text",
-            "icon": "emoji-capital_abcd"
+            "icon": "letter-case"
         },
         {
             "url": "/diff-checker",
             "name": "Diff Checker",
             "description": "Compare two texts line by line and see what was added, removed, or changed.",
             "category": "text",
-            "icon": "emoji-left_right_arrow"
+            "icon": "diff"
         },
         {
             "url": "/color-converter",
             "name": "Color Converter",
             "description": "Convert colors between HEX, RGB, HSL, and CMYK, with a color picker and preview.",
             "category": "design",
-            "icon": "emoji-art"
+            "icon": "eye-dropper"
         },
         {
             "url": "/contrast-checker",
             "name": "Color Contrast Checker",
             "description": "Check text and background colors against the WCAG AA and AAA contrast levels.",
             "category": "design",
-            "icon": "emoji-eyeglasses"
+            "icon": "contrast"
         },
         {
             "url": "/png-to-webp",
             "name": "PNG to WebP Converter",
             "description": "Convert PNG images to smaller WebP files for the web, keeping transparency.",
             "category": "image",
-            "icon": "emoji-framed_picture"
+            "icon": "image"
         },
         {
             "url": "/jpg-to-webp",
             "name": "JPG to WebP Converter",
             "description": "Convert JPG photos to WebP for faster loading pages, at the quality you choose.",
             "category": "image",
-            "icon": "emoji-framed_picture"
+            "icon": "image"
         },
         {
             "url": "/webp-to-png",
             "name": "WebP to PNG Converter",
             "description": "Convert WebP images to PNG to open and edit them in any app.",
             "category": "image",
-            "icon": "emoji-framed_picture"
+            "icon": "image"
         },
         {
             "url": "/webp-to-jpg",
             "name": "WebP to JPG Converter",
             "description": "Convert WebP images to JPG for apps and sites that do not accept WebP.",
             "category": "image",
-            "icon": "emoji-framed_picture"
+            "icon": "image"
         },
         {
             "url": "/png-to-jpg",
             "name": "PNG to JPG Converter",
             "description": "Convert PNG photos and screenshots to much smaller JPG files.",
             "category": "image",
-            "icon": "emoji-framed_picture"
+            "icon": "image"
         },
         {
             "url": "/jpg-to-png",
             "name": "JPG to PNG Converter",
             "description": "Convert JPG photos to PNG to edit them without further quality loss.",
             "category": "image",
-            "icon": "emoji-framed_picture"
+            "icon": "image"
         },
         {
             "url": "/favicon-generator",
             "name": "Favicon Generator",
             "description": "Make a favicon.ico for your website from a PNG, JPG, or WebP image.",
             "category": "image",
-            "icon": "emoji-star"
+            "icon": "window_star|bordered"
         },
         {
             "url": "/resize-image",
             "name": "Image Resizer",
             "description": "Resize images to an exact width or height, keeping their proportions and format.",
             "category": "image",
-            "icon": "emoji-straight_ruler"
+            "icon": "expand"
         },
         {
             "url": "/remove-exif",
             "name": "EXIF Remover",
             "description": "Remove GPS location, camera details, and other hidden data from photos before sharing.",
             "category": "image",
-            "icon": "emoji-shield"
+            "icon": "location|ban"
         },
         {
             "url": "/image-to-base64",
             "name": "Image to Base64",
             "description": "Turn an image into a Base64 data URL, with ready-to-paste HTML and CSS.",
             "category": "image",
-            "icon": "emoji-input_symbols"
+            "icon": "binary"
         },
         {
             "url": "/qr-code-generator",
             "name": "QR Code Generator",
             "description": "Make QR codes for links, text, Wi-Fi, email, and phone numbers, and download them as PNG or SVG.",
             "category": "generators",
-            "icon": "emoji-iphone"
+            "icon": "qrcode"
         },
         {
             "url": "/merge-pdf",
             "name": "Merge PDF",
             "description": "Join PDF files into one, in the order you choose, without uploading them.",
             "category": "pdf",
-            "icon": "emoji-paperclip"
+            "icon": "code-merge"
         },
         {
             "url": "/split-pdf",
             "name": "Split PDF",
             "description": "Take pages out of a PDF, or split it into several files, without uploading it.",
             "category": "pdf",
-            "icon": "emoji-scissors"
+            "icon": "scissors"
         },
         {
             "url": "/image-to-pdf",
             "name": "Image to PDF",
             "description": "Turn JPG, PNG, and WebP images into a PDF, one image per page, on A4, Letter, or image-sized pages.",
             "category": "pdf",
-            "icon": "emoji-page_with_curl"
+            "icon": "file_image|bordered"
         },
         {
             "url": "/markdown-to-html",
             "name": "Markdown to HTML Converter",
             "description": "Convert Markdown to clean HTML, with GitHub tables, task lists, and a live preview.",
             "category": "developer",
-            "icon": "emoji-pencil"
+            "icon": "file_code|bordered"
         },
         {
             "url": "/regex-tester",
             "name": "Regex Tester",
             "description": "Test JavaScript regular expressions, with highlighted matches, groups, and find and replace.",
             "category": "developer",
-            "icon": "emoji-mag"
+            "icon": "regex"
         },
         {
             "url": "/lorem-ipsum-generator",
             "name": "Lorem Ipsum Generator",
             "description": "Generate placeholder text as paragraphs, sentences, words, or list items, in plain text or HTML.",
             "category": "generators",
-            "icon": "emoji-abc"
+            "icon": "align-justify"
         }
     ]
 }

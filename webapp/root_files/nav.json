@@ -1,113 +1,113 @@
 [
     {
         "name": "Home",
-        "icon": "circle_emoji-house|theme:title|backing|inverted",
+        "icon": "circle_home|theme:title|backing|inverted",
         "url": "/"
     },
     {
         "name": "Image Tools",
-        "icon": "emoji-framed_picture",
+        "icon": "circle_images|theme:primary|backing|inverted",
         "children": [
             {
                 "name": "EXIF Remover",
-                "icon": "emoji-shield",
+                "icon": "location|ban",
                 "url": "/remove-exif"
             },
             {
                 "name": "Favicon Generator",
-                "icon": "emoji-star",
+                "icon": "window_star|bordered",
                 "url": "/favicon-generator"
             },
             {
                 "name": "Image Converter",
-                "icon": "emoji-framed_picture",
+                "icon": "image",
                 "url": "/image-converter"
             },
             {
                 "name": "Image Resizer",
-                "icon": "emoji-straight_ruler",
+                "icon": "expand",
                 "url": "/resize-image"
             },
             {
                 "name": "Image to Base64",
-                "icon": "emoji-input_symbols",
+                "icon": "binary",
                 "url": "/image-to-base64"
             },
             {
                 "name": "JPG to PNG Converter",
-                "icon": "emoji-framed_picture",
+                "icon": "image",
                 "url": "/jpg-to-png"
             },
             {
                 "name": "JPG to WebP Converter",
-                "icon": "emoji-framed_picture",
+                "icon": "image",
                 "url": "/jpg-to-webp"
             },
             {
                 "name": "PNG to JPG Converter",
-                "icon": "emoji-framed_picture",
+                "icon": "image",
                 "url": "/png-to-jpg"
             },
             {
                 "name": "PNG to WebP Converter",
-                "icon": "emoji-framed_picture",
+                "icon": "image",
                 "url": "/png-to-webp"
             },
             {
                 "name": "SVG Path Rotate",
-                "icon": "emoji-arrows_counterclockwise",
+                "icon": "undo|flip",
                 "url": "/svg-path-rotator"
             },
             {
                 "name": "WebP to JPG Converter",
-                "icon": "emoji-framed_picture",
+                "icon": "image",
                 "url": "/webp-to-jpg"
             },
             {
                 "name": "WebP to PNG Converter",
-                "icon": "emoji-framed_picture",
+                "icon": "image",
                 "url": "/webp-to-png"
             }
         ]
     },
     {
         "name": "PDF Tools",
-        "icon": "emoji-page_facing_up",
+        "icon": "circle_pdf|theme:danger|backing|inverted",
         "children": [
             {
                 "name": "Image to PDF",
-                "icon": "emoji-page_with_curl",
+                "icon": "file_image|bordered",
                 "url": "/image-to-pdf"
             },
             {
                 "name": "Merge PDF",
-                "icon": "emoji-paperclip",
+                "icon": "code-merge",
                 "url": "/merge-pdf"
             },
             {
                 "name": "Split PDF",
-                "icon": "emoji-scissors",
+                "icon": "scissors",
                 "url": "/split-pdf"
             }
         ]
     },
     {
         "name": "Developer Tools",
-        "icon": "emoji-hammer_and_wrench",
+        "icon": "circle_code|theme:secondary|backing|inverted",
         "children": [
             {
                 "name": "Base64",
-                "icon": "emoji-input_symbols",
+                "icon": "binary",
                 "url": "/base64"
             },
             {
                 "name": "Hash Generator",
-                "icon": "emoji-hash",
+                "icon": "fingerprint",
                 "url": "/hash-generator"
             },
             {
                 "name": "JSON Formatter",
-                "icon": "emoji-clipboard",
+                "icon": "brackets-curly",
                 "url": "/json-formatter"
             },
             {
@@ -117,90 +117,90 @@
             },
             {
                 "name": "Markdown to HTML",
-                "icon": "emoji-pencil",
+                "icon": "file_code|bordered",
                 "url": "/markdown-to-html"
             },
             {
                 "name": "Open API",
-                "icon": "emoji-book",
+                "icon": "book_brackets-curly|bordered",
                 "url": "/openapi"
             },
             {
                 "name": "Regex Tester",
-                "icon": "emoji-mag",
+                "icon": "regex",
                 "url": "/regex-tester"
             },
             {
                 "name": "Timestamp Converter",
-                "icon": "emoji-alarm_clock",
+                "icon": "clock",
                 "url": "/timestamp-converter"
             },
             {
                 "name": "URL Encoder",
-                "icon": "emoji-link",
+                "icon": "link",
                 "url": "/url-encoder"
             }
         ]
     },
     {
         "name": "Color & Design Tools",
-        "icon": "emoji-art",
+        "icon": "circle_palette|theme:tertiary|backing|inverted",
         "children": [
             {
                 "name": "Color Converter",
-                "icon": "emoji-art",
+                "icon": "eye-dropper",
                 "url": "/color-converter"
             },
             {
                 "name": "Contrast Checker",
-                "icon": "emoji-eyeglasses",
+                "icon": "contrast",
                 "url": "/contrast-checker"
             }
         ]
     },
     {
         "name": "Text Tools",
-        "icon": "emoji-memo",
+        "icon": "circle_font|theme:info|backing|inverted",
         "children": [
             {
                 "name": "Case Converter",
-                "icon": "emoji-capital_abcd",
+                "icon": "letter-case",
                 "url": "/case-converter"
             },
             {
                 "name": "Diff Checker",
-                "icon": "emoji-left_right_arrow",
+                "icon": "diff",
                 "url": "/diff-checker"
             },
             {
                 "name": "Word Counter",
-                "icon": "emoji-1234",
+                "icon": "hashtag",
                 "url": "/word-counter"
             }
         ]
     },
     {
         "name": "Generators",
-        "icon": "emoji-game_die",
+        "icon": "circle_sparkles|theme:success|backing|inverted",
         "children": [
             {
                 "name": "Lorem Ipsum Generator",
-                "icon": "emoji-abc",
+                "icon": "align-justify",
                 "url": "/lorem-ipsum-generator"
             },
             {
                 "name": "Password Generator",
-                "icon": "emoji-key",
+                "icon": "key",
                 "url": "/password-generator"
             },
             {
                 "name": "QR Code Generator",
-                "icon": "emoji-iphone",
+                "icon": "qrcode",
                 "url": "/qr-code-generator"
             },
             {
                 "name": "UUID Generator",
-                "icon": "emoji-id",
+                "icon": "id-card",
                 "url": "/uuid-generator"
             }
         ]

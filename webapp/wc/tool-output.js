@@ -124,7 +124,7 @@ display:block;
 padding:0.4em 0.6em;
 border-radius:var(--border-radius, 4px);
 background-color:rgba(0, 0, 0, 0.25);
-font-family:ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+font-family:var(--font-family-mono, monospace);
 overflow-wrap:anywhere;
 user-select:all;
 }

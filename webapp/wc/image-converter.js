@@ -99,8 +99,34 @@
         return new Blob([Uint8Array.from(binary, c => c.charCodeAt(0))], { type: mime });
     }
 
+    // The tool is built in the light DOM, so page styles and Web UI classes reach the components inside it.
+    const MARKUP = `
+<app-file-drop class="mx-a" accept=".png,.jpg,.jpeg,.webp,.ico,.bmp" read="dataurl" label="Drop an image to convert">
+<webui-flex column class="mx-a">
+<webui-flex elevation="10" align="center" justify="center" wrap>
+<webui-dropdown label="Resize To" options="No Resize:Auto,Width,Height"></webui-dropdown>
+<webui-input-text max="5000" min="1" type="number"></webui-input-text>
+<webui-dropdown label="Convert To" options="WebP|webp,JPG|jpg,PNG|png,ICO|ico,BMP|bmp,Same as original|same" value="webp"></webui-dropdown>
+<webui-dropdown label="Quality" options="Best (95)|0.95,High (90)|0.9,Good (80)|0.8,Smaller (65)|0.65,Smallest (50)|0.5" value="0.8"></webui-dropdown>
+</webui-flex>
+<webui-side-by-side>
+<webui-page-segment elevation="10" class="content">
+<h3>Starting File - <webui-file-select label="Select or Drop an Image" accept=".png,.jpg,.jpeg,.webp,.ico,.bmp" style="font-size: var(--typography-size);"></webui-file-select></h3>
+<webui-flex class="msgSelected"></webui-flex>
+<webui-file-preview name="selectedFilePreview" maxHeight="500"></webui-file-preview>
+</webui-page-segment>
+<webui-page-segment elevation="10" class="content">
+<h3>Updated File - <webui-button class="download" theme="primary">Download</webui-button></h3>
+<webui-flex class="msgConverted"></webui-flex>
+<p class="convertNote"></p>
+<webui-file-preview name="convertedFilePreview" maxHeight="500"></webui-file-preview>
+</webui-page-segment>
+</webui-side-by-side>
+</webui-flex>
+</app-file-drop>
+`;
+
     webui.define("app-image-converter", {
-        linkCss: true,
         preload: 'button flex side-by-side page-segment file-preview file-select dropdown input-text',
         attr: ['to', 'quality'],
         width: 100,
@@ -109,6 +135,9 @@
         resize: 'Auto',
         constructor() {
             const t = this;
+            const template = document.createElement('template');
+            template.innerHTML = MARKUP;
+            t.template = template.content;
             t._msgSelect = t.template.querySelector('.msgSelected');
             t._msgConvert = t.template.querySelector('.msgConverted');
             t._note = t.template.querySelector('.convertNote');
@@ -177,6 +206,10 @@
         },
         async connected() {
             const t = this;
+            t.style.display = 'flex';
+            t.style.position = 'relative';
+            t.style.boxSizing = 'border-box';
+            t.appendChild(t.template);
             await customElements.whenDefined('webui-dropdown');
             t.showQuality();
         },
@@ -317,38 +350,5 @@
             link.remove();
             setTimeout(() => URL.revokeObjectURL(url), 1000);
         },
-        shadowTemplate: `
-<style type="text/css">
-:host {
-display:flex;
-position:relative;
-box-sizing:border-box;
-}
-.convertNote:empty { display:none; }
-</style>
-<app-file-drop class="mx-a" accept=".png,.jpg,.jpeg,.webp,.ico,.bmp" read="dataurl" label="Drop an image to convert">
-<webui-flex column class="mx-a">
-<webui-flex elevation="10" align="center" justify="center" wrap>
-<webui-dropdown label="Resize To" options="No Resize:Auto,Width,Height"></webui-dropdown>
-<webui-input-text max="5000" min="1" type="number"></webui-input-text>
-<webui-dropdown label="Convert To" options="WebP|webp,JPG|jpg,PNG|png,ICO|ico,BMP|bmp,Same as original|same" value="webp"></webui-dropdown>
-<webui-dropdown label="Quality" options="Best (95)|0.95,High (90)|0.9,Good (80)|0.8,Smaller (65)|0.65,Smallest (50)|0.5" value="0.8"></webui-dropdown>
-</webui-flex>
-<webui-side-by-side>
-<webui-page-segment elevation="10" class="content">
-<h3>Starting File - <webui-file-select label="Select or Drop an Image" accept=".png,.jpg,.jpeg,.webp,.ico,.bmp" style="font-size: var(--typography-size);"></webui-file-select></h3>
-<webui-flex class="msgSelected"></webui-flex>
-<webui-file-preview name="selectedFilePreview" maxHeight="500"></webui-file-preview>
-</webui-page-segment>
-<webui-page-segment elevation="10" class="content">
-<h3>Updated File - <webui-button class="download" theme="primary">Download</webui-button></h3>
-<webui-flex class="msgConverted"></webui-flex>
-<p class="convertNote"></p>
-<webui-file-preview name="convertedFilePreview" maxHeight="500"></webui-file-preview>
-</webui-page-segment>
-</webui-side-by-side>
-</webui-flex>
-</app-file-drop>
-`
     });
 }

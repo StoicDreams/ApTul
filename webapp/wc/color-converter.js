@@ -133,7 +133,7 @@ display:flex;
 align-items:flex-end;
 justify-content:center;
 padding:0.75rem;
-font-family:ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+font-family:var(--font-family-mono, monospace);
 font-size:1.2rem;
 font-weight:bold;
 }

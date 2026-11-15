@@ -5,6 +5,7 @@ mod markdown;
 mod pdf;
 mod prelude;
 mod qr;
+mod yaml;
 
 /* Define web-worker processes here */
 

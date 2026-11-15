@@ -4,7 +4,7 @@
 
 The tools on {APP_NAME} run in your browser. Files you choose and text you paste into a tool are processed on your device and are not uploaded to {APP_COMPANY_SINGULAR} or anyone else.
 
-The one exception is the OpenAPI Viewer, which loads the API document from the address you enter, and sends any test requests you make to that API. Those requests go straight from your browser to that address.
+The one exception is the OpenAPI Viewer when you give it a link: it loads the API document from that address, and sends any test requests you make to that API. Those requests go straight from your browser to that address. Documents you paste or choose as a file stay in your browser.
 
 </webui-page-segment>
 

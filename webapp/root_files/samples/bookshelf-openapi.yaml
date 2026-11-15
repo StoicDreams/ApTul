@@ -1,0 +1,209 @@
+openapi: 3.1.0
+info:
+  title: Bookshelf API
+  version: 1.0.0
+  description: |
+    A sample API for keeping track of the books on your shelf.
+    It is made up for the Ap Tul OpenAPI Viewer, so its server does not exist.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: https://api.example.com/v1
+    description: Example server
+tags:
+  - name: Books
+    description: Add, find, and remove books.
+  - name: Shelves
+    description: Group books onto shelves.
+paths:
+  /books:
+    get:
+      tags: [Books]
+      summary: List books
+      operationId: listBooks
+      parameters:
+        - name: author
+          in: query
+          description: Only books by this author.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: The books, newest first.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    post:
+      tags: [Books]
+      summary: Add a book
+      operationId: addBook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewBook'
+      responses:
+        '201':
+          description: The book was added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          $ref: '#/components/responses/Invalid'
+  /books/{bookId}:
+    parameters:
+      - $ref: '#/components/parameters/BookId'
+    get:
+      tags: [Books]
+      summary: Get a book
+      operationId: getBook
+      responses:
+        '200':
+          description: The book.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags: [Books]
+      summary: Remove a book
+      operationId: removeBook
+      responses:
+        '204':
+          description: The book was removed.
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /shelves:
+    get:
+      tags: [Shelves]
+      summary: List shelves
+      operationId: listShelves
+      responses:
+        '200':
+          description: Every shelf, with its books.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Shelf'
+  /shelves/{shelfId}/books:
+    put:
+      tags: [Shelves]
+      summary: Move books onto a shelf
+      operationId: shelveBooks
+      deprecated: true
+      description: Use PATCH /books/{bookId} with a shelfId instead.
+      parameters:
+        - name: shelfId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: integer
+            example: [1, 2, 3]
+      responses:
+        '204':
+          description: The books were moved.
+components:
+  parameters:
+    BookId:
+      name: bookId
+      in: path
+      required: true
+      description: The book's ID.
+      schema:
+        type: integer
+        minimum: 1
+    Limit:
+      name: limit
+      in: query
+      description: The most books to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+  responses:
+    NotFound:
+      description: There is no book with that ID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    Invalid:
+      description: The book is missing a title or author.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  schemas:
+    NewBook:
+      type: object
+      required: [title, author]
+      properties:
+        title:
+          type: string
+          example: The Left Hand of Darkness
+        author:
+          type: string
+          example: Ursula K. Le Guin
+        published:
+          type: integer
+          description: The year the book was first published.
+          example: 1969
+        status:
+          type: string
+          enum: [unread, reading, finished]
+          default: unread
+    Book:
+      allOf:
+        - type: object
+          required: [id]
+          properties:
+            id:
+              type: integer
+              readOnly: true
+              example: 42
+            added:
+              type: string
+              format: date-time
+              readOnly: true
+        - $ref: '#/components/schemas/NewBook'
+    Shelf:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          example: Science fiction
+        books:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+        parent:
+          $ref: '#/components/schemas/Shelf'
+    Problem:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Not found
+        detail:
+          type: string

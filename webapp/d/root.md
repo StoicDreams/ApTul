@@ -28,7 +28,7 @@
 ### Developer Tools
 
 - [JWT Decoder](/jwt-parser): Decode JSON Web Tokens to read the header, payload, and expiry, without sending them anywhere.
-- [OpenAPI Viewer](/openapi): View an OpenAPI specification from any URL as readable API documentation.
+- [OpenAPI Viewer](/openapi): View OpenAPI and Swagger docs in JSON or YAML from a link, pasted text, or a file, with schemas, examples, and Try it.
 - [JSON Formatter & Validator](/json-formatter): Format, validate, and minify JSON, with the line and column of any error.
 - [Base64 Encoder & Decoder](/base64): Encode text or files to Base64 and decode it back, with UTF-8 and URL-safe support.
 - [URL Encoder & Decoder](/url-encoder): Percent-encode text for URLs and query strings, or decode it back to readable text.

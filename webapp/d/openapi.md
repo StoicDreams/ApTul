@@ -1,44 +1,29 @@
-<webui-data data-page-title="OpenAPI Viewer" data-page-subtitle="Visualize API Docs via URL"></webui-data>
+<webui-data data-page-title="OpenAPI Viewer" data-page-subtitle="View Swagger and OpenAPI Docs" data-page-description="View OpenAPI and Swagger documents as readable API docs. Load JSON or YAML from a link, paste it, or choose a file. Pasted documents never leave your device."></webui-data>
 
 <webui-quote theme="title">
-Enter any URL to instantly visualize OpenAPI specifications. Supports JSON. Lightweight, browser-based rendering for public, local, or internal API docs.
+Turn an OpenAPI or Swagger document into readable API documentation. Load it from a link, paste it, or choose a file, in JSON or YAML. Pasted and chosen documents are read in your browser and never uploaded.
 </webui-quote>
 
-<webui-page-segment elevation="10">
-A streamlined tool to load and visualize OpenAPI 3.0+ documentation directly from a URL. Whether you are debugging a localhost endpoint or reviewing a public API standard, simply plug in the link to render the interactive documentation.
-</webui-page-segment>
-
-<webui-input-text label="Source URL" data-trigger="openapi-src"></webui-input-text>
-<webui-openapi data-subscribe="openapi-src:setSource"></webui-openapi>
+<app-openapi-viewer sample="/samples/bookshelf-openapi.yaml"></app-openapi-viewer>
 
 ## How It Works
 
 <webui-page-segment elevation="10">
-- **Enter URL**: Paste the link to your openapi.json file.
-- **Fetch & Render**: The tool pulls the specification directly from the source and generates the interactive UI.
-- **Test & Explore**: View schemas, check endpoints, and explore the API structure immediately.
+1. **Load a Document**: Enter a link to an openapi.json or openapi.yaml file, paste the document, or choose or drop a file. Try a sample to see how it looks.
+1. **Browse the API**: Endpoints are grouped by tag. Search by path, method, summary, or tag, and open an endpoint to see its parameters, request body, and responses.
+1. **Read the Schemas**: Every request and response shows its schema as a tree, with types, required fields, allowed values, and examples. The Schemas list at the end shows every shared schema.
+1. **Try a Request**: Open Try it on an endpoint, fill in the parameters, and send a real request to the API's server.
 </webui-page-segment>
 
 ### Key Features
 
 <webui-page-segment elevation="10">
-- **Direct URL Loading**: No need to download files or clone repositories. Just point to the hosted spec file.
-- **Localhost Friendly**: perfect for testing APIs running on your local machine (e.g., http://localhost:8080/v3/api-docs).
-- **Client-Side Fetching**: The request is made directly from your browser to the source, keeping the connection direct and fast.
-</webui-page-segment>
-
-#### Why Use This Tool?
-
-<webui-page-segment elevation="10">
-Often, API specifications are hosted on staging servers, local environments, or public repositories. Downloading these files just to view them in an editor is tedious. This viewer acts as a "browser" for your API contracts - giving you an instant, readable view of any accessible URL.
-</webui-page-segment>
-
-##### Technical Notes
-
-<webui-page-segment elevation="10">
-Since this tool fetches via JavaScript in the browser, CORS (Cross-Origin Resource Sharing) can sometimes block requests if the server hosting the JSON file doesn't explicitly allow it.
-
-If the document fails to load, ensure the hosting server allows CORS requests, or that you are on the same network as the server.
+- **JSON and YAML**: Reads OpenAPI 3.0, 3.1, and Swagger 2.0 documents in either format.
+- **Private by Default**: Pasted text and chosen files are read on your device, so internal and unreleased API designs stay private.
+- **References Followed**: Shared schemas, parameters, and responses ($ref) are filled in where they are used, including schemas that refer to themselves.
+- **Search and Tags**: Find an endpoint in a large API by typing part of its path, summary, or operation ID.
+- **Examples**: Shows the document's examples, or makes one from the schema, and fills the Try it body with it.
+- **Links to Endpoints**: Opening an endpoint puts a link to it in the address bar.
 </webui-page-segment>
 
 <app-ad-slot name="content"></app-ad-slot>
@@ -47,17 +32,25 @@ If the document fails to load, ensure the hosting server allows CORS requests, o
 
 <webui-page-segment elevation="10">
 
-### Why won't my specification load?
+### Is my API document uploaded anywhere?
 
-The most common cause is CORS. Your browser fetches the file directly, so the server hosting it must allow requests from other sites. Allowing CORS on that server, or opening the file from a server that already allows it, usually fixes this.
+No, not when you paste it or choose a file. It is read and shown by your browser. When you load a link, your browser fetches the document straight from that address, and nothing passes through {APP_NAME}.
 
-### Can I view an API running on my own computer?
+### What is the difference between OpenAPI and Swagger?
 
-Yes. The request is made by your browser, so addresses like http://localhost:8080/v3/api-docs work as long as that server allows CORS.
+Swagger was the original name of the specification. Version 2.0 is usually called Swagger, and version 3.0 and later are called OpenAPI. This viewer reads both.
 
-### Which formats are supported?
+### Why won't my document load from a link?
 
-OpenAPI 3.0 and later, in JSON format.
+The most common cause is CORS. Your browser fetches the file directly, so the server must allow other sites to read it. If it does not, download the file and choose it, or paste its contents instead.
+
+### Why does Try it fail when the documentation loads?
+
+The API itself must allow requests from other sites (CORS). Try it also sends requests without your cookies, since most APIs reject cookies from other sites. Requests to an API on your own computer, such as http://localhost:8080, work when that server allows CORS.
+
+### Can I view a YAML file?
+
+Yes. YAML documents are converted to JSON in your browser, including anchors and merge keys.
 
 </webui-page-segment>
 

@@ -1,6 +1,6 @@
 [package]
 name = "webapp"
-version = "0.1.29"
+version = "0.1.30"
 edition = "2024"
 
 [lib]
@@ -16,6 +16,8 @@ qrcode = { version = "0.14", default-features = false, features = ["svg"] }
 pulldown-cmark = { version = "0.13", default-features = false, features = ["html"] }
 # The default features use threads (rayon) and the system clock, which the browser does not provide.
 lopdf = { version = "0.47", default-features = false, features = ["wasm_js"] }
+serde_yaml_ng = "0.10.0"
+serde_json = { version = "1.0.154", features = ["preserve_order"] }
 
 [dependencies.image]
 version = "0.25"

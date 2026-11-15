@@ -56,7 +56,7 @@
         {
             "url": "/openapi",
             "name": "OpenAPI Viewer",
-            "description": "View an OpenAPI specification from any URL as readable API documentation.",
+            "description": "View OpenAPI and Swagger docs in JSON or YAML from a link, pasted text, or a file, with schemas, examples, and Try it.",
             "category": "developer",
             "icon": "book_brackets-curly|bordered"
         },

@@ -42,12 +42,16 @@
     function getWorker() {
         if (!worker) {
             const source = `const run = (${runRegex.toString()});
-self.onmessage = e => { try { postMessage({ ok: true, result: run(e.data) }); } catch (error) { postMessage({ ok: false, error: error.message }); } };`;
+self.onmessage = e => { postMessage({ started: true }); try { postMessage({ ok: true, result: run(e.data) }); } catch (error) { postMessage({ ok: false, error: error.message }); } };`;
             worker = new Worker(URL.createObjectURL(new Blob([source], { type: 'text/javascript' })));
             worker.onmessage = e => {
                 const done = pending;
-                pending = null;
                 if (!done) return;
+                if (e.data.started) {
+                    done.startTimer();
+                    return;
+                }
+                pending = null;
                 clearTimeout(done.timer);
                 e.data.ok ? done.resolve(e.data.result) : done.reject(new Error(e.data.error));
             };
@@ -72,13 +76,19 @@ self.onmessage = e => { try { postMessage({ ok: true, result: run(e.data) }); } 
             return Promise.resolve().then(() => runRegex(job));
         }
         return new Promise((resolve, reject) => {
-            const timer = setTimeout(() => {
-                pending = null;
-                instance.terminate();
-                worker = null;
-                reject(new Error('timeout'));
-            }, TIME_LIMIT);
-            pending = { resolve, reject, timer };
+            // The time limit starts once the worker has the job, so a slow worker start on a busy device isn't
+            // blamed on the pattern. A new worker is started after every stopped pattern.
+            pending = {
+                resolve, reject, timer: null,
+                startTimer() {
+                    this.timer = setTimeout(() => {
+                        pending = null;
+                        instance.terminate();
+                        worker = null;
+                        reject(new Error('timeout'));
+                    }, TIME_LIMIT);
+                },
+            };
             instance.postMessage(job);
         });
     }

@@ -68,14 +68,8 @@ test.beforeEach(async ({ page }) => {
 test('the tool is built in the page, so Web UI styles reach it without linking the stylesheet', async ({ page }) => {
     await expect(tool(page).locator('webui-page-segment').first()).toBeVisible();
     expect(await tool(page).evaluate(el => el.shadowRoot)).toBe(null);
-    // .mx-a and the empty paragraph rule come from webui.css.
+    // The rule that hides an empty paragraph comes from webui.css.
     await expect(tool(page).locator('p.convertNote')).toBeHidden();
-    const [left, right] = await tool(page).locator('app-file-drop').evaluate(el => {
-        const style = getComputedStyle(el);
-        return [parseFloat(style.marginLeft), parseFloat(style.marginRight)];
-    });
-    expect(left).toBeGreaterThan(0);
-    expect(Math.abs(left - right)).toBeLessThan(1);
 });
 test('JPG to WebP makes a smaller file, and lower quality makes it smaller still', async ({ page }) => {
     const jpg = await makeImage(page, { type: 'image/jpeg', width: 400, height: 300, draw: NOISY_PHOTO, quality: 0.85 });

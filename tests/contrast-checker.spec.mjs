@@ -37,6 +37,7 @@ test('swaps the text and background colors', async ({ page }) => {
     await tool(page).getByRole('button', { name: 'Swap the text and background colors' }).click();
     await expect(tool(page).locator('webui-input-message[label="Text color"] textarea')).toHaveValue('#777777');
     await expect(tool(page).locator('webui-input-message[label="Background color"] textarea')).toHaveValue('#000000');
+    // The preview shows the colors chosen, so its color is what this tool produces, not styling.
     await expect(tool(page).locator('.contrast-preview')).toHaveCSS('color', 'rgb(119, 119, 119)');
 });
 

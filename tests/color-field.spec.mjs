@@ -7,6 +7,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 const field = page => page.locator('app-color-field');
+// The swatch shows the color typed, so its color is what this tool produces, not styling, and tests check it.
 const fill = page => field(page).locator('.fill');
 
 test('starts with its value attribute, shown in the box and the swatch', async ({ page }) => {

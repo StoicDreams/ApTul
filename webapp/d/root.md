@@ -1,4 +1,4 @@
-<webui-data data-page-title="Ap Tul" data-page-subtitle="A Developer’s Personal Toolkit & Utility Library"></webui-data>
+<webui-data data-page-title="Ap Tul" data-page-subtitle="A Developer’s Personal Toolkit & Utility Library" data-page-description="Free browser-based tools for developers: convert and resize images, edit PDFs, format JSON, decode JWTs, and more. Your files never leave your device."></webui-data>
 
 > Simple, privacy-focused web tools built to solve real-world development problems
 

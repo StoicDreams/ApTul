@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-TLS4HP4FL9"></script>
+	<script>
+		if (location.hostname !== 'localhost') {
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+			gtag('config', 'G-TLS4HP4FL9');
+		}
+	</script>
+	<title>OpenAPI Viewer: View Swagger and OpenAPI Docs</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="index, follow">
+	<base href="/" />
+	<script type="text/javascript">
+		navigator.serviceWorker.register('service-worker.min.js');
+	</script>
+
+	<link rel="dns-prefetch" href="https://cdn.myfi.ws" />
+	<link rel="dns-prefetch" href="https://api.myfi.ws" />
+	<link rel="preconnect" href="https://cdn.myfi.ws">
+	<link rel="preconnect" href="https://api.myfi.ws">
+	<link href="Logo.svg?v=582c519152" rel="icon" type="image/svg+xml" sizes="any" />
+	<link rel="manifest" href="app.webmanifest?v=db2b4f60eb">
+
+	<script>
+		// Web UI loads from the local MyFiCDN server (MyFiCDN/PowerShell/RunLocal.ps1) when the site runs on localhost,
+		// so framework changes show before they are published, and from cdn.myfi.ws everywhere else.
+		window.webuiCdn = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) ? 'http://localhost:3180/' : 'https://cdn.myfi.ws/';
+		document.write('<link href="' + webuiCdn + 'css/webui.min.css" rel="stylesheet" />');
+	</script>
+	<link href="css/app.min.css?v=96169467e0" rel="stylesheet" />
+	<script>document.write('<script src="' + webuiCdn + 'webui/loader.min.js"></' + 'script>');</script>
+
+	<!-- Prerendered pages from webapp_post_build prerender. Release builds copy them to the site root. -->
+
+	<!--Web Worker-->
+	<script type="module" src="main.js?v=9bde48ebde"></script>
+	<!--End Web Worker-->
+
+	<meta name="theme-color" content="#FF2E46" />
+	<meta name="author" content="Erik Gassler">
+	<meta name="description" content="View OpenAPI and Swagger documents as readable API docs. Load JSON or YAML from a link, paste it, or choose a file. Pasted documents never leave your device.">
+	<meta property="og:image" content="https://www.aptul.com/Logo.svg">
+	<meta property="og:title" content="OpenAPI Viewer: View Swagger and OpenAPI Docs">
+	<meta property="og:url" content="https://www.aptul.com/openapi">
+	<meta property="og:description" content="View OpenAPI and Swagger documents as readable API docs. Load JSON or YAML from a link, paste it, or choose a file. Pasted documents never leave your device.">
+	<link rel="canonical" href="https://www.aptul.com/openapi" />
+	<link rel="modulepreload" href="https://cdn.myfi.ws/js/mdparse.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/ad-slot.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/file-drop.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/openapi-viewer.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/related-tools.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/alerts.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/app.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/app-config.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/card.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/cards.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/data.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/drawer.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/feedback.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/flex.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/icon.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/link.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/myfi-info.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/nav.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/next-page.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/openapi.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/page-footer.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/page-segment.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/quote.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/stoic-dreams-logo.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/stoic-social-links.min.js" crossorigin="anonymous" />
+	<meta name="webui-prerender" content="56f88630ea">
+</head>
+
+<body>
+	<webui-app-config src="appConfig.json"></webui-app-config>
+	<webui-app data-removeclass=".nav|open;.shared|open">
+		<div data-prerendered>
+<p>Turn an OpenAPI or Swagger document into readable API documentation. Load it from a link, paste it, or choose a file, in JSON or YAML. Pasted and chosen documents are read in your browser and never uploaded.</p>
+
+<h2>How It Works</h2>
+
+<ol>
+<li><strong>Load a Document</strong>: Enter a link to an openapi.json or openapi.yaml file, paste the document, or choose or drop a file. Try a sample to see how it looks.</li>
+<li><strong>Browse the API</strong>: Endpoints are grouped by tag. Search by path, method, summary, or tag, and open an endpoint to see its parameters, request body, and responses.</li>
+<li><strong>Read the Schemas</strong>: Every request and response shows its schema as a tree, with types, required fields, allowed values, and examples. The Schemas list at the end shows every shared schema.</li>
+<li><strong>Try a Request</strong>: Open Try it on an endpoint, fill in the parameters, and send a real request to the API's server.</li>
+</ol>
+
+<h3>Key Features</h3>
+
+<ul>
+<li><strong>JSON and YAML</strong>: Reads OpenAPI 3.0, 3.1, and Swagger 2.0 documents in either format.</li>
+<li><strong>Private by Default</strong>: Pasted text and chosen files are read on your device, so internal and unreleased API designs stay private.</li>
+<li><strong>References Followed</strong>: Shared schemas, parameters, and responses ($ref) are filled in where they are used, including schemas that refer to themselves.</li>
+<li><strong>Search and Tags</strong>: Find an endpoint in a large API by typing part of its path, summary, or operation ID.</li>
+<li><strong>Examples</strong>: Shows the document's examples, or makes one from the schema, and fills the Try it body with it.</li>
+<li><strong>Links to Endpoints</strong>: Opening an endpoint puts a link to it in the address bar.</li>
+</ul>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Is my API document uploaded anywhere?</h3>
+<p>No, not when you paste it or choose a file. It is read and shown by your browser. When you load a link, your browser fetches the document straight from that address, and nothing passes through Ap Tul.</p>
+<h3>What is the difference between OpenAPI and Swagger?</h3>
+<p>Swagger was the original name of the specification. Version 2.0 is usually called Swagger, and version 3.0 and later are called OpenAPI. This viewer reads both.</p>
+<h3>Why won't my document load from a link?</h3>
+<p>The most common cause is CORS. Your browser fetches the file directly, so the server must allow other sites to read it. If it does not, download the file and choose it, or paste its contents instead.</p>
+<h3>Why does Try it fail when the documentation loads?</h3>
+<p>The API itself must allow requests from other sites (CORS). Try it also sends requests without your cookies, since most APIs reject cookies from other sites. Requests to an API on your own computer, such as http://localhost:8080, work when that server allows CORS.</p>
+<h3>Can I view a YAML file?</h3>
+<p>Yes. YAML documents are converted to JSON in your browser, including anchors and merge keys.</p>
+		</div>
+		<webui-drawer slot="left" class="nav elevation-20" docked="true" data-state="slot|docked" data-moveable data-dockable>
+			<webui-flex justify="center" slot="header">
+				<webui-stoic-dreams-logo title="Ap Tul Logo" text="ApTul"></webui-stoic-dreams-logo>
+			</webui-flex>
+			<webui-nav routes="/nav.json" data-subscribe="app-nav-routes:setNavRoutes"></webui-nav>
+		</webui-drawer>
+		<webui-drawer slot="right" class="shared elevation-20" data-stopclick data-moveable data-state="slot">
+		</webui-drawer>
+		<header slot="header">
+			<button aria-label="open navigation menu" data-toggleclass=".nav|open" class="elevation-10 pa-1 mx-1">
+				<webui-icon icon="hamburger"></webui-icon>
+			</button>
+			<h1 data-subscribe="page-title:innerHTML">OpenAPI Viewer</h1>
+			<h2 data-subscribe="page-subtitle:innerHTML">View Swagger and OpenAPI Docs</h2>
+			<webui-flex grow></webui-flex>
+			<webui-feedback title="Provide us your feedback" data-post="https://api.myfi.ws/feedback/new" data-json-name="message">
+				<p>You can also come <a href="https://discord.gg/5X4YSDFdHD">chat with us on the Stoic Dreams discord server.</a></p>
+			</webui-feedback>
+			<webui-alerts title="View your notifications" data-title="My Alerts" data-toggleclass=".shared|open"></webui-alerts>
+			<webui-myfi-info sign-in-label="Sign In">
+				<template slot="panel-content">
+					<webui-alert show variant="info">Example Account Panel</webui-alert>
+				</template>
+			</webui-myfi-info>
+		</header>
+		<noscript>Javascript is required to view this site</noscript>
+		<webui-page-footer copyright="2015" company="Stoic Dreams">
+			<webui-next-page theme="tertiary" data-subscribe="page-next-page"></webui-next-page>
+			<webui-quote theme="success" cite="Erik Gassler">
+				If this tool saved you time today, please consider supporting the project via [GitHub Sponsors](https://github.com/sponsors/StoicDreams). Every contribution helps me build more utilities for the community.
+			</webui-quote>
+			<webui-flex class="my-3" justify="center" wrap>
+				<webui-link href="/about" icon="circle_exclamation|backing|bordered">About Ap Tul</webui-link>
+				<webui-link href="/contact" icon="messages|fill|shade:tri">Contact Stoic Dreams</webui-link>
+				<webui-link href="/privacy" icon="shield_exclamation|backing|bordered">Privacy</webui-link>
+				<webui-link href="/terms" icon="handshake|fill|shade:tri">Terms & Conditions</webui-link>
+			</webui-flex>
+			<webui-stoic-social-links class="mb-2"></webui-stoic-social-links>
+		</webui-page-footer>
+	</webui-app>
+</body>
+
+</html>

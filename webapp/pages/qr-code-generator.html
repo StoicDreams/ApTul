@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-TLS4HP4FL9"></script>
+	<script>
+		if (location.hostname !== 'localhost') {
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+			gtag('config', 'G-TLS4HP4FL9');
+		}
+	</script>
+	<title>QR Code Generator: Links, Wi-Fi, and More</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="index, follow">
+	<base href="/" />
+	<script type="text/javascript">
+		navigator.serviceWorker.register('service-worker.min.js');
+	</script>
+
+	<link rel="dns-prefetch" href="https://cdn.myfi.ws" />
+	<link rel="dns-prefetch" href="https://api.myfi.ws" />
+	<link rel="preconnect" href="https://cdn.myfi.ws">
+	<link rel="preconnect" href="https://api.myfi.ws">
+	<link href="Logo.svg?v=582c519152" rel="icon" type="image/svg+xml" sizes="any" />
+	<link rel="manifest" href="app.webmanifest?v=db2b4f60eb">
+
+	<script>
+		// Web UI loads from the local MyFiCDN server (MyFiCDN/PowerShell/RunLocal.ps1) when the site runs on localhost,
+		// so framework changes show before they are published, and from cdn.myfi.ws everywhere else.
+		window.webuiCdn = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) ? 'http://localhost:3180/' : 'https://cdn.myfi.ws/';
+		document.write('<link href="' + webuiCdn + 'css/webui.min.css" rel="stylesheet" />');
+	</script>
+	<link href="css/app.min.css?v=96169467e0" rel="stylesheet" />
+	<script>document.write('<script src="' + webuiCdn + 'webui/loader.min.js"></' + 'script>');</script>
+
+	<!-- Prerendered pages from webapp_post_build prerender. Release builds copy them to the site root. -->
+
+	<!--Web Worker-->
+	<script type="module" src="main.js?v=9bde48ebde"></script>
+	<!--End Web Worker-->
+
+	<meta name="theme-color" content="#FF2E46" />
+	<meta name="author" content="Erik Gassler">
+	<meta name="description" content="Make free QR codes for links, text, Wi-Fi, email, phone calls, and texts. Choose colors and download PNG or SVG. No sign-up, and codes never expire.">
+	<meta property="og:image" content="https://www.aptul.com/Logo.svg">
+	<meta property="og:title" content="QR Code Generator: Links, Wi-Fi, and More">
+	<meta property="og:url" content="https://www.aptul.com/qr-code-generator">
+	<meta property="og:description" content="Make free QR codes for links, text, Wi-Fi, email, phone calls, and texts. Choose colors and download PNG or SVG. No sign-up, and codes never expire.">
+	<link rel="canonical" href="https://www.aptul.com/qr-code-generator" />
+	<link rel="modulepreload" href="https://cdn.myfi.ws/js/mdparse.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/ad-slot.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/qr-code-generator.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/related-tools.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/alert.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/alerts.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/app.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/app-config.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/button.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/card.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/cards.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/data.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/drawer.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/dropdown.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/feedback.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/flex.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/icon.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/input-message.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/link.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/myfi-info.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/nav.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/next-page.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/page-footer.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/page-segment.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/quote.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/stoic-dreams-logo.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/stoic-social-links.min.js" crossorigin="anonymous" />
+	<meta name="webui-prerender" content="20412d14d5">
+</head>
+
+<body>
+	<webui-app-config src="appConfig.json"></webui-app-config>
+	<webui-app data-removeclass=".nav|open;.shared|open">
+		<div data-prerendered>
+<p>Make a QR code for a link, Wi-Fi network, email, phone number, or text message, then download it as PNG or SVG. Codes are made in your browser, contain only what you type, and never expire.</p>
+
+<h2>How It Works</h2>
+
+<ol>
+<li><strong>Choose a Type</strong>: Pick Link or Text, Wi-Fi, Email, Phone Call, or Text Message.</li>
+<li><strong>Fill In the Details</strong>: The code updates as you type.</li>
+<li><strong>Pick Colors</strong>: Dark codes on light backgrounds scan most reliably. You will be warned about colors that are hard to scan.</li>
+<li><strong>Download or Copy</strong>: Save a PNG at up to 2048 pixels for documents and screens, or an SVG that stays sharp at any size for print. Or copy the PNG and paste it straight into a document, slide, or message.</li>
+</ol>
+
+<h3>Key Features</h3>
+
+<ul>
+<li><strong>Wi-Fi Codes</strong>: Guests scan to join your network without typing the password. Special characters in names and passwords are handled for you.</li>
+<li><strong>Static Codes That Never Expire</strong>: The code holds your link or text directly, with no redirect service in between, so it keeps working forever and nobody tracks the scans.</li>
+<li><strong>Error Correction</strong>: Higher levels still scan when part of the code is scratched, dirty, or covered by a logo, at the cost of a denser code.</li>
+<li><strong>Print Ready</strong>: SVG files scale to posters and signs without blurring, and every code has the white border scanners need.</li>
+</ul>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Do these QR codes expire?</h3>
+<p>No. The link or text is stored in the code itself, so it works for as long as the link does. Codes that expire come from services that send scans through their own redirect link.</p>
+<h3>Which error correction level should I use?</h3>
+<p>Medium suits most codes. Choose High if the code will be printed small, used outdoors, or have a logo placed over its center. Low makes the simplest code, which suits long links shown on screens.</p>
+<h3>Can I see how many people scanned my code?</h3>
+<p>Not with a static code, since phones open the link directly. To count scans, add tracking to the link itself, such as UTM parameters for your analytics.</p>
+<h3>How big should I print a QR code?</h3>
+<p>At least 2 cm (about 1 inch) across for codes scanned up close, such as on business cards. A good rule for posters is one tenth of the distance people will scan from, so a code scanned from 3 meters should be about 30 cm wide.</p>
+<h3>Is my Wi-Fi password sent anywhere?</h3>
+<p>No. The code is made in your browser, and the password is only stored in the image you download.</p>
+		</div>
+		<webui-drawer slot="left" class="nav elevation-20" docked="true" data-state="slot|docked" data-moveable data-dockable>
+			<webui-flex justify="center" slot="header">
+				<webui-stoic-dreams-logo title="Ap Tul Logo" text="ApTul"></webui-stoic-dreams-logo>
+			</webui-flex>
+			<webui-nav routes="/nav.json" data-subscribe="app-nav-routes:setNavRoutes"></webui-nav>
+		</webui-drawer>
+		<webui-drawer slot="right" class="shared elevation-20" data-stopclick data-moveable data-state="slot">
+		</webui-drawer>
+		<header slot="header">
+			<button aria-label="open navigation menu" data-toggleclass=".nav|open" class="elevation-10 pa-1 mx-1">
+				<webui-icon icon="hamburger"></webui-icon>
+			</button>
+			<h1 data-subscribe="page-title:innerHTML">QR Code Generator</h1>
+			<h2 data-subscribe="page-subtitle:innerHTML">Links, Wi-Fi, and More</h2>
+			<webui-flex grow></webui-flex>
+			<webui-feedback title="Provide us your feedback" data-post="https://api.myfi.ws/feedback/new" data-json-name="message">
+				<p>You can also come <a href="https://discord.gg/5X4YSDFdHD">chat with us on the Stoic Dreams discord server.</a></p>
+			</webui-feedback>
+			<webui-alerts title="View your notifications" data-title="My Alerts" data-toggleclass=".shared|open"></webui-alerts>
+			<webui-myfi-info sign-in-label="Sign In">
+				<template slot="panel-content">
+					<webui-alert show variant="info">Example Account Panel</webui-alert>
+				</template>
+			</webui-myfi-info>
+		</header>
+		<noscript>Javascript is required to view this site</noscript>
+		<webui-page-footer copyright="2015" company="Stoic Dreams">
+			<webui-next-page theme="tertiary" data-subscribe="page-next-page"></webui-next-page>
+			<webui-quote theme="success" cite="Erik Gassler">
+				If this tool saved you time today, please consider supporting the project via [GitHub Sponsors](https://github.com/sponsors/StoicDreams). Every contribution helps me build more utilities for the community.
+			</webui-quote>
+			<webui-flex class="my-3" justify="center" wrap>
+				<webui-link href="/about" icon="circle_exclamation|backing|bordered">About Ap Tul</webui-link>
+				<webui-link href="/contact" icon="messages|fill|shade:tri">Contact Stoic Dreams</webui-link>
+				<webui-link href="/privacy" icon="shield_exclamation|backing|bordered">Privacy</webui-link>
+				<webui-link href="/terms" icon="handshake|fill|shade:tri">Terms & Conditions</webui-link>
+			</webui-flex>
+			<webui-stoic-social-links class="mb-2"></webui-stoic-social-links>
+		</webui-page-footer>
+	</webui-app>
+</body>
+
+</html>

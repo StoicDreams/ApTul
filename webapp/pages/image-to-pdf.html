@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-TLS4HP4FL9"></script>
+	<script>
+		if (location.hostname !== 'localhost') {
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+			gtag('config', 'G-TLS4HP4FL9');
+		}
+	</script>
+	<title>Image to PDF: JPG, PNG, and WebP to PDF</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="index, follow">
+	<base href="/" />
+	<script type="text/javascript">
+		navigator.serviceWorker.register('service-worker.min.js');
+	</script>
+
+	<link rel="dns-prefetch" href="https://cdn.myfi.ws" />
+	<link rel="dns-prefetch" href="https://api.myfi.ws" />
+	<link rel="preconnect" href="https://cdn.myfi.ws">
+	<link rel="preconnect" href="https://api.myfi.ws">
+	<link href="Logo.svg?v=582c519152" rel="icon" type="image/svg+xml" sizes="any" />
+	<link rel="manifest" href="app.webmanifest?v=db2b4f60eb">
+
+	<script>
+		// Web UI loads from the local MyFiCDN server (MyFiCDN/PowerShell/RunLocal.ps1) when the site runs on localhost,
+		// so framework changes show before they are published, and from cdn.myfi.ws everywhere else.
+		window.webuiCdn = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) ? 'http://localhost:3180/' : 'https://cdn.myfi.ws/';
+		document.write('<link href="' + webuiCdn + 'css/webui.min.css" rel="stylesheet" />');
+	</script>
+	<link href="css/app.min.css?v=96169467e0" rel="stylesheet" />
+	<script>document.write('<script src="' + webuiCdn + 'webui/loader.min.js"></' + 'script>');</script>
+
+	<!-- Prerendered pages from webapp_post_build prerender. Release builds copy them to the site root. -->
+
+	<!--Web Worker-->
+	<script type="module" src="main.js?v=9bde48ebde"></script>
+	<!--End Web Worker-->
+
+	<meta name="theme-color" content="#FF2E46" />
+	<meta name="author" content="Erik Gassler">
+	<meta name="description" content="Turn JPG, PNG, and WebP images into a PDF, one per page, on A4, Letter, or image-sized pages. Free and private, with no upload.">
+	<meta property="og:image" content="https://www.aptul.com/Logo.svg">
+	<meta property="og:title" content="Image to PDF: JPG, PNG, and WebP to PDF">
+	<meta property="og:url" content="https://www.aptul.com/image-to-pdf">
+	<meta property="og:description" content="Turn JPG, PNG, and WebP images into a PDF, one per page, on A4, Letter, or image-sized pages. Free and private, with no upload.">
+	<link rel="canonical" href="https://www.aptul.com/image-to-pdf" />
+	<link rel="modulepreload" href="https://cdn.myfi.ws/js/mdparse.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/ad-slot.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/file-drop.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/file-list.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/image-to-pdf.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="/wc/related-tools.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/alert.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/alerts.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/app.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/app-config.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/button.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/card.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/cards.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/data.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/drawer.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/dropdown.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/feedback.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/file-select.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/flex.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/icon.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/link.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/myfi-info.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/nav.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/next-page.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/page-footer.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/page-segment.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/quote.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/stoic-dreams-logo.min.js" crossorigin="anonymous" />
+	<link rel="preload" as="script" href="https://cdn.myfi.ws/webui/stoic-social-links.min.js" crossorigin="anonymous" />
+	<meta name="webui-prerender" content="305167f9f1">
+</head>
+
+<body>
+	<webui-app-config src="appConfig.json"></webui-app-config>
+	<webui-app data-removeclass=".nav|open;.shared|open">
+		<div data-prerendered>
+<p>Turn photos, scans, and screenshots into a single PDF, one image per page. Images are put together in your browser and never uploaded.</p>
+
+<h2>How It Works</h2>
+
+<ol>
+<li><strong>Add Images</strong>: Choose JPG, PNG, WebP, or BMP images, or drop them onto the tool.</li>
+<li><strong>Put Them in Order</strong>: Use the arrows to move images up or down. Each image becomes one page.</li>
+<li><strong>Choose a Page Size</strong>: A4 or US Letter for printing, or the same size as each image.</li>
+<li><strong>Create the PDF</strong>: The PDF downloads, named after your image when there is only one.</li>
+</ol>
+
+<h3>Key Features</h3>
+
+<ul>
+<li><strong>Full Quality</strong>: JPG photos are placed in the PDF unchanged, so they keep their sharpness and size. Photos that need turning upright are saved again at high quality, and other formats are stored without loss.</li>
+<li><strong>Turned the Right Way</strong>: Phone photos are turned upright using their orientation data, and landscape images get landscape pages.</li>
+<li><strong>Fits the Page</strong>: Each image is scaled to fit inside the margin and centered, without stretching.</li>
+<li><strong>Transparency Kept</strong>: Transparent areas in PNG and WebP images stay transparent.</li>
+</ul>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Why is my PDF about the same size as my photos?</h3>
+<p>JPG photos are placed in the PDF without being compressed further, so the PDF is about the size of the photos together. PNG and WebP images are stored without loss, which can be larger than the original files. To make it smaller, shrink the photos first with the <a href="/resize-image">Image Resizer</a>, or convert them to JPG at a lower quality.</p>
+<h3>Can I add iPhone HEIC photos?</h3>
+<p>Not directly. Convert them to JPG first, which iPhones can do when sharing or with the Most Compatible camera setting.</p>
+<h3>Can I add text or edit pages?</h3>
+<p>This tool only places images. To combine the result with other PDFs, use <a href="/merge-pdf">Merge PDF</a>.</p>
+		</div>
+		<webui-drawer slot="left" class="nav elevation-20" docked="true" data-state="slot|docked" data-moveable data-dockable>
+			<webui-flex justify="center" slot="header">
+				<webui-stoic-dreams-logo title="Ap Tul Logo" text="ApTul"></webui-stoic-dreams-logo>
+			</webui-flex>
+			<webui-nav routes="/nav.json" data-subscribe="app-nav-routes:setNavRoutes"></webui-nav>
+		</webui-drawer>
+		<webui-drawer slot="right" class="shared elevation-20" data-stopclick data-moveable data-state="slot">
+		</webui-drawer>
+		<header slot="header">
+			<button aria-label="open navigation menu" data-toggleclass=".nav|open" class="elevation-10 pa-1 mx-1">
+				<webui-icon icon="hamburger"></webui-icon>
+			</button>
+			<h1 data-subscribe="page-title:innerHTML">Image to PDF</h1>
+			<h2 data-subscribe="page-subtitle:innerHTML">JPG, PNG, and WebP to PDF</h2>
+			<webui-flex grow></webui-flex>
+			<webui-feedback title="Provide us your feedback" data-post="https://api.myfi.ws/feedback/new" data-json-name="message">
+				<p>You can also come <a href="https://discord.gg/5X4YSDFdHD">chat with us on the Stoic Dreams discord server.</a></p>
+			</webui-feedback>
+			<webui-alerts title="View your notifications" data-title="My Alerts" data-toggleclass=".shared|open"></webui-alerts>
+			<webui-myfi-info sign-in-label="Sign In">
+				<template slot="panel-content">
+					<webui-alert show variant="info">Example Account Panel</webui-alert>
+				</template>
+			</webui-myfi-info>
+		</header>
+		<noscript>Javascript is required to view this site</noscript>
+		<webui-page-footer copyright="2015" company="Stoic Dreams">
+			<webui-next-page theme="tertiary" data-subscribe="page-next-page"></webui-next-page>
+			<webui-quote theme="success" cite="Erik Gassler">
+				If this tool saved you time today, please consider supporting the project via [GitHub Sponsors](https://github.com/sponsors/StoicDreams). Every contribution helps me build more utilities for the community.
+			</webui-quote>
+			<webui-flex class="my-3" justify="center" wrap>
+				<webui-link href="/about" icon="circle_exclamation|backing|bordered">About Ap Tul</webui-link>
+				<webui-link href="/contact" icon="messages|fill|shade:tri">Contact Stoic Dreams</webui-link>
+				<webui-link href="/privacy" icon="shield_exclamation|backing|bordered">Privacy</webui-link>
+				<webui-link href="/terms" icon="handshake|fill|shade:tri">Terms & Conditions</webui-link>
+			</webui-flex>
+			<webui-stoic-social-links class="mb-2"></webui-stoic-social-links>
+		</webui-page-footer>
+	</webui-app>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-<webui-data data-page-title="SVG Path Rotator" data-page-subtitle="A Tool for Rotating SVG Path Data"></webui-data>
+<webui-data data-page-title="SVG Path Rotator" data-page-subtitle="A Tool for Rotating SVG Path Data" data-page-description="Rotate SVG path data by any angle around a center point you choose, with one or several angles at once, and copy the updated path."></webui-data>
 
 <webui-quote theme="title">
 Easily rotate SVG path data for your vector graphics projects. This tool allows you to input SVG path commands and apply rotation transformations with precision.

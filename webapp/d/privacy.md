@@ -1,3 +1,5 @@
+<webui-data data-page-description="Ap Tul tools run in your browser, so files and text you use stay on your device. Read what that covers and the one exception, the OpenAPI Viewer."></webui-data>
+
 ## Your Files and Text Stay in Your Browser
 
 <webui-page-segment elevation="10">

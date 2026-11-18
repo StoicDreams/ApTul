@@ -1,4 +1,4 @@
-<webui-data data-page-title="JWT Decoder & Debugger" data-page-subtitle="Private, Client-Side Token Inspector"></webui-data>
+<webui-data data-page-title="JWT Decoder & Debugger" data-page-subtitle="Private, Client-Side Token Inspector" data-page-description="Decode a JSON Web Token to read its header, payload, and expiry dates in your browser, without sending it anywhere. It does not verify signatures."></webui-data>
 
 <webui-quote theme="title">
 Decode and inspect JSON Web Tokens (JWT) directly in your browser. 100% client-side execution ensures your sensitive tokens are never sent to a server. View headers, payloads, and expiration dates instantly.

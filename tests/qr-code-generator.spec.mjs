@@ -20,6 +20,23 @@ test.beforeEach(async ({ page }) => {
 
 const lastCode = page => page.evaluate(() => window.__qr[window.__qr.length - 1]);
 
+
+/**
+ * Resolves with true once the element's text becomes `text`. Start it before the click: a label such as "Copied" only
+ * shows for a moment, and a check after the click can miss it on a slow machine.
+ */
+function textBecomes(locator, text) {
+    return locator.evaluate((el, text) => new Promise(resolve => {
+        const observer = new MutationObserver(() => {
+            if (el.innerText.trim() === text) {
+                observer.disconnect();
+                resolve(true);
+            }
+        });
+        observer.observe(el, { childList: true, characterData: true, subtree: true });
+    }), text);
+}
+
 test('makes a code from a link and shows it', async ({ page }) => {
     await expect(tool(page).locator('.qr-result')).toBeHidden();
     await field(page, 'Link or text').fill('https://aptul.com');
@@ -72,8 +89,9 @@ test('copies the code to the clipboard as a PNG at the chosen size', async ({ pa
     await expect(tool(page).locator('.qr-result')).toBeVisible();
     await choose(tool(page), 'PNG Size', '256');
     const button = tool(page).locator('webui-button.copy-image');
+    const copied = textBecomes(button, 'Copied');
     await button.click();
-    await expect(button).toHaveText('Copied');
+    expect(await copied).toBe(true);
     const size = await page.evaluate(async () => {
         const [item] = await navigator.clipboard.read();
         const bitmap = await createImageBitmap(await item.getType('image/png'));

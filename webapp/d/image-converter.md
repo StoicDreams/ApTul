@@ -1,4 +1,4 @@
-<webui-data data-page-title="Free Image Converter & Resizer Tool" data-page-subtitle="Resize, Convert to WebP, PNG, JPG & More"></webui-data>
+<webui-data data-page-title="Free Image Converter & Resizer Tool" data-page-subtitle="Resize, Convert to WebP, PNG, JPG & More" data-page-description="Resize images and convert between WebP, PNG, JPG, BMP, and ICO in your browser, with EXIF and GPS data removed. Nothing is uploaded."></webui-data>
 
 <webui-quote theme="title">
 Easily resize and convert images locally. Securely strips hidden metadata (EXIF/GPS) while converting to WebP, PNG, and JPG. Fast, private, and free.

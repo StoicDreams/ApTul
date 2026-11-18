@@ -10,6 +10,22 @@ import {
 const registry = readJson(join(ROOT_FILES, 'tools.json'));
 const toolUrls = registry.tools.map(tool => tool.url);
 
+/**
+ * Resolves with true once the element's text becomes `text`. Start it before the click: a label such as "Copied" only
+ * shows for a moment, and a check after the click can miss it on a slow machine.
+ */
+function textBecomes(locator, text) {
+    return locator.evaluate((el, text) => new Promise(resolve => {
+        const observer = new MutationObserver(() => {
+            if (el.innerText.trim() === text) {
+                observer.disconnect();
+                resolve(true);
+            }
+        });
+        observer.observe(el, { childList: true, characterData: true, subtree: true });
+    }), text);
+}
+
 /** Put HTML at the top of the page content, where a tool would be, and wait for its components to load. */
 async function mount(page, html) {
     const tags = [...new Set((html.match(/<(webui|app)-[a-z0-9-]+/g) || []).map(tag => tag.substring(1)))];
@@ -136,8 +152,9 @@ test.describe('app-tool-output', () => {
         const output = root.locator('app-tool-output');
         const exact = '{\n\t"a": "x & y <b>"\n}\n';
         await output.evaluate((el, text) => el.setValue(text), exact);
+        const copied = textBecomes(output.locator('webui-button.copy'), 'Copied');
         await output.locator('webui-button', { hasText: 'Copy' }).click();
-        await expect(output.locator('webui-button.copy')).toHaveText('Copied');
+        expect(await copied).toBe(true);
         await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(exact);
     });
 

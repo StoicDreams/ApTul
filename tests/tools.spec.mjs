@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-    test, expect, openPage, ROOT_FILES, readJson, readText, routeToFile, navRoutes, sitemapUrls,
+    test, expect, openPage, pageReady, ROOT_FILES, readJson, readText, routeToFile, navRoutes, sitemapUrls,
 } from './support/site.mjs';
 
 // The tools registry, the shared tool components, and the layout every tool page follows.
@@ -22,6 +22,8 @@ async function mount(page, html) {
         app.insertBefore(root, app.querySelector(':scope > :not([slot])'));
         await Promise.all(tags.map(tag => customElements.whenDefined(tag)));
     }, { html, tags });
+    // The components inside them load their own scripts, so wait for those too.
+    await pageReady(page);
     return page.locator('#test-root');
 }
 
@@ -136,7 +138,7 @@ test.describe('app-tool-output', () => {
         await output.evaluate((el, text) => el.setValue(text), exact);
         await output.locator('webui-button', { hasText: 'Copy' }).click();
         await expect(output.locator('webui-button.copy')).toHaveText('Copied');
-        expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(exact);
+        await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(exact);
     });
 
     test('has no Download button without a filename', async ({ page }) => {
@@ -166,7 +168,7 @@ test.describe('app-file-drop', () => {
         const drop = root.locator('app-file-drop');
         const rejected = drop.evaluate(el => new Promise(resolve => el.addEventListener('rejected', () => resolve(true), { once: true })));
         await dropFiles(drop, [text('a.txt', 'text/plain', 'nope')]);
-        expect(await rejected).toBe(true);
+        await expect(rejected).resolves.toBe(true);
         const changed = drop.evaluate(el => new Promise(resolve => el.addEventListener('change', () => resolve(el.value), { once: true })));
         await dropFiles(drop, [PNG, { ...PNG, name: 'second.png' }]);
         const value = await changed;

@@ -25,7 +25,7 @@ test('makes a code from a link and shows it', async ({ page }) => {
     await field(page, 'Link or text').fill('https://aptul.com');
     await expect(tool(page).locator('.qr-result')).toBeVisible();
     await expect.poll(() => lastCode(page)).toBe('https://aptul.com');
-    expect(await tool(page).locator('img.qr-preview').getAttribute('src')).toMatch(/^data:image\/svg\+xml/);
+    await expect(tool(page).locator('img.qr-preview')).toHaveAttribute('src', /^data:image\/svg\+xml/);
 });
 
 test('Wi-Fi codes escape special characters, and open networks have no password', async ({ page }) => {

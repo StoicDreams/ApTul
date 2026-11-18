@@ -7,7 +7,7 @@ test.describe('Markdown to HTML', () => {
 
     test('converts the sample, including GitHub tables', async ({ page }) => {
         await expect.poll(() => outputText(tool(page))).toContain('<h1>Project Title</h1>');
-        expect(await outputText(tool(page))).toContain('<table>');
+        await expect.poll(() => outputText(tool(page))).toContain('<table>');
         await tool(page).locator('input[name="github"]').uncheck();
         await expect.poll(() => outputText(tool(page))).not.toContain('<table>');
     });
@@ -21,10 +21,13 @@ test.describe('Markdown to HTML', () => {
         await typeInto(tool(page), 'Markdown', 'Text\n\n<script>parent.__ran = true</script><img src=x onerror="parent.__ran = true">');
         const preview = tool(page).locator('iframe.markdown-preview');
         await expect.poll(() => preview.getAttribute('srcdoc')).toContain('<script>parent.__ran');
-        expect(await preview.getAttribute('sandbox')).toBe('');
-        expect(await preview.getAttribute('srcdoc')).toContain("Content-Security-Policy");
-        await page.waitForTimeout(300);
-        expect(await page.evaluate(() => window.__ran)).toBeUndefined();
+        await expect(preview).toHaveAttribute('sandbox', '');
+        await expect(preview).toHaveAttribute('srcdoc', /Content-Security-Policy/);
+        // The frame has shown the Markdown and finished with its image, which is when onerror would have run.
+        const frame = page.frameLocator('iframe.markdown-preview');
+        await expect(frame.getByText('Text')).toBeVisible();
+        await expect.poll(() => frame.locator('img').evaluate(img => img.complete)).toBe(true);
+        await expect.poll(() => page.evaluate(() => window.__ran)).toBeUndefined();
     });
 });
 
@@ -79,19 +82,19 @@ test.describe('Lorem Ipsum Generator', () => {
 
     test('makes paragraphs that start with the classic opening', async ({ page }) => {
         await expect.poll(() => outputText(tool(page))).toMatch(/^Lorem ipsum dolor sit amet, consectetur adipiscing elit\./);
-        expect((await outputText(tool(page))).split('\n\n')).toHaveLength(3);
+        await expect.poll(async () => (await outputText(tool(page))).split('\n\n')).toHaveLength(3);
     });
 
     test('makes an exact number of words, and HTML lists', async ({ page }) => {
         await choose(tool(page), 'Of', 'words');
         await setNumber(tool(page), 'How many', 12);
         await expect.poll(async () => (await outputText(tool(page))).split(' ').length).toBe(12);
-        expect(await outputText(tool(page))).toMatch(/^Lorem ipsum dolor sit amet consectetur adipiscing elit \w/);
+        await expect.poll(() => outputText(tool(page))).toMatch(/^Lorem ipsum dolor sit amet consectetur adipiscing elit \w/);
         await choose(tool(page), 'Of', 'list');
         await setNumber(tool(page), 'How many', 4);
         await tool(page).locator('input[name="html"]').check();
         await expect.poll(async () => (await outputText(tool(page))).match(/<li>/g)?.length).toBe(4);
-        expect(await outputText(tool(page))).toMatch(/^<ul>\n/);
+        await expect.poll(() => outputText(tool(page))).toMatch(/^<ul>\n/);
         await expect(tool(page).locator('.lorem-stats')).toContainText('words');
     });
 

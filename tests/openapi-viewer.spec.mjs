@@ -6,14 +6,11 @@ const viewer = page => tool(page).locator('webui-openapi');
 
 test.beforeEach(async ({ page }) => {
     await openPage(page, '/openapi');
-    // The viewer needs webui-openapi's setDoc, added to the framework in MyFiCDN. Until the live CDN has it, only
-    // npm run test:local-cdn can run these. Web UI binds methods to each element, so check the element itself.
+    // The viewer uses webui-openapi's setDoc. Web UI binds methods to each element, so wait on the element itself.
     await page.waitForFunction(() => {
         const inner = document.querySelector('app-openapi-viewer')?.shadowRoot?.querySelector('webui-openapi');
-        return inner && typeof inner.loadDoc === 'function';
+        return inner && typeof inner.setDoc === 'function';
     });
-    const ready = await viewer(page).evaluate(el => typeof el.setDoc === 'function');
-    test.skip(!ready, 'The CDN does not have the updated webui-openapi yet. Push MyFiCDN, or run npm run test:local-cdn.');
 });
 
 const spec = {
@@ -33,7 +30,7 @@ test('the sample loads as YAML into the paste box and shows its endpoints', asyn
     await tool(page).getByRole('button', { name: 'Try a sample' }).click();
     await expect(viewer(page).locator('.title')).toHaveText('Bookshelf API');
     await expect(tool(page).locator('button[data-mode="paste"]')).toHaveAttribute('aria-pressed', 'true');
-    expect(await tool(page).locator('textarea').inputValue()).toMatch(/^openapi: 3\.1\.0/);
+    await expect(tool(page).locator('textarea')).toHaveValue(/^openapi: 3\.1\.0/);
     await expect(viewer(page).locator('section.tag > h3')).toHaveText(['Books', 'Shelves']);
     await expect(viewer(page).locator('details.op')).toHaveCount(6);
     // YAML response codes such as '200' arrive as text keys.
@@ -68,7 +65,7 @@ test('loads a link in the browser, and resolves relative servers against it', as
     await tool(page).locator('input[type=url]').fill('https://specs.test/docs/openapi.json');
     await tool(page).getByRole('button', { name: 'Load' }).click();
     await expect(viewer(page).locator('.title')).toHaveText('Pasted API');
-    expect(await viewer(page).evaluate(el => el.baseUrl)).toBe('https://specs.test/v3');
+    await expect.poll(() => viewer(page).evaluate(el => el.baseUrl)).toBe('https://specs.test/v3');
     expect(cookie).toBe('none');
 });
 

@@ -28,14 +28,15 @@ test('reports where invalid JSON fails', async ({ page }) => {
     const alert = tool(page).locator('webui-alert');
     await expect(alert).toContainText('Invalid JSON');
     await expect(alert).toContainText('line 4');
-    expect(await outputText(tool(page))).toBe('');
+    await expectOutput(tool(page), '');
 });
 
 test('shows error text as text, even when it quotes HTML from the input', async ({ page }) => {
     await typeInto(tool(page), 'JSON', '<img src=x onerror="window.__attacked=1">');
     await expect(tool(page).locator('webui-alert')).toContainText('Invalid JSON');
     await expect(tool(page).locator('webui-alert img')).toHaveCount(0);
-    expect(await page.evaluate(() => window.__attacked)).toBeUndefined();
+    // No image element was made from the text, so nothing can run its onerror.
+    await expect.poll(() => page.evaluate(() => window.__attacked)).toBeUndefined();
 });
 
 test('formats a dropped .json file', async ({ page }) => {

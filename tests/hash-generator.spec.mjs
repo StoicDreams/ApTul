@@ -13,8 +13,8 @@ test('hashes text with every algorithm', async ({ page }) => {
     await expectCode(tool(page), 'MD5', '900150983cd24fb0d6963f7d28e17f72');
     await expectCode(tool(page), 'SHA-1', 'a9993e364706816aba3e25717850c26c9cd0d89d');
     await expectCode(tool(page), 'SHA-256', 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
-    expect(await codeText(tool(page), 'SHA-384')).toMatch(/^cb00753f45a35e8b[0-9a-f]{80}$/);
-    expect(await codeText(tool(page), 'SHA-512')).toMatch(/^[0-9a-f]{128}$/);
+    await expect.poll(() => codeText(tool(page), 'SHA-384')).toMatch(/^cb00753f45a35e8b[0-9a-f]{80}$/);
+    await expect.poll(() => codeText(tool(page), 'SHA-512')).toMatch(/^[0-9a-f]{128}$/);
 });
 
 test('hashes text as UTF-8, and can show uppercase', async ({ page }) => {

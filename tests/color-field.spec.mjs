@@ -24,8 +24,8 @@ test('reads typed colors into color, the swatch, and the picker, and sends one i
     await typeInto(page, 'Color', 'rebeccapurple');
     await expect(fill(page)).toHaveCSS('background-color', 'rgb(102, 51, 153)');
     await expect(field(page).locator('input[type=color]')).toHaveValue('#663399');
-    expect(await field(page).evaluate(el => el.value)).toBe('rebeccapurple');
-    expect(await page.evaluate(() => window.fieldEvents)).toBe(1);
+    await expect.poll(() => field(page).evaluate(el => el.value)).toBe('rebeccapurple');
+    await expect.poll(() => page.evaluate(() => window.fieldEvents)).toBe(1);
 });
 
 test('shows see-through colors over a checkerboard', async ({ page }) => {
@@ -42,6 +42,6 @@ test('a picked color replaces the text', async ({ page }) => {
 test('marks text that is not a color, and names the picker for screen readers', async ({ page }) => {
     await typeInto(page, 'Color', 'not a color');
     await expect(field(page)).toHaveAttribute('invalid', '');
-    expect(await field(page).evaluate(el => el.color)).toBeNull();
+    await expect.poll(() => field(page).evaluate(el => el.color)).toBeNull();
     await expect(field(page).getByLabel('Pick the color')).toHaveAttribute('type', 'color');
 });

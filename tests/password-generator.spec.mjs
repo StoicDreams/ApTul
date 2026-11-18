@@ -45,7 +45,7 @@ test('keeps length and count within limits, and needs at least one type', async 
     await expect.poll(async () => (await passwords(page))[0].length).toBe(128);
     for (const name of ['upper', 'lower', 'digits', 'symbols']) await setBox(page, name, false);
     await expect(tool(page).locator('webui-alert')).toContainText('Choose at least one');
-    expect(await outputText(tool(page))).toBe('');
+    await expect.poll(() => outputText(tool(page))).toBe('');
 });
 
 test('rates strength by bits of randomness', async ({ page }) => {

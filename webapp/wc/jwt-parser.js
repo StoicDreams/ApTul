@@ -9,7 +9,10 @@
 {
     function decodeBase64Url(str) {
         try {
-            return JSON.parse(webui.fromBase64(str));
+            // JWT parts are JSON written as UTF-8, in url safe base64 without padding.
+            const base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+            const bytes = Uint8Array.from(atob(base64 + '='.repeat((4 - base64.length % 4) % 4)), c => c.charCodeAt(0));
+            return JSON.parse(new TextDecoder().decode(bytes));
         } catch (e) {
             throw new Error("Invalid Base64 or JSON structure.");
         }

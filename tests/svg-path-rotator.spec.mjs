@@ -28,5 +28,6 @@ test('treats a pasted path as data, never as HTML', async ({ page }) => {
     const original = rotator.locator('svg[viewBox="-200 -200 400 400"]').first().locator('path');
     await expect(original).toHaveAttribute('d', attack);
     await expect(rotator.locator('img')).toHaveCount(0);
-    expect(await page.evaluate(() => window.__attacked)).toBeUndefined();
+    // No image element was made from the text, so nothing can run its onerror.
+    await expect.poll(() => page.evaluate(() => window.__attacked)).toBeUndefined();
 });

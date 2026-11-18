@@ -15,8 +15,8 @@ test('decodes the header, payload, and signature', async ({ page }) => {
     const payload = { sub: '1234567890', name: 'Test User', admin: true };
     await typeInto(tool(page), 'Encoded Token', token(header, payload, 'abc-_123'));
     await expect.poll(() => code(page, 'Primary')).toBe(JSON.stringify(payload, null, 2));
-    expect(await code(page, 'Header')).toBe(JSON.stringify(header, null, 2));
-    expect(await code(page, 'Signature')).toBe('abc-_123');
+    await expect.poll(() => code(page, 'Header')).toBe(JSON.stringify(header, null, 2));
+    await expect.poll(() => code(page, 'Signature')).toBe('abc-_123');
 });
 
 test('reads URL-safe base64 without padding', async ({ page }) => {
@@ -29,10 +29,9 @@ test('reads URL-safe base64 without padding', async ({ page }) => {
 });
 
 test('decodes text that is not plain ASCII', async ({ page }) => {
-    test.fail(true, 'Known bug: webui.fromBase64 returns atob\'s bytes without UTF-8 decoding, so "José" shows as "JosÃ©"');
     const payload = { name: 'José 日本' };
     await typeInto(tool(page), 'Encoded Token', token(header, payload));
-    await expect.poll(() => code(page, 'Primary'), { timeout: 2000 }).toBe(JSON.stringify(payload, null, 2));
+    await expect.poll(() => code(page, 'Primary')).toBe(JSON.stringify(payload, null, 2));
 });
 
 test('shows when the token was issued, and whether it has expired', async ({ page }) => {
@@ -58,8 +57,9 @@ test('a part that is not base64 JSON says decoding failed', async ({ page }) => 
 test('markup in a claim is shown as text', async ({ page }) => {
     await typeInto(tool(page), 'Encoded Token', token(header, { name: '<img src=x onerror="window.__xss=1">' }));
     await expect.poll(() => code(page, 'Primary')).toContain('<img');
-    expect(await page.evaluate(() => window.__xss)).toBeUndefined();
+    // No image element was made from the claim, so nothing can run its onerror.
     await expect(tool(page).locator('img')).toHaveCount(0);
+    await expect.poll(() => page.evaluate(() => window.__xss)).toBeUndefined();
 });
 
 test('clearing the token clears the results', async ({ page }) => {

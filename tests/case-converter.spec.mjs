@@ -42,5 +42,6 @@ test('shows pasted HTML as text', async ({ page }) => {
     await typeInto(tool(page), 'Text', '<img src=x onerror="window.__attacked=1">');
     await expectCode(tool(page), 'lower case', '<img src=x onerror="window.__attacked=1">');
     await expect(tool(page).locator('webui-code img')).toHaveCount(0);
-    expect(await page.evaluate(() => window.__attacked)).toBeUndefined();
+    // No image element was made from the text, so nothing can run its onerror.
+    await expect.poll(() => page.evaluate(() => window.__attacked)).toBeUndefined();
 });

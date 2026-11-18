@@ -31,5 +31,6 @@ test('shows pasted HTML as text', async ({ page }) => {
     await typeInto(tool(page), 'Changed text', '<img src=x onerror="window.__attacked=1">');
     await expect(tool(page).locator('webui-content-compare .diff-cell.insert')).toContainText(['<img src=x']);
     await expect(tool(page).locator('webui-content-compare img')).toHaveCount(0);
-    expect(await page.evaluate(() => window.__attacked)).toBeUndefined();
+    // No image element was made from the text, so nothing can run its onerror.
+    await expect.poll(() => page.evaluate(() => window.__attacked)).toBeUndefined();
 });

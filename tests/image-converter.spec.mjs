@@ -4,6 +4,8 @@ import { join } from 'node:path';
 // Uses the Rust worker, so webapp/pkg must exist (run PowerShell/RunLocal.ps1 -PreBuildOnly or a Trunk build first).
 
 const tool = page => page.locator('app-image-converter');
+// The dropdown keeps a hidden select under its options list, which can never pass Playwright's visibility check, so
+// this sets the select directly. Its change event updates the dropdown.
 const choose = (page, label, value) => tool(page).locator(`webui-dropdown[label="${label}"] select`).selectOption(value, { force: true });
 
 /** Make an image in the page with a canvas, returned as Base64. */
@@ -67,7 +69,7 @@ test.beforeEach(async ({ page }) => {
 
 test('the tool is built in the page, so Web UI styles reach it without linking the stylesheet', async ({ page }) => {
     await expect(tool(page).locator('webui-page-segment').first()).toBeVisible();
-    expect(await tool(page).evaluate(el => el.shadowRoot)).toBe(null);
+    await expect.poll(() => tool(page).evaluate(el => el.shadowRoot)).toBe(null);
     // The rule that hides an empty paragraph comes from webui.css.
     await expect(tool(page).locator('p.convertNote')).toBeHidden();
 });
@@ -177,7 +179,7 @@ test('screenshots become a smaller, lossless WebP when that beats lossy', async 
     expect(result.note).toContain('Lossless WebP was smaller');
     expect(result.note).not.toContain('larger than the original');
     // Lossless keeps the background exactly.
-    expect(await pixel(page, 450, 2)).toEqual([58, 58, 58, 255]);
+    await expect.poll(() => pixel(page, 450, 2)).toEqual([58, 58, 58, 255]);
 });
 
 test('JPG photos stay lossy WebP, without trying lossless', async ({ page }) => {

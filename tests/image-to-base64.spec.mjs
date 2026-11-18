@@ -23,9 +23,9 @@ test('gives the data URL, Base64, HTML, and CSS for an image', async ({ page }) 
     await drop(page, 'my-icon.png', 'image/png', PNG);
     const dataUrl = `data:image/png;base64,${PNG}`;
     await expect.poll(() => codeText(tool(page), 'Data URL')).toBe(dataUrl);
-    expect(await codeText(tool(page), 'Base64 only')).toBe(PNG);
-    expect(await codeText(tool(page), 'HTML image tag')).toBe(`<img src="${dataUrl}" alt="my icon">`);
-    expect(await codeText(tool(page), 'CSS background')).toBe(`background-image: url("${dataUrl}");`);
+    await expect.poll(() => codeText(tool(page), 'Base64 only')).toBe(PNG);
+    await expect.poll(() => codeText(tool(page), 'HTML image tag')).toBe(`<img src="${dataUrl}" alt="my icon">`);
+    await expect.poll(() => codeText(tool(page), 'CSS background')).toBe(`background-image: url("${dataUrl}");`);
     await expect(tool(page).locator('img.image-preview')).toBeVisible();
     await expect(tool(page).locator('webui-alert')).toContainText('my-icon.png');
 });
@@ -35,7 +35,8 @@ test('shows a file name with HTML in it as text, and escapes it in the snippet',
     // Quotes are escaped so the name cannot end the attribute. The alt text also turns _ and - into spaces.
     await expect.poll(() => codeText(tool(page), 'HTML image tag')).toContain('alt="&quot;><img src=x onerror=&quot;window. attacked=1&quot;>"');
     await expect(tool(page).locator('webui-alert img, webui-code img')).toHaveCount(0);
-    expect(await page.evaluate(() => window.__attacked)).toBeUndefined();
+    // No image element was made from the text, so nothing can run its onerror.
+    await expect.poll(() => page.evaluate(() => window.__attacked)).toBeUndefined();
 });
 
 test('warns about large data URLs', async ({ page }) => {
@@ -58,7 +59,9 @@ test('keeps the result for an image chosen with the select button', async ({ pag
     // The file select sits inside the drop zone, whose own change used to follow and hide the result.
     await tool(page).locator('webui-file-select input[type=file]').setInputFiles({ name: 'chosen.png', mimeType: 'image/png', buffer: Buffer.from(PNG, 'base64') });
     await expect.poll(() => codeText(tool(page), 'Base64 only')).toBe(PNG);
-    await page.waitForTimeout(300);
+    // The file select's change bubbles through the drop zone in the same dispatch, and the message is the last thing
+    // the tool sets for a file, so once it shows, both have been handled.
+    await expect(tool(page).locator('webui-alert')).toContainText('chosen.png');
     await expect(tool(page).locator('img.image-preview')).toBeVisible();
-    expect(await codeText(tool(page), 'Base64 only')).toBe(PNG);
+    await expect.poll(() => codeText(tool(page), 'Base64 only')).toBe(PNG);
 });

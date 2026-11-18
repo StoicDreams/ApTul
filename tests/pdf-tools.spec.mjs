@@ -28,14 +28,14 @@ test.describe('Merge PDF', () => {
             } });
         });
         await tool(page).locator('.file-row').first().locator('button.move-down').click();
-        expect(await names(tool(page))).toEqual(['second.pdf', 'first.pdf']);
+        await expect.poll(() => names(tool(page))).toEqual(['second.pdf', 'first.pdf']);
         await expect.poll(() => notes(tool(page))).toEqual(['3 pages', '2 pages']);
 
         const file = await download(page, () => tool(page).locator('webui-button.merge').click());
         expect(file.name).toBe('merged.pdf');
-        expect(await pageCount(page, file.bytes)).toBe(5);
+        await expect.poll(() => pageCount(page, file.bytes)).toBe(5);
         const sizes = [makePdf(['b1', 'b2', 'b3']).length, makePdf(['a1', 'a2']).length];
-        expect(await page.evaluate(() => window.__merged)).toEqual([sizes]);
+        await expect.poll(() => page.evaluate(() => window.__merged)).toEqual([sizes]);
         await expect(tool(page).locator('webui-alert')).toContainText('5 pages');
     });
 
@@ -47,9 +47,9 @@ test.describe('Merge PDF', () => {
         await expect(tool(page).locator('webui-alert')).toContainText('broken.pdf');
         await dropFiles(tool(page), [{ name: 'notes.txt', type: 'text/plain', bytes: Buffer.from('hi') }]);
         await expect(tool(page).locator('webui-alert')).toContainText('not PDFs: notes.txt');
-        expect(await names(tool(page))).toEqual(['only.pdf', 'broken.pdf']);
+        await expect.poll(() => names(tool(page))).toEqual(['only.pdf', 'broken.pdf']);
         await tool(page).locator('.file-row').nth(1).locator('button.remove').click();
-        expect(await names(tool(page))).toEqual(['only.pdf']);
+        await expect.poll(() => names(tool(page))).toEqual(['only.pdf']);
     });
 });
 
@@ -66,7 +66,7 @@ test.describe('Split PDF', () => {
         await pages(page).fill('2-3, 5');
         const file = await download(page, () => tool(page).locator('webui-button.run').click());
         expect(file.name).toBe('report-pages.pdf');
-        expect(await pageCount(page, file.bytes)).toBe(3);
+        await expect.poll(() => pageCount(page, file.bytes)).toBe(3);
     });
 
     test('splits by range, with open ended ranges', async ({ page }) => {
@@ -75,9 +75,9 @@ test.describe('Split PDF', () => {
         await tool(page).locator('webui-button.run').click();
         const results = tool(page).locator('webui-button.result');
         await expect(results).toHaveCount(2);
-        expect(await results.evaluateAll(b => b.map(x => x.dataset.filename))).toEqual(['report-pages-1-2.pdf', 'report-pages-4-5.pdf']);
+        await expect.poll(() => results.evaluateAll(b => b.map(x => x.dataset.filename))).toEqual(['report-pages-1-2.pdf', 'report-pages-4-5.pdf']);
         const file = await download(page, () => results.nth(1).click());
-        expect(await pageCount(page, file.bytes)).toBe(2);
+        await expect.poll(() => pageCount(page, file.bytes)).toBe(2);
     });
 
     test('splits every page into its own file', async ({ page }) => {
@@ -110,7 +110,7 @@ test.describe('Image to PDF', () => {
         await expect(tool(page).locator('.file-row')).toHaveCount(2);
         const file = await download(page, () => tool(page).locator('webui-button.create').click());
         expect(file.name).toBe('images.pdf');
-        expect(await pageCount(page, file.bytes)).toBe(2);
+        await expect.poll(() => pageCount(page, file.bytes)).toBe(2);
         // A4 turned sideways for the wide image.
         expect(file.bytes.toString('latin1')).toMatch(/\/MediaBox\s*\[0 0 841.89 595.28\]/);
     });
